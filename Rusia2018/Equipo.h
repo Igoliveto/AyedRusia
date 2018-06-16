@@ -3,7 +3,7 @@
 #ifndef NULL
 #define NULL      0
 #endif
-#include "Jugador.h"
+#include "ListaJugadores.h"
 #include <string>
 #include <iostream>
 using namespace std;
@@ -13,6 +13,7 @@ string nombre;
 int golesAFavor;
 int golesEnContra;
 int puntos;
+Lista listaJugadores;
 }Equipo;
 
 void crearEquipo(Equipo &equipo,int id, string nombre);

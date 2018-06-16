@@ -5,8 +5,8 @@
 	<string>
 	<iostream>
 
-1527876535 c:\users\tomas\documents\codeblocks\rusia2018\equipo.h
-	"Jugador.h"
+1529184460 c:\users\tomas\documents\codeblocks\rusia2018\equipo.h
+	"ListaJugadores.h"
 	<string>
 	<iostream>
 
@@ -18,15 +18,28 @@
 	<stdlib.h>
 	<string>
 
-1527817312 source:c:\users\tomas\documents\codeblocks\rusia2018\grupo.cpp
+1529181372 source:c:\users\tomas\documents\codeblocks\rusia2018\grupo.cpp
+	"Grupo.h"
+	<string>
+	<iostream>
 
 1527816858 source:c:\users\tomas\documents\codeblocks\rusia2018\jugador.cpp
 
 1527817507 source:c:\users\tomas\documents\codeblocks\rusia2018\partido.cpp
 
-1527876505 source:c:\users\tomas\documents\codeblocks\rusia2018\listaequipo.cpp
+1529184431 source:c:\users\tomas\documents\codeblocks\rusia2018\listaequipo.cpp
 	"ListaEquipo.h"
 
-1527876489 c:\users\tomas\documents\codeblocks\rusia2018\listaequipo.h
+1529184419 c:\users\tomas\documents\codeblocks\rusia2018\listaequipo.h
 	"Equipo.h"
+
+1529182520 source:c:\users\tomas\documents\codeblocks\rusia2018\listajugadores.cpp
+	"ListaJugadores.h"
+
+1529181508 c:\users\tomas\documents\codeblocks\rusia2018\grupo.h
+	<string>
+	<iostream>
+
+1529182512 c:\users\tomas\documents\codeblocks\rusia2018\listajugadores.h
+	"Jugador.h"
 

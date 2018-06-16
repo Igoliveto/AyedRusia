@@ -40,6 +40,8 @@
 		<Unit filename="Jugador.h" />
 		<Unit filename="ListaEquipo.cpp" />
 		<Unit filename="ListaEquipo.h" />
+		<Unit filename="ListaJugadores.cpp" />
+		<Unit filename="ListaJugadores.h" />
 		<Unit filename="Partido.cpp" />
 		<Unit filename="Partido.h" />
 		<Unit filename="main.cpp" />

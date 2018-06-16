@@ -3,44 +3,44 @@
 #include "Equipo.h"
 
 
-struct NodoLista{
+struct NodoListaEquipo{
 Equipo equipo;
-NodoLista* siguiente;
+NodoListaEquipo* siguiente;
 
 };
 
-typedef NodoLista* PtrNodoLista;
+typedef NodoListaEquipo* PtrNodoListaEquipo;
 
-struct Lista{
-PtrNodoLista primero;
+struct ListaEquipo{
+PtrNodoListaEquipo primero;
 
 };
 /*-------------Primitivas-------------*/
-void crearLista(Lista &lista);
+void crearListaEquipo(ListaEquipo &lista);
 
-bool listaVacia(Lista &lista);
+bool listaVaciaEquipo(ListaEquipo &lista);
 
-PtrNodoLista listaPrimero(Lista &lista);
+PtrNodoListaEquipo listaPrimeroEquipo(ListaEquipo &lista);
 
-PtrNodoLista fin();
+PtrNodoListaEquipo finEquipo();
 
-PtrNodoLista siguiente(Lista &lista, PtrNodoLista ptrNodo);
+PtrNodoListaEquipo siguienteEquipo(Lista &listaEquipo, PtrNodoListaEquipo ptrNodo);
 
-PtrNodoLista anterior(Lista &lista,PtrNodoLista ptrNodo);
+PtrNodoListaEquipo anteriorEquipo(ListaEquipo &lista,PtrNodoListaEquipo ptrNodo);
 
-PtrNodoLista ultimo(Lista &lista);
+PtrNodoListaEquipo ultimoEquipo(ListaEquipo &lista);
 
-PtrNodoLista crearNodoLista(Equipo equipo);
+PtrNodoListaEquipo crearNodoLista(Equipo equipo);
 
-PtrNodoLista adicionarAlPrincipio(Lista &lista, Equipo equipo);
+PtrNodoListaEquipo adicionarAlPrincipio(ListaEquipo &lista, Equipo equipo);
 
-PtrNodoLista adicionarDespues(Lista &lista, Equipo equipo, PtrNodoLista ptrNodo);
+PtrNodoListaEquipo adicionarDespues(ListaEquipo &lista, Equipo equipo, PtrNodoListaEquipo ptrNodo);
 
-PtrNodoLista adicionarFinal(Lista &lista,Equipo equipo);
+PtrNodoListaEquipo adicionarFinal(ListaEquipo &lista,Equipo equipo);
 
-PtrNodoLista adicionarAntes(Lista &lista, Equipo equipo, PtrNodoLista ptrNodo);
+PtrNodoListaEquipo adicionarAntes(ListaEquipo &lista, Equipo equipo, PtrNodoListaEquipo ptrNodo);
 
-void colocarDato(Lista &lista,Equipo equipo, PtrNodoLista ptrNodo);
+void colocarDato(ListaEquipo &lista,Equipo equipo, PtrNodoListaEquipo ptrNodo);
 
 
 #endif // _LISTAEQUIPO_H

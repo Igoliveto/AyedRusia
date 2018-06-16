@@ -6,59 +6,59 @@
 
 
 
-void crearLista(Lista &lista){
-lista.primero=fin();
+void crearListaEquipo(ListaEquipo &lista){
+lista.primero=finEquipo();
 
 }
 
-bool listaVacia(Lista &lista){
-return(lista.primero==fin());
+bool listaVaciaEquipo(ListaEquipo &lista){
+return(lista.primero==finEquipo());
 }
 
-PtrNodoLista listaPrimero(Lista &lista){
+PtrNodoListaEquipo listaPrimeroEquipo(ListaEquipo &lista){
 return lista.primero;
 }
 
-PtrNodoLista fin() {
+PtrNodoListaEquipo finEquipo() {
   return NULL;
 }
 
-PtrNodoLista siguiente(Lista &lista, PtrNodoLista ptrNodo){
-if((!listaVacia(lista)) && (ptrNodo->siguiente!=fin())){
+PtrNodoListaEquipo siguienteEquipo(ListaEquipo &lista, PtrNodoListaEquipo ptrNodo){
+if((!listaVaciaEquipo(lista)) && (ptrNodo->siguiente!=finEquipo())){
     return ptrNodo->siguiente;
 }
 else
-    return fin();
+    return finEquipo();
 
 }
-PtrNodoLista anterior(Lista &lista,PtrNodoLista ptrNodo){
-PtrNodoLista ptrAnterior;
-PtrNodoLista ptrCursor=listaPrimero(lista);
+PtrNodoListaEquipo anteriorEquipo(ListaEquipo &lista,PtrNodoListaEquipo ptrNodo){
+PtrNodoListaEquipo ptrAnterior;
+PtrNodoListaEquipo ptrCursor=listaPrimeroEquipo(lista);
 
-while(ptrCursor!=fin() && ptrCursor !=ptrNodo){
+while(ptrCursor!=finEquipo() && ptrCursor !=ptrNodo){
 
     ptrAnterior=ptrCursor;
-    ptrCursor=siguiente(lista,ptrCursor);
+    ptrCursor=siguienteEquipo(lista,ptrCursor);
 
 }
 return ptrAnterior;
 
 }
 
-PtrNodoLista ultimo(Lista &lista){
-return anterior(lista,fin());
+PtrNodoListaEquipo ultimoEquipo(ListaEquipo &lista){
+return anteriorEquipo(lista,finEquipo());
 }
 
-PtrNodoLista crearNodoLista(Equipo equipo){
-PtrNodoLista ptrNodo = new NodoLista;
+PtrNodoListaEquipo crearNodoLista(Equipo equipo){
+PtrNodoListaEquipo ptrNodo = new NodoListaEquipo;
 ptrNodo->equipo=equipo;
-ptrNodo->siguiente=fin();
+ptrNodo->siguiente=finEquipo();
 
 return ptrNodo;
 }
 
-PtrNodoLista adicionarAlPrincipio(Lista &lista, Equipo equipo){
-PtrNodoLista ptrNodo = crearNodoLista(equipo);
+PtrNodoListaEquipo adicionarAlPrincipio(ListaEquipo &lista, Equipo equipo){
+PtrNodoListaEquipo ptrNodo = crearNodoLista(equipo);
 
 ptrNodo->siguiente=lista.primero;
 lista.primero=ptrNodo;
@@ -66,13 +66,13 @@ lista.primero=ptrNodo;
 return ptrNodo;
 }
 
-PtrNodoLista adicionarDespues(Lista &lista, Equipo equipo, PtrNodoLista ptrNodo){
+PtrNodoListaEquipo adicionarDespues(ListaEquipo &lista, Equipo equipo, PtrNodoListaEquipo ptrNodo){
 
-PtrNodoLista ptrAux = fin();
-if(listaVacia(lista)){
+PtrNodoListaEquipo ptrAux = finEquipo();
+if(listaVaciaEquipo(lista)){
     adicionarAlPrincipio(lista,equipo);
     }
-   if(ptrNodo!=fin()){
+   if(ptrNodo!=finEquipo()){
 
     ptrAux=crearNodoLista(equipo);
 
@@ -84,17 +84,17 @@ if(listaVacia(lista)){
 
  }
 
- PtrNodoLista adicionarFinal(Lista &lista,Equipo equipo){
+ PtrNodoListaEquipo adicionarFinal(ListaEquipo &lista,Equipo equipo){
 
- return adicionarDespues(lista,equipo,ultimo(lista));
+ return adicionarDespues(lista,equipo,ultimoEquipo(lista));
    }
 
- PtrNodoLista adicionarAntes(Lista &lista, Equipo equipo, PtrNodoLista ptrNodo){
- PtrNodoLista ptrNodoNuevo=fin();
- if(!listaVacia(lista)){
+ PtrNodoListaEquipo adicionarAntes(ListaEquipo &lista, Equipo equipo, PtrNodoListaEquipo ptrNodo){
+ PtrNodoListaEquipo ptrNodoNuevo=finEquipo();
+ if(!listaVaciaEquipo(lista)){
 
-     if(ptrNodo!=listaPrimero(lista))
-         ptrNodoNuevo=adicionarDespues(lista,equipo,anterior(lista,ptrNodo));
+     if(ptrNodo!=listaPrimeroEquipo(lista))
+         ptrNodoNuevo=adicionarDespues(lista,equipo,anteriorEquipo(lista,ptrNodo));
       else
          ptrNodoNuevo=adicionarAlPrincipio(lista,equipo);
     }
@@ -102,8 +102,8 @@ if(listaVacia(lista)){
 
  }
 
- void colocarDato(Lista &lista,Equipo equipo, PtrNodoLista ptrNodo){
- if(!listaVacia(lista) && ptrNodo!=fin()){
+ void colocarDato(ListaEquipo &lista,Equipo equipo, PtrNodoListaEquipo ptrNodo){
+ if(!listaVaciaEquipo(lista) && ptrNodo!=finEquipo()){
     ptrNodo->equipo=equipo;
  }
  }
