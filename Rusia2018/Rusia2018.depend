@@ -1,9 +1,10 @@
 # depslib dependency file v1.0
-1527876489 source:c:\users\tomas\documents\codeblocks\rusia2018\equipo.cpp
+1529185043 source:c:\users\tomas\documents\codeblocks\rusia2018\equipo.cpp
 	"Equipo.h"
 	<cstring>
 	<string>
 	<iostream>
+	"ListaJugadores.h"
 
 1529184460 c:\users\tomas\documents\codeblocks\rusia2018\equipo.h
 	"ListaJugadores.h"
@@ -12,9 +13,12 @@
 
 1527810604 c:\users\tomas\documents\codeblocks\rusia2018\jugador.h
 
-1527876516 source:c:\users\tomas\documents\codeblocks\rusia2018\main.cpp
+1529270397 source:c:\users\tomas\documents\codeblocks\rusia2018\main.cpp
 	<iostream>
 	"Equipo.h"
+	"ListaEquipo.h"
+	"ListaGrupo.h"
+	"ListaJugadores.h"
 	<stdlib.h>
 	<string>
 
@@ -42,4 +46,10 @@
 
 1529182512 c:\users\tomas\documents\codeblocks\rusia2018\listajugadores.h
 	"Jugador.h"
+
+1529271856 source:c:\users\tomas\documents\codeblocks\rusia2018\listagrupo.cpp
+	"ListaGrupo.h"
+
+1529274188 c:\users\tomas\documents\codeblocks\rusia2018\listagrupo.h
+	"Grupo.h"
 
