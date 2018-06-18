@@ -44,6 +44,8 @@
 		<Unit filename="ListaGrupo.h" />
 		<Unit filename="ListaJugadores.cpp" />
 		<Unit filename="ListaJugadores.h" />
+		<Unit filename="ListaPartidos.cpp" />
+		<Unit filename="ListaPartidos.h" />
 		<Unit filename="Partido.cpp" />
 		<Unit filename="Partido.h" />
 		<Unit filename="main.cpp" />
