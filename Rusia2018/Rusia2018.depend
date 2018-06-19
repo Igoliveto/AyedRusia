@@ -116,3 +116,69 @@
 
 1529419878 c:\users\tomas\documents\codeblocks\rusia2018\partido.h
 
+1529423209 source:c:\users\bettina\desktop\rusia2018\equipo.cpp
+	"Equipo.h"
+	<cstring>
+	<string>
+	<iostream>
+	"ListaJugadores.h"
+
+1529423470 c:\users\bettina\desktop\rusia2018\equipo.h
+	"ListaJugadores.h"
+	<string>
+	<iostream>
+
+1529421941 c:\users\bettina\desktop\rusia2018\listajugadores.h
+	"Jugador.h"
+
+1529423664 c:\users\bettina\desktop\rusia2018\jugador.h
+	<string>
+
+1529196199 source:c:\users\bettina\desktop\rusia2018\grupo.cpp
+	"Grupo.h"
+	<string>
+	<iostream>
+
+1529196199 c:\users\bettina\desktop\rusia2018\grupo.h
+	<string>
+	<iostream>
+
+1529424284 source:c:\users\bettina\desktop\rusia2018\jugador.cpp
+	"Jugador.h"
+	"string"
+
+1529196199 source:c:\users\bettina\desktop\rusia2018\listaequipo.cpp
+	"ListaEquipo.h"
+
+1529196199 c:\users\bettina\desktop\rusia2018\listaequipo.h
+	"Equipo.h"
+
+1529360079 source:c:\users\bettina\desktop\rusia2018\listagrupo.cpp
+	"ListaGrupo.h"
+
+1529360079 c:\users\bettina\desktop\rusia2018\listagrupo.h
+	"Grupo.h"
+
+1529421941 source:c:\users\bettina\desktop\rusia2018\listapartidos.cpp
+	"ListaPartidos.h"
+
+1529421941 c:\users\bettina\desktop\rusia2018\listapartidos.h
+	"Partido.h"
+
+1529424503 c:\users\bettina\desktop\rusia2018\partido.h
+
+1528054416 source:c:\users\bettina\desktop\rusia2018\partido.cpp
+
+1529421941 source:c:\users\bettina\desktop\rusia2018\listajugadores.cpp
+	"ListaJugadores.h"
+
+1529421941 source:c:\users\bettina\desktop\rusia2018\main.cpp
+	<iostream>
+	"Equipo.h"
+	"ListaEquipo.h"
+	"ListaGrupo.h"
+	"ListaJugadores.h"
+	"ListaPartidos.h"
+	<stdlib.h>
+	<string>
+

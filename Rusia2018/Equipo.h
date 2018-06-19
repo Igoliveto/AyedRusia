@@ -18,8 +18,8 @@ Lista listaJugadores;
 
 void crearEquipo(Equipo &equipo,int id, string nombre);
 
-int getId(Equipo equipo);
-string getNombre(Equipo equipo);
+int getId(Equipo &equipo);
+string getNombre(Equipo &equipo);
 void setNombre(Equipo &equipo,string nombre);
 void setId(Equipo &equipo, int id);
 

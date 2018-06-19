@@ -3,15 +3,19 @@
 #ifndef NULL
 #define NULL      0
 #endif
-struct Jugador{
+#include <string>
+using namespace std;
+typedef struct{
 int id;
-char nombre[12];
+string nombre;
 int goles;
-};
+}Jugador;
 
 
-
-
-
+void crearJugador(Jugador &jugador, int id, string nombre);
+int getId(Jugador &jugador);
+string getNombre(Jugador &jugador);
+void setNombre(Jugador &jugador,string nombre);
+void setId(Jugador &jugador, int id);
 
 #endif // _JUGADOR_H_

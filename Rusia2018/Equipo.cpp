@@ -12,11 +12,11 @@ equipo.puntos=0;
 crearLista(equipo.listaJugadores);
 }
 
-int getId(Equipo equipo){
+int getId(Equipo &equipo){
     return equipo.id;
 }
 
-string getNombre(Equipo equipo){
+string getNombre(Equipo &equipo){
 return equipo.nombre;
 }
 
