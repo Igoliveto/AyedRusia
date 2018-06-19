@@ -13,12 +13,13 @@
 
 1527810604 c:\users\tomas\documents\codeblocks\rusia2018\jugador.h
 
-1529270397 source:c:\users\tomas\documents\codeblocks\rusia2018\main.cpp
+1529420381 source:c:\users\tomas\documents\codeblocks\rusia2018\main.cpp
 	<iostream>
 	"Equipo.h"
 	"ListaEquipo.h"
 	"ListaGrupo.h"
 	"ListaJugadores.h"
+	"ListaPartidos.h"
 	<stdlib.h>
 	<string>
 
@@ -37,20 +38,20 @@
 1529184419 c:\users\tomas\documents\codeblocks\rusia2018\listaequipo.h
 	"Equipo.h"
 
-1529182520 source:c:\users\tomas\documents\codeblocks\rusia2018\listajugadores.cpp
+1529420461 source:c:\users\tomas\documents\codeblocks\rusia2018\listajugadores.cpp
 	"ListaJugadores.h"
 
 1529181508 c:\users\tomas\documents\codeblocks\rusia2018\grupo.h
 	<string>
 	<iostream>
 
-1529182512 c:\users\tomas\documents\codeblocks\rusia2018\listajugadores.h
+1529420461 c:\users\tomas\documents\codeblocks\rusia2018\listajugadores.h
 	"Jugador.h"
 
-1529271856 source:c:\users\tomas\documents\codeblocks\rusia2018\listagrupo.cpp
+1529274519 source:c:\users\tomas\documents\codeblocks\rusia2018\listagrupo.cpp
 	"ListaGrupo.h"
 
-1529274188 c:\users\tomas\documents\codeblocks\rusia2018\listagrupo.h
+1529274539 c:\users\tomas\documents\codeblocks\rusia2018\listagrupo.h
 	"Grupo.h"
 
 1529291550 source:c:\users\havok\documents\github\ayedrusia\rusia2018\equipo.cpp
@@ -106,4 +107,12 @@
 	<string>
 
 1528503553 source:c:\users\havok\documents\github\ayedrusia\rusia2018\partido.cpp
+
+1529420579 source:c:\users\tomas\documents\codeblocks\rusia2018\listapartidos.cpp
+	"ListaPartidos.h"
+
+1529420572 c:\users\tomas\documents\codeblocks\rusia2018\listapartidos.h
+	"Partido.h"
+
+1529419878 c:\users\tomas\documents\codeblocks\rusia2018\partido.h
 

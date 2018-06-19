@@ -3,6 +3,7 @@
 #include "ListaEquipo.h"
 #include "ListaGrupo.h"
 #include "ListaJugadores.h"
+#include "ListaPartidos.h"
 #include <stdlib.h>
 #include <string>
 using namespace std;

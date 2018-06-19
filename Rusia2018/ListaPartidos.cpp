@@ -3,44 +3,65 @@
 /******************************************************************************/
 /* Implementación de Primitivas */
 /*------------------------------*/
+/*
+  pre : ninguna.
+  post: compara ambos dato1 y dato2, devuelve
+          mayor si dato1 es mayor que dato2,
+          igual si dato1 es igual a dato2,
+          menor si dato1 es menor que dato2.
 
-void crearLista(Lista &lista) {
-  lista.primero = fin();
+  dato1 : dato a comparar.
+  dato2 : dato a comparar.
+  return resultado de comparar dato1 respecto de dato2.
+*/
+ResultadoComparacion compararDato(Partido partido1, Partido partido2) {
+    if (partido1.id > partido2.id) {
+        return ESMAYOR;
+    }
+    else if (partido1.id < partido2.id) {
+        return ESMENOR;
+    }
+    else {
+        return ESIGUAL;
+    }
+}
+void crearListaPartido(ListaPartido &lista) {
+  lista.primero = finListaPartido();
 }
 
 /*----------------------------------------------------------------------------*/
-bool listaVacia(Lista &lista) {
+bool listaVaciaPartido(ListaPartido &lista) {
 
-  return (primero(lista) == fin());
+  return (primero(lista) == finListaPartido());
 }
 
 /*----------------------------------------------------------------------------*/
-PtrNodoLista fin() {
+PtrNodoPartido finListaPartido() {
   return NULL;
 }
 
 /*----------------------------------------------------------------------------*/
-PtrNodoLista primero(Lista &lista) {
+PtrNodoPartido primero(ListaPartido &lista) {
   return lista.primero;
 }
 
 /*----------------------------------------------------------------------------*/
-PtrNodoLista siguiente(Lista &lista, PtrNodoLista ptrNodo) {
+PtrNodoPartido siguiente(ListaPartido &lista, PtrNodoPartido ptrNodo) {
 
   /* verifica si la lista está vacia o si ptrNodo es el último */
-  if ((! listaVacia(lista)) && (ptrNodo != fin()))
-    return ptrNodo->sgte;
+  if ((! listaVaciaPartido(lista)) && (ptrNodo != finListaPartido()))
+    return ptrNodo->siguiente;
   else
-    return fin();
+    return finListaPartido();
 }
 
 /*----------------------------------------------------------------------------*/
-PtrNodoLista anterior(Lista &lista, PtrNodoLista ptrNodo) {
+PtrNodoPartido anterior(ListaPartido &lista, PtrNodoPartido ptrNodo) {
 
-  PtrNodoLista ptrPrevio = fin();
-  PtrNodoLista ptrCursor = primero(lista);
+  PtrNodoPartido ptrPrevio = finListaPartido();
+  PtrNodoPartido ptrCursor = primero(lista);
 
-  while (( ptrCursor != fin()) && (ptrCursor != ptrNodo)) {
+  while (( ptrCursor != finListaPartido()) && (ptrCursor != ptrNodo)) {
     ptrPrevio = ptrCursor;
     ptrCursor = siguiente(lista,ptrCursor);
   }
@@ -48,72 +69,72 @@ PtrNodoLista anterior(Lista &lista, PtrNodoLista ptrNodo) {
 }
 
 /*----------------------------------------------------------------------------*/
-PtrNodoLista ultimo(Lista &lista) {
+PtrNodoPartido ultimo(ListaPartido &lista) {
 
   /* el último nodo de la lista es el anterior al fin() */
-  return anterior(lista,fin());
+  return anterior(lista,finListaPartido());
 }
 
 /*----------------------------------------------------------------------------*/
-PtrNodoLista crearNodoLista(Partido partido) {
+PtrNodoPartido crearNodoLista(Partido partido) {
 
   /* reserva memoria para el nodo y luego completa sus datos */
-  PtrNodoLista ptrAux = new NodoLista;
+  PtrNodoPartido ptrAux = new NodoListaPartido;
 
   ptrAux->partido = partido;
-  ptrAux->sgte = fin();
+  ptrAux->siguiente = finListaPartido();
 
   return ptrAux;
 }
 
 /*----------------------------------------------------------------------------*/
-PtrNodoLista adicionarPrincipio(Lista &lista, Partido partido) {
+PtrNodoPartido adicionarPrincipio(ListaPartido &lista, Partido partido) {
 
   /* crea el nodo */
-  PtrNodoLista ptrNuevoNodo = crearNodoLista(partido);
+  PtrNodoPartido ptrNuevoNodo = crearNodoLista(partido);
 
   /* lo incorpora al principio de la lista */
-  ptrNuevoNodo->sgte = lista.primero;
+  ptrNuevoNodo->siguiente = lista.primero;
   lista.primero = ptrNuevoNodo;
 
   return ptrNuevoNodo;
 }
 
 /*----------------------------------------------------------------------------*/
-PtrNodoLista adicionarDespues(Lista &lista, Partido partido, PtrNodoLista ptrNodo) {
+PtrNodoPartido adicionarDespues(ListaPartido &lista, Partido partido, PtrNodoPartido ptrNodo) {
 
-  PtrNodoLista ptrNuevoNodo = fin();
+  PtrNodoPartido ptrNuevoNodo = finListaPartido();
 
   /* si la lista está vacia se adiciona la principio */
-  if (listaVacia(lista))
+  if (listaVaciaPartido(lista))
     ptrNuevoNodo = adicionarPrincipio(lista,partido);
 
   else {
-    if (ptrNodo != fin()) {
+    if (ptrNodo != finListaPartido()) {
 
       /* crea el nodo y lo intercala en la lista */
       ptrNuevoNodo = crearNodoLista(partido);
 
-      ptrNuevoNodo->sgte = ptrNodo->sgte;
-      ptrNodo->sgte = ptrNuevoNodo;
+      ptrNuevoNodo->siguiente = ptrNodo->siguiente;
+      ptrNodo->siguiente = ptrNuevoNodo;
     }
   }
   return ptrNuevoNodo;
 }
 
 /*----------------------------------------------------------------------------*/
-PtrNodoLista adicionarFinal(Lista &lista, Partido partido) {
+PtrNodoPartido adicionarFinal(ListaPartido &lista, Partido partido) {
 
   /* adiciona el dato después del último nodo de la lista */
   return adicionarDespues(lista,partido,ultimo(lista));
 }
 
 /*----------------------------------------------------------------------------*/
-PtrNodoLista adicionarAntes(Lista &lista, Partido partido, PtrNodoLista ptrNodo) {
+PtrNodoPartido adicionarAntes(ListaPartido &lista, Partido partido, PtrNodoPartido ptrNodo) {
 
-  PtrNodoLista ptrNuevoNodo = fin();
+  PtrNodoPartido ptrNuevoNodo = finListaPartido();
 
-  if (! listaVacia(lista)) {
+  if (! listaVaciaPartido(lista)) {
     if (ptrNodo != primero(lista))
       ptrNuevoNodo = adicionarDespues(lista,partido,anterior(lista,ptrNodo));
     else
@@ -123,33 +144,33 @@ PtrNodoLista adicionarAntes(Lista &lista, Partido partido, PtrNodoLista ptrNodo)
 }
 
 /*----------------------------------------------------------------------------*/
-void colocarDato(Lista &lista, Partido &partido, PtrNodoLista ptrNodo) {
+void colocarDato(ListaPartido &lista, Partido &partido, PtrNodoPartido ptrNodo) {
 
-  if ( (! listaVacia(lista)) && (ptrNodo != fin()))
+  if ( (! listaVaciaPartido(lista)) && (ptrNodo != finListaPartido()))
     ptrNodo->partido = partido;
 }
 
 /*----------------------------------------------------------------------------*/
-void obtenerDato(Lista &lista, Partido &partido, PtrNodoLista ptrNodo) {
+void obtenerDato(ListaPartido &lista, Partido &partido, PtrNodoPartido ptrNodo) {
 
-  if ((! listaVacia(lista)) && (ptrNodo != fin()))
+  if ((! listaVaciaPartido(lista)) && (ptrNodo != finListaPartido()))
     partido = ptrNodo->partido;
 }
 
 /*----------------------------------------------------------------------------*/
-void eliminarNodo(Lista &lista, PtrNodoLista ptrNodo) {
+void eliminarNodo(ListaPartido &lista, PtrNodoPartido ptrNodo) {
 
-  PtrNodoLista ptrPrevio;
+  PtrNodoPartido ptrPrevio;
 
   /* verifica que la lista no esté vacia y que nodo no sea fin*/
-  if ((! listaVacia(lista)) && (ptrNodo != fin())) {
+  if ((! listaVaciaPartido(lista)) && (ptrNodo != finListaPartido())) {
 
     if (ptrNodo == primero(lista))
       lista.primero = siguiente(lista,primero(lista));
 
     else {
       ptrPrevio = anterior( lista , ptrNodo );
-      ptrPrevio->sgte = ptrNodo->sgte;
+      ptrPrevio->siguiente = ptrNodo->siguiente;
     }
     // Si el dato es un TDA, acá habría que llamar al destructor.
 
@@ -158,41 +179,41 @@ void eliminarNodo(Lista &lista, PtrNodoLista ptrNodo) {
 }
 
 /*----------------------------------------------------------------------------*/
-void eliminarNodoPrimero(Lista &lista) {
+void eliminarNodoPrimero(ListaPartido &lista) {
 
-  if (! listaVacia(lista))
+  if (! listaVaciaPartido(lista))
     eliminarNodo(lista,primero(lista));
 }
 
 /*----------------------------------------------------------------------------*/
-void eliminarNodoUltimo(Lista &lista) {
+void eliminarNodoUltimo(ListaPartido &lista) {
 
-  if (! listaVacia(lista))
+  if (! listaVaciaPartido(lista))
     eliminarNodo(lista,ultimo(lista));
 }
 
 /*----------------------------------------------------------------------------*/
-void eliminarLista(Lista &lista) {
+void eliminarLista(ListaPartido &lista) {
 
   /* retira uno a uno los nodos de la lista */
-  while (! listaVacia(lista))
+  while (! listaVaciaPartido(lista))
     eliminarNodo(lista,primero(lista));
 }
 
 /*----------------------------------------------------------------------------*/
-PtrNodoLista localizarDato(Lista &lista, Partido partido) {
+PtrNodoPartido localizarDato(ListaPartido &lista, Partido partido) {
 
    bool encontrado = false;
    Partido partidoCursor;
-   PtrNodoLista ptrCursor = primero(lista);
+   PtrNodoPartido ptrCursor = primero(lista);
 
   /* recorre los nodos hasta llegar al último o hasta
      encontrar el nodo buscado */
-  while ((ptrCursor != fin()) && (! encontrado)) {
+  while ((ptrCursor != finListaPartido()) && (! encontrado)) {
 
     /* obtiene el dato del nodo y lo compara */
     obtenerDato(lista,partidoCursor,ptrCursor);
-    if (compararDato(partidoCursor,partido) == IGUAL)
+    if (compararDato(partidoCursor,partido) == ESIGUAL)
       encontrado = true;
     else
       ptrCursor = siguiente(lista,ptrCursor);
@@ -200,34 +221,34 @@ PtrNodoLista localizarDato(Lista &lista, Partido partido) {
 
   /* si no lo encontró devuelve fin */
   if (! encontrado)
-    ptrCursor = fin();
+    ptrCursor = finListaPartido();
 
   return ptrCursor;
 }
 
 /*----------------------------------------------------------------------------*/
-void eliminarDato(Lista &lista, Partido partido) {
+void eliminarDato(ListaPartido &lista, Partido partido) {
 
   /* localiza el dato y luego lo elimina */
-  PtrNodoLista ptrNodo = localizarDato(lista,partido);
-  if (ptrNodo != fin())
+  PtrNodoPartido ptrNodo = localizarDato(lista,partido);
+  if (ptrNodo != finListaPartido())
     eliminarNodo(lista,ptrNodo);
 }
 
 /*----------------------------------------------------------------------------*/
-PtrNodoLista insertarDato(Lista &lista, Partido partido) {
+PtrNodoPartido insertarDato(ListaPartido &lista, Partido partido) {
 
-  PtrNodoLista ptrPrevio = primero(lista);
-  PtrNodoLista ptrCursor = primero(lista);
-  PtrNodoLista ptrNuevoNodo;
+  PtrNodoPartido ptrPrevio = primero(lista);
+  PtrNodoPartido ptrCursor = primero(lista);
+  PtrNodoPartido ptrNuevoNodo;
   Partido partidoCursor;
   bool ubicado = false;
 
   /* recorre la lista buscando el lugar de la inserción */
-  while ((ptrCursor != fin()) && (! ubicado)) {
+  while ((ptrCursor != finListaPartido()) && (! ubicado)) {
 
     obtenerDato(lista,partidoCursor,ptrCursor);
-    if (compararDato(partidoCursor,partido) == MAYOR)
+    if (compararDato(partidoCursor,partido) == ESMAYOR)
       ubicado = true;
 
     else {
@@ -246,12 +267,12 @@ PtrNodoLista insertarDato(Lista &lista, Partido partido) {
 
 /*----------------------------------------------------------------------------*/
 
-void reordenar(Lista &lista) {
+void reordenar(ListaPartido &lista) {
 
-  Lista temp = lista;
-  PtrNodoLista ptrCursor = primero(temp);
-  crearLista(lista);
-  while ( ptrCursor != fin() ) {
+  ListaPartido temp = lista;
+  PtrNodoPartido ptrCursor = primero(temp);
+  crearListaPartido(lista);
+  while ( ptrCursor != finListaPartido() ) {
         Partido partido;
         obtenerDato( temp, partido, ptrCursor);
         insertarDato( lista, partido );
@@ -264,10 +285,10 @@ void reordenar(Lista &lista) {
 
 /*----------------------------------------------------------------------------*/
 
-int longitud(Lista &lista){
-  PtrNodoLista ptrCursor = primero(lista);
+int longitud(ListaPartido &lista){
+  PtrNodoPartido ptrCursor = primero(lista);
   int longitud = 0;
-  while ( ptrCursor != fin() ) {
+  while ( ptrCursor != finListaPartido() ) {
         longitud++;
         ptrCursor = siguiente( lista, ptrCursor);
   }

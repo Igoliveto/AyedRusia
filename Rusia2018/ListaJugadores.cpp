@@ -22,7 +22,7 @@
   dato2 : dato a comparar.
   return resultado de comparar dato1 respecto de dato2.
 */
-ResultadoComparacion compararDato(Jugador jugador1, Jugador jugador2) {
+ResultadoComparacionJugadores compararDato(Jugador jugador1, Jugador jugador2) {
     if (jugador1.id > jugador2.id) {
         return MAYOR;
     }

@@ -5,12 +5,12 @@
 
 
 
- struct Partido{
-    int idEntero;
+struct Partido{
+    int id;
     int idEquipoL;
     int idEquipoV;
     int golesL;
     int golesV;
-}Partido;
+};
 
 #endif // _PARTIDO_H

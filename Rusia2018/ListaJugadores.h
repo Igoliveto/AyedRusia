@@ -16,7 +16,7 @@
 /*--------------------------------*/
 
 /* tipo enumerado para realizar comparaciones */
-enum ResultadoComparacion {
+enum ResultadoComparacionJugadores {
   MAYOR,
   IGUAL,
   MENOR
