@@ -6,17 +6,22 @@
 #include "ListaPartidos.h"
 #include <stdlib.h>
 #include <string>
+#include <sstream>
+#include <fstream>
 using namespace std;
 void alta();
 void administrarPartidos();
+void cargarEquipos();
+void cargarGrupos();
 int main()
 {
-     int menu=0;
+    int menu=0;
     int submenu1=0,submenu2=0,submenu3=0;
-
+    cargarEquipos();
+    cargarGrupos();
 
     while(menu!=4){
-     cout<<"1_Administrar equipos, jugadores, rupos y partidos(Altas, bajas y modificaciones)"<<endl;
+     cout<<"1_Administrar equipos, jugadores, grupos y partidos(Altas, bajas y modificaciones)"<<endl;
      cout<<"2_Administrar partidos"<<endl;
      cout<<"3_Procesar reportes"<<endl;
      cout<<"4_Salir"<<endl;
@@ -100,22 +105,78 @@ int main()
      }
     return 0;
 }
-
-void alta(){
+void cargarEquipos(){
 ListaEquipo listaEquipo;
 crearListaEquipo(listaEquipo);
 Equipo equipo;
-string nombre;
-int id=0;
-cout<<"ingrese id :"<<endl;
-cin>>id;
-cout<<"ingrese nombre del equipo :"<<endl;
-cin>>nombre;
-crearEquipo(equipo,id,nombre);
-adicionarAlPrincipio(listaEquipo,equipo);
+crearEquipo(equipo);
+ifstream archivo("equipos.txt"); // abrir el archivo en modo lectura//
+int aux=0;
+string linea;
+if(archivo.is_open()){
+    while(!archivo.eof()){        //mientras no sea el fin de archivo//
+            getline(archivo,linea,';'); // leo desde el comienzo has ";" y lo guardo en linea//
+            stringstream id(linea);  //Cargo en el stream "id", lo que esta en linea;
+            id>>aux;                  // lo paso a aux;
+            setId(equipo,aux);
+            getline(archivo,linea,';');
+            setNombre(equipo,linea);
+            getline(archivo,linea,';');
+            stringstream golA(linea);
+            golA>>aux;
+            setGolesAFavor(equipo,aux);
+            getline(archivo,linea,';');
+            stringstream golE(linea);
+            golE>>aux;
+            setGolesEnContra(equipo,aux);
+            getline(archivo,linea);
+            stringstream puntos(linea);
+            puntos>>aux;
+            setPuntos(equipo,aux);
+            adicionarFinal(listaEquipo,equipo);
+         }
+        archivo.seekg(0); //Me posiciono al principio del archivo
+}
+archivo.close();
+}
 
-};
+void cargarGrupos(){
+ListaGrupo listaGrupo;
+crearListaGrupo(listaGrupo);
+Grupo grupo;
+crearGrupo(grupo);
+ifstream archivo("grupos.txt");
+int aux=0;
+char aux1;
+string linea;
+if(archivo.is_open()){
 
-void administrarPartidos(){
+    while(!archivo.eof()){
+         getline(archivo,linea,';');
+         aux1=linea[0];
+         setId(grupo,aux1);
+         getline(archivo,linea,';');
+         setNombre(grupo,linea);
+         getline(archivo,linea,';');
+         stringstream id1(linea);
+         id1>>aux;
+         setIdEquipo1(grupo,aux);
+         getline(archivo,linea,';');
+         stringstream id2(linea);
+         id2>>aux;
+         setIdEquipo2(grupo,aux);
+         getline(archivo,linea,';');
+         stringstream id3(linea);
+         id3>>aux;
+         setIdEquipo3(grupo,aux);
+         getline(archivo,linea);
+         stringstream id4(linea);
+         id4>>aux;
+         setIdEquipo4(grupo,aux);
+         adicionarFinal(listaGrupo,grupo);
 
+     }
+      archivo.seekg(0); //Me posiciono al principio del archivo
+}
+archivo.close();
 }

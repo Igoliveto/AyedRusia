@@ -1,19 +1,20 @@
 # depslib dependency file v1.0
-1529185043 source:c:\users\tomas\documents\codeblocks\rusia2018\equipo.cpp
+1529433644 source:c:\users\tomas\documents\codeblocks\rusia2018\equipo.cpp
 	"Equipo.h"
 	<cstring>
 	<string>
 	<iostream>
 	"ListaJugadores.h"
 
-1529184460 c:\users\tomas\documents\codeblocks\rusia2018\equipo.h
+1529433778 c:\users\tomas\documents\codeblocks\rusia2018\equipo.h
 	"ListaJugadores.h"
 	<string>
 	<iostream>
 
-1527810604 c:\users\tomas\documents\codeblocks\rusia2018\jugador.h
+1529428601 c:\users\tomas\documents\codeblocks\rusia2018\jugador.h
+	<string>
 
-1529420381 source:c:\users\tomas\documents\codeblocks\rusia2018\main.cpp
+1529434827 source:c:\users\tomas\documents\codeblocks\rusia2018\main.cpp
 	<iostream>
 	"Equipo.h"
 	"ListaEquipo.h"
@@ -22,15 +23,20 @@
 	"ListaPartidos.h"
 	<stdlib.h>
 	<string>
+	<sstream>
+	<fstream>
 
-1529181372 source:c:\users\tomas\documents\codeblocks\rusia2018\grupo.cpp
+1529437870 source:c:\users\tomas\documents\codeblocks\rusia2018\grupo.cpp
 	"Grupo.h"
 	<string>
 	<iostream>
 
-1527816858 source:c:\users\tomas\documents\codeblocks\rusia2018\jugador.cpp
+1529428601 source:c:\users\tomas\documents\codeblocks\rusia2018\jugador.cpp
+	"Jugador.h"
+	"string"
 
-1527817507 source:c:\users\tomas\documents\codeblocks\rusia2018\partido.cpp
+1529428601 source:c:\users\tomas\documents\codeblocks\rusia2018\partido.cpp
+	"partido.h"
 
 1529184431 source:c:\users\tomas\documents\codeblocks\rusia2018\listaequipo.cpp
 	"ListaEquipo.h"
@@ -41,7 +47,7 @@
 1529420461 source:c:\users\tomas\documents\codeblocks\rusia2018\listajugadores.cpp
 	"ListaJugadores.h"
 
-1529181508 c:\users\tomas\documents\codeblocks\rusia2018\grupo.h
+1529436132 c:\users\tomas\documents\codeblocks\rusia2018\grupo.h
 	<string>
 	<iostream>
 
@@ -114,7 +120,7 @@
 1529420572 c:\users\tomas\documents\codeblocks\rusia2018\listapartidos.h
 	"Partido.h"
 
-1529419878 c:\users\tomas\documents\codeblocks\rusia2018\partido.h
+1529428601 c:\users\tomas\documents\codeblocks\rusia2018\partido.h
 
 1529423209 source:c:\users\bettina\desktop\rusia2018\equipo.cpp
 	"Equipo.h"
