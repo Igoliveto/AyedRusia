@@ -58,4 +58,15 @@ int getPuntos(Equipo equipo){
 return equipo.puntos;
 }
 /*----------------------------------------------------------------------------*/
+ListaJugador getLista(Equipo equipo){
+return equipo.listaJugadores;}
+
+void destructor(Equipo &equipo){
+equipo.id=0;
+equipo.nombre="-";
+equipo.golesAFavor=0;
+equipo.golesEnContra=0;
+equipo.puntos=0;
+crearListaJugador(equipo.listaJugadores);
+}
 /******************************************************************************/

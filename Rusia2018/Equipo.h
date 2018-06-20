@@ -119,5 +119,7 @@ void setPuntos(Equipo &equipo,int puntos);
 */
 int getPuntos(Equipo equipo);
 /*----------------------------------------------------------------------------*/
+ListaJugador getLista(Equipo equipo);
+void destructor(Equipo &equipo);
 /******************************************************************************/
 #endif // _EQUIPO_H

@@ -12,6 +12,7 @@ typedef struct{
 int id;
 string nombre;
 int goles;
+int idEquipo;
 }Jugador;
 /*----------------------------------------------------------------------------*/
 //                                PRIMITIVAS
@@ -77,6 +78,8 @@ void setId(Jugador &jugador, int id);
   goles: valor a cargar en el jugador.
 */
 void setGoles(Jugador &jugador, int goles);
+void setIdEquipo(Jugador &jugador,int id);
+int getIdEquipo(Jugador &jugador);
 /*----------------------------------------------------------------------------*/
 /******************************************************************************/
 #endif // _JUGADOR_H_

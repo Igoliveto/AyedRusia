@@ -10,6 +10,7 @@ void crearJugador(Jugador &jugador){
 jugador.id=0;
 jugador.nombre="-";
 jugador.goles=0;
+jugador.idEquipo=0;
 }
 /*----------------------------------------------------------------------------*/
 int getId(Jugador &jugador){
@@ -37,4 +38,10 @@ void setGoles(Jugador &jugador, int goles){
 jugador.goles=goles;
 }
 /*----------------------------------------------------------------------------*/
+void setIdEquipo(Jugador &jugador,int id){
+jugador.idEquipo=id;
+}
+int getIdEquipo(Jugador &jugador){
+return jugador.idEquipo;
+}
 /******************************************************************************/

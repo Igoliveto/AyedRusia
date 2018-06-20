@@ -14,6 +14,8 @@ void administrarPartidos();
 void cargarEquipos();
 void cargarGrupos();
 void cargarPartidos();
+void cargarJugadores(Equipo &equipo);
+void imprimirListaJugadores(ListaJugador  &lista);
 int main()
 {
     int menu=0;
@@ -152,7 +154,11 @@ if(archivo.is_open()){
             stringstream puntos(linea);
             puntos>>aux;
             setPuntos(equipo,aux);
+            cout<<equipo.nombre<<endl;
+            cargarJugadores(equipo);
             adicionarFinal(listaEquipo,equipo);
+            destructor(equipo);
+
          }
         archivo.seekg(0); //Me posiciono al principio del archivo
 }
@@ -194,6 +200,7 @@ if(archivo.is_open()){
          setIdEquipo4(grupo,aux);
          adicionarFinal(listaGrupo,grupo);
 
+
      }
       archivo.seekg(0); //Me posiciono al principio del archivo
 }
@@ -211,7 +218,7 @@ void bateriaJugadores(){
     for (int i=0; i<32; i++){
         for (int u=0;u<23;u++){
           id++;
-          ficheroSalida <<id<<";"<<"Equipo"<<i+1<< "JugadorNumero"<<u+1<<";"<<0<<"\n";
+          ficheroSalida <<id<<";"<<"Equipo"<<i+1<< "JugadorNumero"<<u+1<<";"<<0<< ";"<<i+1 <<"\n";
 
      }
    }
@@ -249,7 +256,6 @@ if(archivo.is_open()){
         stringstream gv(linea);
         gv>>aux;
         setGolesV(partido,aux);
-        cout<<"ID:"<<getId(partido)<<endl;
         adicionarFinal(listaPartido,partido);
 
 
@@ -257,5 +263,62 @@ if(archivo.is_open()){
     archivo.seekg(0);
 }
 archivo.close();
+}
+void cargarJugadores(Equipo &equipo){
+ListaJugador listaJugador;
+crearListaJugador(listaJugador);
+Jugador jugador;
+crearJugador(jugador);
+ifstream archivoJugadores("jugadores.txt");
+int aux=0;
+string linea;
+int idEquipo=0;
+idEquipo=getId(equipo);
+cout<<idEquipo<<endl;
+if(archivoJugadores.is_open()){
+
+        while(!archivoJugadores.eof()){
+        getline(archivoJugadores,linea,';');
+        stringstream id(linea);
+        id>>aux;
+        setId(jugador,aux);
+
+        getline(archivoJugadores,linea,';');
+        setNombre(jugador,linea);
+
+        getline(archivoJugadores,linea,';');
+        stringstream goles(linea);
+        goles>>aux;
+        setGoles(jugador,aux);
+
+        getline(archivoJugadores,linea);
+        stringstream idE(linea);
+        idE>>aux;
+        setIdEquipo(jugador,aux);
+        if(aux==idEquipo){
+        adicionarFinal(equipo.listaJugadores,jugador);}
+
+        }
+
+
+
+archivoJugadores.seekg(0);
+
+}
+archivoJugadores.close();
+
+
+}
+void imprimirListaJugadores(ListaJugador  &lista){
+    PtrNodoListaJugador cursor = primeroJugador(lista);
+    Jugador jugador;
+
+    while (cursor != finJugador()) {
+        obtenerDato(lista, jugador, cursor);
+        cout << jugador.nombre << endl;
+        cursor = siguienteJugador(lista, cursor);
+    }
+
+    cout << endl;
 }
 

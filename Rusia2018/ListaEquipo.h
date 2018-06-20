@@ -230,6 +230,8 @@ void eliminarLista(ListaEquipo &lista);
   dato2 : dato a comparar.
   return resultado de comparar dato1 respecto de dato2.
 */
+PtrNodoListaEquipo localizarDato(ListaEquipo &lista, Equipo equipo) ;
+
 ResultadoComparacionEquipo compararDatoEquipo(Equipo equipo1, Equipo equipo2);
 /*----------------------------------------------------------------------------*/
 /******************************************************************************/

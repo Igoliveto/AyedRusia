@@ -158,6 +158,32 @@ void eliminarLista(ListaEquipo &lista) {
   while (! listaVaciaEquipo(lista))
     eliminarNodo(lista,primeroEquipo(lista));
 }
+/*--------------------------------------------------------------------------*/
+PtrNodoListaEquipo localizarDato(ListaEquipo &lista, Equipo equipo) {
+
+   bool encontrado = false;
+   Equipo equipoCursor;
+   PtrNodoListaEquipo ptrCursor = primeroEquipo(lista);
+
+  /* recorre los nodos hasta llegar al último o hasta
+     encontrar el nodo buscado */
+  while ((ptrCursor != finEquipo()) && (! encontrado)) {
+
+    /* obtiene el dato del nodo y lo compara */
+    obtenerDato(lista,equipoCursor,ptrCursor);
+    if (compararDatoEquipo(equipoCursor,equipo) == IGUAL_EQUIPO)
+      encontrado = true;
+    else
+      ptrCursor = siguienteEquipo(lista,ptrCursor);
+  }
+
+  /* si no lo encontró devuelve fin */
+  if (! encontrado)
+    ptrCursor = finEquipo();
+
+  return ptrCursor;
+}
+
 /*----------------------------------------------------------------------------*/
 ResultadoComparacionEquipo compararDatoEquipo(Equipo equipo1, Equipo equipo2) {
     if (equipo1.id > equipo2.id) {
