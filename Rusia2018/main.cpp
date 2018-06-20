@@ -10,16 +10,17 @@
 #include <fstream>
 using namespace std;
 void bateriaJugadores();
-void alta();
 void administrarPartidos();
 void cargarEquipos();
 void cargarGrupos();
+void cargarPartidos();
 int main()
 {
     int menu=0;
     int submenu1=0,submenu2=0,submenu3=0;
     cargarEquipos();
     cargarGrupos();
+    cargarPartidos();
 
     while(menu!=5){
 
@@ -217,5 +218,44 @@ void bateriaJugadores(){
 
     ficheroSalida.close();
 
+}
+void cargarPartidos(){
+ListaPartido listaPartido;
+crearListaPartido(listaPartido);
+Partido partido;
+crearPartido(partido);
+ifstream archivo("partidos.txt");
+int aux;
+string linea;
+if(archivo.is_open()){
+    while(!archivo.eof()){
+        getline(archivo,linea,';');
+        stringstream id(linea);
+        id>>aux;
+        setId(partido,aux);
+        getline(archivo,linea,';');
+        stringstream el(linea);
+        el>>aux;
+        setIdEquipoL(partido,aux);
+        getline(archivo,linea,';');
+        stringstream ev(linea);
+        ev>>aux;
+        setIdEquipoV(partido,aux);
+        getline(archivo,linea,';');
+        stringstream gl(linea);
+        gl>>aux;
+        setGolesL(partido,aux);
+        getline(archivo,linea);
+        stringstream gv(linea);
+        gv>>aux;
+        setGolesV(partido,aux);
+        cout<<"ID:"<<getId(partido)<<endl;
+        adicionarFinal(listaPartido,partido);
+
+
+    }
+    archivo.seekg(0);
+}
+archivo.close();
 }
 
