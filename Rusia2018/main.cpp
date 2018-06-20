@@ -154,7 +154,6 @@ if(archivo.is_open()){
             stringstream puntos(linea);
             puntos>>aux;
             setPuntos(equipo,aux);
-            cout<<equipo.nombre<<endl;
             cargarJugadores(equipo);
             adicionarFinal(listaEquipo,equipo);
             destructor(equipo);
@@ -274,7 +273,6 @@ int aux=0;
 string linea;
 int idEquipo=0;
 idEquipo=getId(equipo);
-cout<<idEquipo<<endl;
 if(archivoJugadores.is_open()){
 
         while(!archivoJugadores.eof()){
