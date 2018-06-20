@@ -9,6 +9,7 @@
 #include <sstream>
 #include <fstream>
 using namespace std;
+void bateriaJugadores();
 void alta();
 void administrarPartidos();
 void cargarEquipos();
@@ -20,11 +21,14 @@ int main()
     cargarEquipos();
     cargarGrupos();
 
-    while(menu!=4){
+    while(menu!=5){
+
      cout<<"1_Administrar equipos, jugadores, grupos y partidos(Altas, bajas y modificaciones)"<<endl;
      cout<<"2_Administrar partidos"<<endl;
      cout<<"3_Procesar reportes"<<endl;
-     cout<<"4_Salir"<<endl;
+     cout<<"4_Crear Datos de prueba"<<endl;
+     cout<<"5_Salir"<<endl;
+
      cin>>menu;
 
      switch(menu){
@@ -72,7 +76,7 @@ int main()
                  }
                  }
                   break;
-     case 3: //reportes
+    case 3: //reportes
 
             while(submenu3!=6){
                  cout<<"1-Listado de goleadores"<<endl;
@@ -97,12 +101,26 @@ int main()
                  }
                  }
                   break;
-     case 4: break;
+    case 4:
+        bateriaJugadores();
+        break;
+
+     case 5:
+        break;
+    case 6://Test Interno(osea no le den  bola)
+            Equipo* equipo = new Equipo;
+            ListaJugador* listaJugador = new ListaJugador;
+            Jugador* jugador = new Jugador;
+
+            crearEquipo(*equipo);
+            crearJugador(*jugador);
+
+            adicionarDespues((*equipo).listaJugadores,*jugador,crearNodoListaJugador(*jugador));
 
 
-
+        break;
      }
-     }
+    }
     return 0;
 }
 void cargarEquipos(){
@@ -180,3 +198,24 @@ if(archivo.is_open()){
 }
 archivo.close();
 }
+
+void bateriaJugadores(){
+    int id =0;
+    ofstream ficheroSalida;
+
+    ficheroSalida.open ("Jugadores.txt",ios::trunc);
+    ficheroSalida.close();
+
+    ficheroSalida.open ("Jugadores.txt",ios::app);
+    for (int i=0; i<32; i++){
+        for (int u=0;u<23;u++){
+          id++;
+          ficheroSalida <<id<<";"<<"Equipo"<<i+1<< "JugadorNumero"<<u+1<<";"<<0<<"\n";
+
+     }
+   }
+
+    ficheroSalida.close();
+
+}
+
