@@ -1,111 +1,71 @@
-
-
 #include "ListaJugadores.h"
 
-/******************************************************************************/
-/* Definición de Tipos de Datos para manejo interno */
-/*--------------------------------------------------*/
-
-
-/******************************************************************************/
-/* Funciones Adicionales */
-/*-----------------------*/
-
-/*
-  pre : ninguna.
-  post: compara ambos dato1 y dato2, devuelve
-          mayor si dato1 es mayor que dato2,
-          igual si dato1 es igual a dato2,
-          menor si dato1 es menor que dato2.
-
-  dato1 : dato a comparar.
-  dato2 : dato a comparar.
-  return resultado de comparar dato1 respecto de dato2.
-*/
-ResultadoComparacionJugadores compararDato(Jugador jugador1, Jugador jugador2) {
-    if (jugador1.id > jugador2.id) {
-        return MAYOR;
-    }
-    else if (jugador1.id < jugador2.id) {
-        return MENOR;
-    }
-    else {
-        return IGUAL;
-    }
-}
-
-
-/******************************************************************************/
-/* Implementación de Primitivas */
-/*------------------------------*/
-
-void crearLista(Lista &lista) {
-  lista.primero = fin();
-}
-
+#ifndef NULL
+#define NULL      0
+#endif
 /*----------------------------------------------------------------------------*/
-bool listaVacia(Lista &lista) {
-
-  return (primero(lista) == fin());
-}
-
+//                        IMPLEMENTACION DE PRIMITIVAS
 /*----------------------------------------------------------------------------*/
-PtrNodoLista fin() {
+void crearListaJugador(ListaJugador &lista) {
+  lista.primero = finJugador();
+}
+/*----------------------------------------------------------------------------*/
+bool listaVaciaJugador(ListaJugador &lista) {
+
+  return (primeroJugador(lista) == finJugador());
+}
+/*----------------------------------------------------------------------------*/
+PtrNodoListaJugador finJugador() {
   return NULL;
 }
-
 /*----------------------------------------------------------------------------*/
-PtrNodoLista primero(Lista &lista) {
+PtrNodoListaJugador primeroJugador(ListaJugador &lista) {
   return lista.primero;
 }
-
 /*----------------------------------------------------------------------------*/
-PtrNodoLista siguiente(Lista &lista, PtrNodoLista ptrNodo) {
+PtrNodoListaJugador siguienteJugador(ListaJugador &lista, PtrNodoListaJugador ptrNodo) {
 
   /* verifica si la lista está vacia o si ptrNodo es el último */
-  if ((! listaVacia(lista)) && (ptrNodo != fin()))
+  if ((! listaVaciaJugador(lista)) && (ptrNodo != finJugador()))
     return ptrNodo->sgte;
   else
-    return fin();
+    return finJugador();
 }
-
 /*----------------------------------------------------------------------------*/
-PtrNodoLista anterior(Lista &lista, PtrNodoLista ptrNodo) {
+PtrNodoListaJugador anteriorJugador(ListaJugador &lista, PtrNodoListaJugador ptrNodo) {
 
-  PtrNodoLista ptrPrevio = fin();
-  PtrNodoLista ptrCursor = primero(lista);
+  PtrNodoListaJugador ptrPrevio = finJugador();
+  PtrNodoListaJugador ptrCursor = primeroJugador(lista);
 
-  while (( ptrCursor != fin()) && (ptrCursor != ptrNodo)) {
+  while (( ptrCursor != finJugador()) && (ptrCursor != ptrNodo)) {
     ptrPrevio = ptrCursor;
-    ptrCursor = siguiente(lista,ptrCursor);
+    ptrCursor = siguienteJugador(lista,ptrCursor);
   }
   return ptrPrevio;
 }
-
 /*----------------------------------------------------------------------------*/
-PtrNodoLista ultimo(Lista &lista) {
+PtrNodoListaJugador ultimoJugador(ListaJugador &lista) {
 
   /* el último nodo de la lista es el anterior al fin() */
-  return anterior(lista,fin());
+  return anteriorJugador(lista,finJugador());
 }
-
 /*----------------------------------------------------------------------------*/
-PtrNodoLista crearNodoLista(Jugador jugador) {
+PtrNodoListaJugador crearNodoListaJugador(Jugador jugador) {
 
   /* reserva memoria para el nodo y luego completa sus datos */
-  PtrNodoLista ptrAux = new NodoLista;
+  PtrNodoListaJugador ptrAux = new NodoListaJugador;
 
   ptrAux->jugador = jugador;
-  ptrAux->sgte = fin();
+  ptrAux->sgte = finJugador();
 
   return ptrAux;
 }
 
 /*----------------------------------------------------------------------------*/
-PtrNodoLista adicionarPrincipio(Lista &lista, Jugador jugador) {
+PtrNodoListaJugador adicionarPrincipio(ListaJugador &lista, Jugador jugador) {
 
   /* crea el nodo */
-  PtrNodoLista ptrNuevoNodo = crearNodoLista(jugador);
+  PtrNodoListaJugador ptrNuevoNodo = crearNodoListaJugador(jugador);
 
   /* lo incorpora al principio de la lista */
   ptrNuevoNodo->sgte = lista.primero;
@@ -113,21 +73,20 @@ PtrNodoLista adicionarPrincipio(Lista &lista, Jugador jugador) {
 
   return ptrNuevoNodo;
 }
-
 /*----------------------------------------------------------------------------*/
-PtrNodoLista adicionarDespues(Lista &lista, Jugador jugador, PtrNodoLista ptrNodo) {
+PtrNodoListaJugador adicionarDespues(ListaJugador &lista, Jugador jugador, PtrNodoListaJugador ptrNodo) {
 
-  PtrNodoLista ptrNuevoNodo = fin();
+  PtrNodoListaJugador ptrNuevoNodo = finJugador();
 
   /* si la lista está vacia se adiciona la principio */
-  if (listaVacia(lista))
+  if (listaVaciaJugador(lista))
     ptrNuevoNodo = adicionarPrincipio(lista,jugador);
 
   else {
-    if (ptrNodo != fin()) {
+    if (ptrNodo != finJugador()) {
 
       /* crea el nodo y lo intercala en la lista */
-      ptrNuevoNodo = crearNodoLista(jugador);
+      ptrNuevoNodo = crearNodoListaJugador(jugador);
 
       ptrNuevoNodo->sgte = ptrNodo->sgte;
       ptrNodo->sgte = ptrNuevoNodo;
@@ -135,55 +94,50 @@ PtrNodoLista adicionarDespues(Lista &lista, Jugador jugador, PtrNodoLista ptrNod
   }
   return ptrNuevoNodo;
 }
-
 /*----------------------------------------------------------------------------*/
-PtrNodoLista adicionarFinal(Lista &lista, Jugador jugador) {
+PtrNodoListaJugador adicionarFinal(ListaJugador &lista, Jugador jugador) {
 
   /* adiciona el dato después del último nodo de la lista */
-  return adicionarDespues(lista,jugador,ultimo(lista));
+  return adicionarDespues(lista,jugador,ultimoJugador(lista));
 }
-
 /*----------------------------------------------------------------------------*/
-PtrNodoLista adicionarAntes(Lista &lista, Jugador jugador, PtrNodoLista ptrNodo) {
+PtrNodoListaJugador adicionarAntes(ListaJugador &lista, Jugador jugador, PtrNodoListaJugador ptrNodo) {
 
-  PtrNodoLista ptrNuevoNodo = fin();
+  PtrNodoListaJugador ptrNuevoNodo = finJugador();
 
-  if (! listaVacia(lista)) {
-    if (ptrNodo != primero(lista))
-      ptrNuevoNodo = adicionarDespues(lista,jugador,anterior(lista,ptrNodo));
+  if (! listaVaciaJugador(lista)) {
+    if (ptrNodo != primeroJugador(lista))
+      ptrNuevoNodo = adicionarDespues(lista,jugador,anteriorJugador(lista,ptrNodo));
     else
       ptrNuevoNodo = adicionarPrincipio(lista,jugador);
    }
    return ptrNuevoNodo;
 }
-
 /*----------------------------------------------------------------------------*/
-void colocarDato(Lista &lista, Jugador &jugador, PtrNodoLista ptrNodo) {
+void colocarDato(ListaJugador &lista, Jugador &jugador, PtrNodoListaJugador ptrNodo) {
 
-  if ( (! listaVacia(lista)) && (ptrNodo != fin()))
+  if ( (! listaVaciaJugador(lista)) && (ptrNodo != finJugador()))
     ptrNodo->jugador = jugador;
 }
-
 /*----------------------------------------------------------------------------*/
-void obtenerDato(Lista &lista, Jugador &jugador, PtrNodoLista ptrNodo) {
+void obtenerDato(ListaJugador &lista, Jugador &jugador, PtrNodoListaJugador ptrNodo) {
 
-  if ((! listaVacia(lista)) && (ptrNodo != fin()))
+  if ((! listaVaciaJugador(lista)) && (ptrNodo != finJugador()))
     jugador = ptrNodo->jugador;
 }
-
 /*----------------------------------------------------------------------------*/
-void eliminarNodo(Lista &lista, PtrNodoLista ptrNodo) {
+void eliminarNodo(ListaJugador &lista, PtrNodoListaJugador ptrNodo) {
 
-  PtrNodoLista ptrPrevio;
+  PtrNodoListaJugador ptrPrevio;
 
   /* verifica que la lista no esté vacia y que nodo no sea fin*/
-  if ((! listaVacia(lista)) && (ptrNodo != fin())) {
+  if ((! listaVaciaJugador(lista)) && (ptrNodo != finJugador())) {
 
-    if (ptrNodo == primero(lista))
-      lista.primero = siguiente(lista,primero(lista));
+    if (ptrNodo == primeroJugador(lista))
+      lista.primero = siguienteJugador(lista,primeroJugador(lista));
 
     else {
-      ptrPrevio = anterior( lista , ptrNodo );
+      ptrPrevio = anteriorJugador( lista , ptrNodo );
       ptrPrevio->sgte = ptrNodo->sgte;
     }
     // Si el dato es un TDA, acá habría que llamar al destructor.
@@ -191,122 +145,36 @@ void eliminarNodo(Lista &lista, PtrNodoLista ptrNodo) {
     delete ptrNodo;
   }
 }
-
 /*----------------------------------------------------------------------------*/
-void eliminarNodoPrimero(Lista &lista) {
+void eliminarNodoPrimero(ListaJugador &lista) {
 
-  if (! listaVacia(lista))
-    eliminarNodo(lista,primero(lista));
+  if (! listaVaciaJugador(lista))
+    eliminarNodo(lista,primeroJugador(lista));
 }
-
 /*----------------------------------------------------------------------------*/
-void eliminarNodoUltimo(Lista &lista) {
+void eliminarNodoUltimo(ListaJugador &lista) {
 
-  if (! listaVacia(lista))
-    eliminarNodo(lista,ultimo(lista));
+  if (! listaVaciaJugador(lista))
+    eliminarNodo(lista,ultimoJugador(lista));
 }
-
 /*----------------------------------------------------------------------------*/
-void eliminarLista(Lista &lista) {
+void eliminarLista(ListaJugador &lista) {
 
   /* retira uno a uno los nodos de la lista */
-  while (! listaVacia(lista))
-    eliminarNodo(lista,primero(lista));
+  while (! listaVaciaJugador(lista))
+    eliminarNodo(lista,primeroJugador(lista));
 }
-
 /*----------------------------------------------------------------------------*/
-PtrNodoLista localizarDato(Lista &lista, Jugador jugador) {
-
-   bool encontrado = false;
-   Jugador jugadorCursor;
-   PtrNodoLista ptrCursor = primero(lista);
-
-  /* recorre los nodos hasta llegar al último o hasta
-     encontrar el nodo buscado */
-  while ((ptrCursor != fin()) && (! encontrado)) {
-
-    /* obtiene el dato del nodo y lo compara */
-    obtenerDato(lista,jugadorCursor,ptrCursor);
-    if (compararDato(jugadorCursor,jugador) == IGUAL)
-      encontrado = true;
-    else
-      ptrCursor = siguiente(lista,ptrCursor);
-  }
-
-  /* si no lo encontró devuelve fin */
-  if (! encontrado)
-    ptrCursor = fin();
-
-  return ptrCursor;
-}
-
-/*----------------------------------------------------------------------------*/
-void eliminarDato(Lista &lista, Jugador jugador) {
-
-  /* localiza el dato y luego lo elimina */
-  PtrNodoLista ptrNodo = localizarDato(lista,jugador);
-  if (ptrNodo != fin())
-    eliminarNodo(lista,ptrNodo);
-}
-
-/*----------------------------------------------------------------------------*/
-PtrNodoLista insertarDato(Lista &lista, Jugador jugador) {
-
-  PtrNodoLista ptrPrevio = primero(lista);
-  PtrNodoLista ptrCursor = primero(lista);
-  PtrNodoLista ptrNuevoNodo;
-  Jugador jugadorCursor;
-  bool ubicado = false;
-
-  /* recorre la lista buscando el lugar de la inserción */
-  while ((ptrCursor != fin()) && (! ubicado)) {
-
-    obtenerDato(lista,jugadorCursor,ptrCursor);
-    if (compararDato(jugadorCursor,jugador) == MAYOR)
-      ubicado = true;
-
-    else {
-      ptrPrevio = ptrCursor;
-      ptrCursor = siguiente(lista,ptrCursor);
+ResultadoComparacionJugador compararDatoJugador(Jugador jugador1, Jugador jugador2) {
+    if (jugador1.id > jugador2.id) {
+        return MAYOR_JUGADOR;
     }
-  }
-
-  if (ptrCursor == primero(lista))
-    ptrNuevoNodo = adicionarPrincipio(lista,jugador);
-  else
-    ptrNuevoNodo = adicionarDespues(lista,jugador,ptrPrevio);
-
-  return ptrNuevoNodo;
+    else if (jugador1.id < jugador2.id) {
+        return MENOR_JUGADOR;
+    }
+    else {
+        return IGUAL_JUGADOR;
+    }
 }
-
 /*----------------------------------------------------------------------------*/
-
-void reordenar(Lista &lista) {
-
-  Lista temp = lista;
-  PtrNodoLista ptrCursor = primero(temp);
-  crearLista(lista);
-  while ( ptrCursor != fin() ) {
-        Jugador jugador;
-        obtenerDato( temp, jugador, ptrCursor);
-        insertarDato( lista, jugador );
-        eliminarNodo( temp, ptrCursor );
-        ptrCursor = primero(temp);
-  }
-  eliminarLista( temp );
-}
-
-
-/*----------------------------------------------------------------------------*/
-
-int longitud(Lista &lista){
-  PtrNodoLista ptrCursor = primero(lista);
-  int longitud = 0;
-  while ( ptrCursor != fin() ) {
-        longitud++;
-        ptrCursor = siguiente( lista, ptrCursor);
-  }
-  return longitud;
-}
-
-/*----------------------------------------------------------------------------*/
+/******************************************************************************/

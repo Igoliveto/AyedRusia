@@ -5,17 +5,21 @@
 #endif
 #include "ListaJugadores.h"
 #include <string>
-#include <iostream>
 using namespace std;
+/*----------------------------------------------------------------------------*/
+//                                ESTRUCTURAS
+/*----------------------------------------------------------------------------*/
 typedef struct {
 int id;
 string nombre;
 int golesAFavor;
 int golesEnContra;
 int puntos;
-Lista listaJugadores;
+ListaJugador listaJugadores;
 }Equipo;
-
+/*----------------------------------------------------------------------------*/
+//                                PRIMITIVAS
+/*----------------------------------------------------------------------------*/
 void crearEquipo(Equipo &equipo);
 
 int getId(Equipo equipo);
@@ -37,4 +41,6 @@ int getGolesEnContra(Equipo equipo);
 void setPuntos(Equipo &equipo,int puntos);
 
 int getPuntos(Equipo equipo);
+/*----------------------------------------------------------------------------*/
+/******************************************************************************/
 #endif // _EQUIPO_H

@@ -3,13 +3,14 @@
 #include <string>
 #include <iostream>
 #include "ListaJugadores.h"
+using namespace std;
 void crearEquipo(Equipo &equipo){
 equipo.id=0;
 equipo.nombre="-";
 equipo.golesAFavor=0;
 equipo.golesEnContra=0;
 equipo.puntos=0;
-crearLista(equipo.listaJugadores);
+crearListaJugador(equipo.listaJugadores);
 }
 
 int getId(Equipo equipo){

@@ -1,54 +1,40 @@
-/* TDA Lista
- * Implementación Simplemente Enlazada
- * Archivo : Lista.h
- * Versión : 1.1
- */
-
 #ifndef __LISTAJUGADORES_H_
 #define __LISTAJUGADORES_H_
 #include "Jugador.h"
 #ifndef NULL
 #define NULL      0
 #endif
-
-/******************************************************************************/
-/* Definiciones de Tipos de Datos */
-/*--------------------------------*/
-
-/* tipo enumerado para realizar comparaciones */
-enum ResultadoComparacionJugadores {
-  MAYOR,
-  IGUAL,
-  MENOR
+/*----------------------------------------------------------------------------*/
+//                                ESTRUCTURAS
+/*----------------------------------------------------------------------------*/
+enum ResultadoComparacionJugador{
+  MAYOR_JUGADOR,
+  IGUAL_JUGADOR,
+  MENOR_JUGADOR
 };
-/* Tipo de Informacion que esta contenida en los Nodos de la
-   Lista, identificada como Dato. */
 
-struct NodoLista {
+
+struct NodoListaJugador{
     Jugador jugador;
-    NodoLista* sgte; // puntero al siguiente
-};
-
-/* Tipo de Puntero a los Nodos de la Lista, el cual se usa para recorrer
-   la Lista y acceder a sus Datos. */
-typedef NodoLista* PtrNodoLista;
-/* Tipo de Estructura de la Lista */
-struct Lista{
-    PtrNodoLista primero;      // puntero al primer nodo de la lista
+    NodoListaJugador* sgte;
 };
 
 
-/******************************************************************************/
-/* Definicion de Primitivas */
-/*--------------------------*/
+typedef NodoListaJugador* PtrNodoListaJugador;
 
+struct ListaJugador{
+    PtrNodoListaJugador primero;
+};
+/*----------------------------------------------------------------------------*/
+//                                PRIMITIVAS
+/*----------------------------------------------------------------------------*/
 /*
   pre : la lista no debe haber sido creada.
   post: lista queda creada y preparada para ser usada.
 
   lista : estructura de datos a ser creado.
 */
-void crearLista(Lista &lista);
+void crearListaJugador(ListaJugador &lista);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -57,7 +43,7 @@ void crearLista(Lista &lista);
 
   lista : lista sobre la cual se invoca la primitiva.
 */
-bool listaVacia(Lista &lista);
+bool listaVaciaJugador(ListaJugador &lista);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -68,7 +54,7 @@ bool listaVacia(Lista &lista);
 
   return representación del fin de la lista.
 */
-PtrNodoLista fin();
+PtrNodoListaJugador finJugador();
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -79,7 +65,7 @@ PtrNodoLista fin();
   lista : lista sobre la cual se invoca la primitiva.
   return puntero al primer nodo.
 */
-PtrNodoLista primero(Lista &lista);
+PtrNodoListaJugador primeroJugador(ListaJugador &lista);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -91,7 +77,7 @@ PtrNodoLista primero(Lista &lista);
   prtNodo : puntero al nodo a partir del cual se requiere el siguiente.
   return puntero al nodo siguiente.
 */
-PtrNodoLista siguiente(Lista &lista, PtrNodoLista ptrNodo);
+PtrNodoListaJugador siguienteJugador(ListaJugador &lista, PtrNodoListaJugador ptrNodo);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -104,7 +90,7 @@ PtrNodoLista siguiente(Lista &lista, PtrNodoLista ptrNodo);
   prtNodo : puntero al nodo a partir del cual se requiere el anterior.
   return puntero al nodo anterior.
 */
-PtrNodoLista anterior(Lista &lista, PtrNodoLista ptrNodo);
+PtrNodoListaJugador anteriorJugador(ListaJugador &lista, PtrNodoListaJugador ptrNodo);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -115,8 +101,16 @@ PtrNodoLista anterior(Lista &lista, PtrNodoLista ptrNodo);
   lista : lista sobre la cual se invoca la primitiva.
   return puntero al último nodo.
 */
-PtrNodoLista ultimo(Lista &lista);
+PtrNodoListaJugador ultimoJugador(ListaJugador &lista);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : lista creada con crearLista().
+  post: crea el nodo de la lista.
 
+  dato : elemento a almacenar en el nodo.
+  return puntero al nodo creado.
+*/
+PtrNodoListaJugador crearNodoListaJugador(Jugador jugador);
 /*----------------------------------------------------------------------------*/
 /*
   pre : lista creada con crearLista().
@@ -127,7 +121,7 @@ PtrNodoLista ultimo(Lista &lista);
   dato : elemento a adicionar al principio de la lista.
   return puntero al nodo adicionado.
 */
-PtrNodoLista adicionarPrincipio(Lista &lista, Jugador jugador);
+PtrNodoListaJugador adicionarPrincipio(ListaJugador &lista, Jugador jugador);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -143,7 +137,7 @@ PtrNodoLista adicionarPrincipio(Lista &lista, Jugador jugador);
   ptrNodo : puntero al nodo después del cual se quiere adicionar el dato.
   return puntero al nodo adicionado.
 */
-PtrNodoLista adicionarDespues(Lista &lista, Jugador jugador, PtrNodoLista ptrNodo);
+PtrNodoListaJugador adicionarDespues(ListaJugador &lista, Jugador jugador, PtrNodoListaJugador ptrNodo);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -155,7 +149,7 @@ PtrNodoLista adicionarDespues(Lista &lista, Jugador jugador, PtrNodoLista ptrNod
   dato : elemento a adicionar al final de la lista.
   return puntero al nodo adicionado.
 */
-PtrNodoLista adicionarFinal(Lista &lista, Jugador jugador);
+PtrNodoListaJugador adicionarFinal(ListaJugador &lista, Jugador jugador);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -170,7 +164,7 @@ PtrNodoLista adicionarFinal(Lista &lista, Jugador jugador);
   ptrNodo : puntero al nodo antes del cual se quiere adicionar el dato.
   return puntero al nodo adicionado.
 */
-PtrNodoLista adicionarAntes(Lista &lista, Jugador jugador, PtrNodoLista ptrNodo);
+PtrNodoListaJugador adicionarAntes(ListaJugador &lista, Jugador jugador, PtrNodoListaJugador ptrNodo);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -181,7 +175,7 @@ PtrNodoLista adicionarAntes(Lista &lista, Jugador jugador, PtrNodoLista ptrNodo)
   dato : elemento a colocar.
   ptrNodo : puntero al nodo del cual se quiere colocar el dato.
 */
-void colocarDato(Lista &lista, Jugador &jugador, PtrNodoLista ptrNodo);
+void colocarDato(ListaJugador &lista, Jugador &jugador, PtrNodoListaJugador ptrNodo);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -192,7 +186,7 @@ void colocarDato(Lista &lista, Jugador &jugador, PtrNodoLista ptrNodo);
   dato : elemento obtenido.
   ptrNodo : puntero al nodo del cual se quiere obtener el dato.
 */
-void obtenerDato(Lista &lista, Jugador &jugador, PtrNodoLista ptrNodo);
+void obtenerDato(ListaJugador &lista, Jugador &jugador, PtrNodoListaJugador ptrNodo);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -203,7 +197,7 @@ void obtenerDato(Lista &lista, Jugador &jugador, PtrNodoLista ptrNodo);
   lista : lista sobre la cual se invoca la primitiva.
   ptrNodo : puntero al nodo que se desea eliminar.
 */
-void eliminarNodo(Lista &lista, PtrNodoLista ptrNodo);
+void eliminarNodo(ListaJugador &lista, PtrNodoListaJugador ptrNodo);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -213,7 +207,7 @@ void eliminarNodo(Lista &lista, PtrNodoLista ptrNodo);
 
   lista : lista sobre la cual se invoca la primitiva.
 */
-void eliminarNodoPrimero(Lista &lista);
+void eliminarNodoPrimero(ListaJugador &lista);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -223,7 +217,7 @@ void eliminarNodoPrimero(Lista &lista);
 
   lista : lista sobre la cual se invoca la primitiva.
 */
-void eliminarNodoUltimo(Lista &lista);
+void eliminarNodoUltimo(ListaJugador &lista);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -233,63 +227,20 @@ void eliminarNodoUltimo(Lista &lista);
 
   lista : lista sobre la cual se invoca la primitiva.
 */
-void eliminarLista(Lista &lista);
+void eliminarLista(ListaJugador &lista);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : ninguna.
+  post: compara ambos dato1 y dato2, devuelve
+          mayor si dato1 es mayor que dato2,
+          igual si dato1 es igual a dato2,
+          menor si dato1 es menor que dato2.
 
-
+  dato1 : dato a comparar.
+  dato2 : dato a comparar.
+  return resultado de comparar dato1 respecto de dato2.
+*/
+ResultadoComparacionJugador compararDatoJugador(Jugador jugador1, Jugador jugador2);
+/*----------------------------------------------------------------------------*/
 /******************************************************************************/
-/* Definición de Operaciones Adicionales */
-/*---------------------------------------*/
-
-/*
-  pre : lista fue creada con crearLista().
-  post: si el dato se encuentra en la lista, devuelve el puntero al primer nodo
-        que lo contiene. Si el dato no se encuentra en la lista devuelve fin().
-
-  lista : lista sobre la cual se invoca la primitiva.
-  dato : elemento a localizar.
-  return puntero al nodo localizado o fin().
-*/
-PtrNodoLista localizarDato(Lista &lista , Jugador jugador);
-
-/*----------------------------------------------------------------------------*/
-/*
-  pre : lista fue creada con crearLista() y cargada con datos ordenados de
-        menor a mayor respecto del sentido progresivo.
-  post: agrega a la lista el dato manteniendo el orden pero con multiples
-        valores iguales y devuelve un puntero al nodo insertado.
-
-  lista : lista sobre la cual se invoca la primitiva.
-  dato : elemento a insertar.
-  return puntero al nodo insertado.
-*/
-PtrNodoLista insertarDato(Lista &lista, Jugador jugador);
-
-/*----------------------------------------------------------------------------*/
-/*
-  pre : la lista fue creada con crearLista().
-  post : elimina el dato de la lista, si el mismo se encuentra.
-
-  lista : lista sobre la cual se invoca la primitiva.
-  dato : elemento a eliminar.
-*/
-void eliminarDato(Lista &lista, Jugador jugador);
-
-/*----------------------------------------------------------------------------*/
-/*
-  pre : la lista fue creada con crearLista().
-  post : reordena la lista.
-
-  lista : lista sobre la cual se invoca la primitiva.
-*/
-void reordenar(Lista &lista);
-
-/*----------------------------------------------------------------------------*/
-/*
-  pre : la lista fue creada con crearLista().
-  post : devuelve la cantidad de datos que tiene la lista.
-
-  lista : lista sobre la cual se invoca la primitiva.
-*/
-int longitud(Lista &lista);
-
 #endif

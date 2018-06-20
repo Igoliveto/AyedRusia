@@ -5,17 +5,24 @@
 #endif
 #include <string>
 using namespace std;
+/*----------------------------------------------------------------------------*/
+//                                ESTRUCTURAS
+/*----------------------------------------------------------------------------*/
 typedef struct{
 int id;
 string nombre;
 int goles;
 }Jugador;
-
-
-void crearJugador(Jugador &jugador, int id, string nombre);
+/*----------------------------------------------------------------------------*/
+//                                PRIMITIVAS
+/*----------------------------------------------------------------------------*/
+void crearJugador(Jugador &jugador);
 int getId(Jugador &jugador);
 string getNombre(Jugador &jugador);
+int getGoles(Jugador &jugador);
 void setNombre(Jugador &jugador,string nombre);
 void setId(Jugador &jugador, int id);
-
+void setGoles(Jugador &jugador, int goles);
+/*----------------------------------------------------------------------------*/
+/******************************************************************************/
 #endif // _JUGADOR_H_
