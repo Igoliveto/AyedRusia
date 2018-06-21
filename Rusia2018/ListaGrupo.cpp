@@ -164,5 +164,38 @@ ResultadoComparacionGrupo compararDatoGrupo(Grupo grupo1, Grupo grupo2) {
         return IGUAL_GRUPO;
     }
 }
+/*--------------------------------------------------------------------------*/
+PtrNodoGrupo localizarDato(ListaGrupo &lista, Grupo grupo) {
+
+   bool encontrado = false;
+   Grupo grupoCursor;
+   PtrNodoGrupo ptrCursor = primeroListaGrupo(lista);
+
+  /* recorre los nodos hasta llegar al último o hasta
+     encontrar el nodo buscado */
+  while ((ptrCursor != finGrupo()) && (! encontrado)) {
+
+    /* obtiene el dato del nodo y lo compara */
+    obtenerDato(lista,grupoCursor,ptrCursor);
+    if (compararDatoGrupo(grupoCursor,grupo) == IGUAL_GRUPO)
+      encontrado = true;
+    else
+      ptrCursor = siguienteListaGrupo(lista,ptrCursor);
+  }
+
+  /* si no lo encontró devuelve fin */
+  if (! encontrado)
+    ptrCursor = finGrupo();
+
+  return ptrCursor;
+}
+/*----------------------------------------------------------------------------*/
+void eliminarDato(ListaGrupo &lista, Grupo grupo) {
+
+  /* localiza el dato y luego lo elimina */
+  PtrNodoGrupo ptrNodo = localizarDato(lista,grupo);
+  if (ptrNodo != finGrupo())
+    eliminarNodo(lista,ptrNodo);
+}
 /*----------------------------------------------------------------------------*/
 /******************************************************************************/

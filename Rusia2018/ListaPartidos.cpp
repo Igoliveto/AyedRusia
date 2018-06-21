@@ -175,5 +175,38 @@ ResultadoComparacionPartido compararDatoPartido(Partido partido1, Partido partid
         return IGUAL_PARTIDO;
     }
 }
+/*--------------------------------------------------------------------------*/
+PtrNodoPartido localizarDato(ListaPartido &lista, Partido partido) {
+
+   bool encontrado = false;
+   Partido partidoCursor;
+   PtrNodoPartido ptrCursor = primeroPartido(lista);
+
+  /* recorre los nodos hasta llegar al último o hasta
+     encontrar el nodo buscado */
+  while ((ptrCursor != finListaPartido()) && (! encontrado)) {
+
+    /* obtiene el dato del nodo y lo compara */
+    obtenerDato(lista,partidoCursor,ptrCursor);
+    if (compararDatoPartido(partidoCursor,partido) == IGUAL_PARTIDO)
+      encontrado = true;
+    else
+      ptrCursor = siguientePartido(lista,ptrCursor);
+  }
+
+  /* si no lo encontró devuelve fin */
+  if (! encontrado)
+    ptrCursor = finListaPartido();
+
+  return ptrCursor;
+}
+/*----------------------------------------------------------------------------*/
+void eliminarDato(ListaPartido &lista, Partido partido) {
+
+  /* localiza el dato y luego lo elimina */
+  PtrNodoPartido ptrNodo = localizarDato(lista,partido);
+  if (ptrNodo != finListaPartido())
+    eliminarNodo(lista,ptrNodo);
+}
 /*----------------------------------------------------------------------------*/
 /******************************************************************************/

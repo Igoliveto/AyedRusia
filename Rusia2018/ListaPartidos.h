@@ -225,5 +225,25 @@ void eliminarLista(ListaPartido &lista);
 */
 ResultadoComparacionPartido compararDatoPartido(Partido partido1, Partido partido2);
 /*----------------------------------------------------------------------------*/
+/*
+  pre : lista fue creada con crearLista().
+  post: si el dato se encuentra en la lista, devuelve el puntero al primer nodo
+        que lo contiene. Si el dato no se encuentra en la lista devuelve fin().
+
+  lista : lista sobre la cual se invoca la primitiva.
+  dato : elemento a localizar.
+  return puntero al nodo localizado o fin().
+*/
+PtrNodoPartido localizarDato(ListaPartido &lista, Partido partido);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : la lista fue creada con crearLista().
+  post : elimina el dato de la lista, si el mismo se encuentra.
+
+  lista : lista sobre la cual se invoca la primitiva.
+  dato : elemento a eliminar.
+*/
+void eliminarDato(ListaPartido &lista, Partido partido);
+/*----------------------------------------------------------------------------*/
 /******************************************************************************/
 #endif

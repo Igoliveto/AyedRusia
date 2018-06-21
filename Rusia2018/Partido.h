@@ -114,5 +114,13 @@ void setGolesL(Partido &partido, int golesL);
 */
 void setGolesV(Partido &partido, int golesV);
 /*----------------------------------------------------------------------------*/
+/*
+  pre : el partido  debe haber sido creado.
+  post: el partido queda destruido (iniciado a su origen).
+
+  partido : estructura de datos a ser destruido.
+*/
+void destructor(Partido &partido);
+/*----------------------------------------------------------------------------*/
 /******************************************************************************/
 #endif // _PARTIDO_H

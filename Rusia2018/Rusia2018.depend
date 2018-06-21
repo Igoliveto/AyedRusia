@@ -125,62 +125,62 @@
 
 1529524354 c:\users\tomas\documents\codeblocks\rusia2018\partido.h
 
-1529520105 source:c:\users\bettina\desktop\rusia2018\equipo.cpp
+1529539387 source:c:\users\bettina\desktop\rusia2018\equipo.cpp
 	"Equipo.h"
 	<cstring>
 	<string>
 	<iostream>
 	"ListaJugadores.h"
 
-1529517390 c:\users\bettina\desktop\rusia2018\equipo.h
+1529539387 c:\users\bettina\desktop\rusia2018\equipo.h
 	"ListaJugadores.h"
 	<string>
 
-1529463836 c:\users\bettina\desktop\rusia2018\listajugadores.h
+1529541273 c:\users\bettina\desktop\rusia2018\listajugadores.h
 	"Jugador.h"
 
-1529517959 c:\users\bettina\desktop\rusia2018\jugador.h
+1529539387 c:\users\bettina\desktop\rusia2018\jugador.h
 	<string>
 
-1529520106 source:c:\users\bettina\desktop\rusia2018\grupo.cpp
+1529539775 source:c:\users\bettina\desktop\rusia2018\grupo.cpp
 	"Grupo.h"
 	<string>
 	<iostream>
 
-1529518635 c:\users\bettina\desktop\rusia2018\grupo.h
+1529539775 c:\users\bettina\desktop\rusia2018\grupo.h
 	<string>
 
-1529520106 source:c:\users\bettina\desktop\rusia2018\jugador.cpp
+1529539387 source:c:\users\bettina\desktop\rusia2018\jugador.cpp
 	"Jugador.h"
 	"string"
 
-1529464009 source:c:\users\bettina\desktop\rusia2018\listaequipo.cpp
+1529540563 source:c:\users\bettina\desktop\rusia2018\listaequipo.cpp
 	"ListaEquipo.h"
 
-1529463880 c:\users\bettina\desktop\rusia2018\listaequipo.h
+1529540563 c:\users\bettina\desktop\rusia2018\listaequipo.h
 	"Equipo.h"
 
-1529463973 source:c:\users\bettina\desktop\rusia2018\listagrupo.cpp
+1529540953 source:c:\users\bettina\desktop\rusia2018\listagrupo.cpp
 	"ListaGrupo.h"
 
-1529463880 c:\users\bettina\desktop\rusia2018\listagrupo.h
+1529540953 c:\users\bettina\desktop\rusia2018\listagrupo.h
 	"Grupo.h"
 
 1529465190 source:c:\users\bettina\desktop\rusia2018\listapartidos.cpp
 	"ListaPartidos.h"
 
-1529465116 c:\users\bettina\desktop\rusia2018\listapartidos.h
+1529541886 c:\users\bettina\desktop\rusia2018\listapartidos.h
 	"Partido.h"
 
-1529519219 c:\users\bettina\desktop\rusia2018\partido.h
+1529539775 c:\users\bettina\desktop\rusia2018\partido.h
 
-1529519691 source:c:\users\bettina\desktop\rusia2018\partido.cpp
+1529539775 source:c:\users\bettina\desktop\rusia2018\partido.cpp
 	"partido.h"
 
-1529464061 source:c:\users\bettina\desktop\rusia2018\listajugadores.cpp
+1529541273 source:c:\users\bettina\desktop\rusia2018\listajugadores.cpp
 	"ListaJugadores.h"
 
-1529509529 source:c:\users\bettina\desktop\rusia2018\main.cpp
+1529538380 source:c:\users\bettina\desktop\rusia2018\main.cpp
 	<iostream>
 	"Equipo.h"
 	"ListaEquipo.h"

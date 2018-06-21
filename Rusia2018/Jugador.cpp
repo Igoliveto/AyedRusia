@@ -41,7 +41,16 @@ jugador.goles=goles;
 void setIdEquipo(Jugador &jugador,int id){
 jugador.idEquipo=id;
 }
+/*----------------------------------------------------------------------------*/
 int getIdEquipo(Jugador &jugador){
 return jugador.idEquipo;
 }
+/*----------------------------------------------------------------------------*/
+void destructor(Jugador &jugador){
+jugador.id=0;
+jugador.nombre="-";
+jugador.goles=0;
+jugador.idEquipo=0;
+}
+/*----------------------------------------------------------------------------*/
 /******************************************************************************/

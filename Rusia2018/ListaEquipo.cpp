@@ -197,4 +197,12 @@ ResultadoComparacionEquipo compararDatoEquipo(Equipo equipo1, Equipo equipo2) {
     }
 }
 /*----------------------------------------------------------------------------*/
+void eliminarDato(ListaEquipo &lista, Equipo equipo) {
+
+  /* localiza el dato y luego lo elimina */
+  PtrNodoListaEquipo ptrNodo = localizarDato(lista,equipo);
+  if (ptrNodo != finEquipo())
+    eliminarNodo(lista,ptrNodo);
+}
+/*----------------------------------------------------------------------------*/
 /******************************************************************************/

@@ -242,5 +242,25 @@ void eliminarLista(ListaJugador &lista);
 */
 ResultadoComparacionJugador compararDatoJugador(Jugador jugador1, Jugador jugador2);
 /*----------------------------------------------------------------------------*/
+/*
+  pre : lista fue creada con crearLista().
+  post: si el dato se encuentra en la lista, devuelve el puntero al primer nodo
+        que lo contiene. Si el dato no se encuentra en la lista devuelve fin().
+
+  lista : lista sobre la cual se invoca la primitiva.
+  dato : elemento a localizar.
+  return puntero al nodo localizado o fin().
+*/
+PtrNodoListaJugador localizarDato(ListaJugador &lista, Jugador jugador);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : la lista fue creada con crearLista().
+  post : elimina el dato de la lista, si el mismo se encuentra.
+
+  lista : lista sobre la cual se invoca la primitiva.
+  dato : elemento a eliminar.
+*/
+void eliminarDato(ListaJugador &lista, Jugador jugador);
+/*----------------------------------------------------------------------------*/
 /******************************************************************************/
 #endif

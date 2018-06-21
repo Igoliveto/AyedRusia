@@ -60,7 +60,7 @@ return equipo.puntos;
 /*----------------------------------------------------------------------------*/
 ListaJugador getLista(Equipo equipo){
 return equipo.listaJugadores;}
-
+/*----------------------------------------------------------------------------*/
 void destructor(Equipo &equipo){
 equipo.id=0;
 equipo.nombre="-";
@@ -69,4 +69,5 @@ equipo.golesEnContra=0;
 equipo.puntos=0;
 crearListaJugador(equipo.listaJugadores);
 }
+/*----------------------------------------------------------------------------*/
 /******************************************************************************/

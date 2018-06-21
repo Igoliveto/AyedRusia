@@ -63,4 +63,13 @@ int getIdEquipo4(Grupo grupo){
 return grupo.idEquipo4;
 }
 /*----------------------------------------------------------------------------*/
+void destructor(Grupo &grupo){
+    grupo.id='-';
+    grupo.nombre="-";
+    grupo.idEquipo1=0;
+    grupo.idEquipo2=0;
+    grupo.idEquipo3=0;
+    grupo.idEquipo4=0;
+}
+/*----------------------------------------------------------------------------*/
 /******************************************************************************/

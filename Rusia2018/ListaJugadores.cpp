@@ -176,5 +176,38 @@ ResultadoComparacionJugador compararDatoJugador(Jugador jugador1, Jugador jugado
         return IGUAL_JUGADOR;
     }
 }
+/*--------------------------------------------------------------------------*/
+PtrNodoListaJugador localizarDato(ListaJugador &lista, Jugador jugador) {
+
+   bool encontrado = false;
+   Jugador jugadorCursor;
+   PtrNodoListaJugador ptrCursor = primeroJugador(lista);
+
+  /* recorre los nodos hasta llegar al último o hasta
+     encontrar el nodo buscado */
+  while ((ptrCursor != finJugador()) && (! encontrado)) {
+
+    /* obtiene el dato del nodo y lo compara */
+    obtenerDato(lista,jugadorCursor,ptrCursor);
+    if (compararDatoJugador(jugadorCursor,jugador) == IGUAL_JUGADOR)
+      encontrado = true;
+    else
+      ptrCursor = siguienteJugador(lista,ptrCursor);
+  }
+
+  /* si no lo encontró devuelve fin */
+  if (! encontrado)
+    ptrCursor = finJugador();
+
+  return ptrCursor;
+}
+/*----------------------------------------------------------------------------*/
+void eliminarDato(ListaJugador &lista, Jugador jugador) {
+
+  /* localiza el dato y luego lo elimina */
+  PtrNodoListaJugador ptrNodo = localizarDato(lista,jugador);
+  if (ptrNodo != finJugador())
+    eliminarNodo(lista,ptrNodo);
+}
 /*----------------------------------------------------------------------------*/
 /******************************************************************************/

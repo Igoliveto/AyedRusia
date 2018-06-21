@@ -230,9 +230,27 @@ void eliminarLista(ListaEquipo &lista);
   dato2 : dato a comparar.
   return resultado de comparar dato1 respecto de dato2.
 */
-PtrNodoListaEquipo localizarDato(ListaEquipo &lista, Equipo equipo) ;
-
 ResultadoComparacionEquipo compararDatoEquipo(Equipo equipo1, Equipo equipo2);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : lista fue creada con crearLista().
+  post: si el dato se encuentra en la lista, devuelve el puntero al primer nodo
+        que lo contiene. Si el dato no se encuentra en la lista devuelve fin().
+
+  lista : lista sobre la cual se invoca la primitiva.
+  dato : elemento a localizar.
+  return puntero al nodo localizado o fin().
+*/
+PtrNodoListaEquipo localizarDato(ListaEquipo &lista, Equipo equipo);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : la lista fue creada con crearLista().
+  post : elimina el dato de la lista, si el mismo se encuentra.
+
+  lista : lista sobre la cual se invoca la primitiva.
+  dato : elemento a eliminar.
+*/
+void eliminarDato(ListaEquipo &lista, Equipo equipo);
 /*----------------------------------------------------------------------------*/
 /******************************************************************************/
 #endif // _LISTAEQUIPO_H

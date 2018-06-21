@@ -53,4 +53,12 @@ void setGolesV(Partido &partido, int golesV){
 partido.golesV=golesV;
 }
 /*----------------------------------------------------------------------------*/
+void destructor(Partido &partido){
+partido.id=0;
+partido.idEquipoL=0;
+partido.idEquipoV=0;
+partido.golesL=0;
+partido.golesV=0;
+}
+/*----------------------------------------------------------------------------*/
 /******************************************************************************/

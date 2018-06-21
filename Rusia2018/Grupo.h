@@ -135,5 +135,13 @@ void setIdEquipo4(Grupo &grupo,int id);
 */
 int getIdEquipo4(Grupo grupo);
 /*----------------------------------------------------------------------------*/
+/*
+  pre : el grupo  debe haber sido creado.
+  post: el grupo queda destruido (iniciado a su origen).
+
+  grupo : estructura de datos a ser destruido.
+*/
+void destructor(Grupo &grupo);
+/*----------------------------------------------------------------------------*/
 /******************************************************************************/
 #endif // _GRUPO_H

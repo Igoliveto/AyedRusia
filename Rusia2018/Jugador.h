@@ -78,8 +78,32 @@ void setId(Jugador &jugador, int id);
   goles: valor a cargar en el jugador.
 */
 void setGoles(Jugador &jugador, int goles);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : el jugador debe haber sido creado.
+  post: se setea los id del equipo del jugador creado pasado por parametro.
+
+  jugador : estructura de datos a ser usada.
+  id: valor a cargar en el jugador.
+*/
 void setIdEquipo(Jugador &jugador,int id);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : el jugador debe haber sido creado.
+  post: se obtiene los id del equipo del jugador creado pasado por parametro.
+
+  jugador : estructura de datos a ser usada.
+  return: id del equipo obtenido del jugador.
+*/
 int getIdEquipo(Jugador &jugador);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : el jugador  debe haber sido creado.
+  post: el jugador queda destruido (iniciado a su origen).
+
+  jugador: estructura de datos a ser destruido.
+*/
+void destructor(Jugador &jugador);
 /*----------------------------------------------------------------------------*/
 /******************************************************************************/
 #endif // _JUGADOR_H_

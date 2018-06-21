@@ -119,7 +119,22 @@ void setPuntos(Equipo &equipo,int puntos);
 */
 int getPuntos(Equipo equipo);
 /*----------------------------------------------------------------------------*/
+/*
+  pre : el equipo debe haber sido creado.
+  post: se obtiene la lista de jugador del equipo creado pasado por parametro.
+
+  equipo : estructura de datos a ser usada.
+  return: lista de jugadores obtenidos del equipo.
+*/
 ListaJugador getLista(Equipo equipo);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : el equipo  debe haber sido creado.
+  post: el equipo queda destruido (iniciado a su origen).
+
+  equipo : estructura de datos a ser destruido.
+*/
 void destructor(Equipo &equipo);
+/*----------------------------------------------------------------------------*/
 /******************************************************************************/
 #endif // _EQUIPO_H
