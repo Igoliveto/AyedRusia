@@ -11,18 +11,19 @@
 using namespace std;
 void bateriaJugadores();
 void administrarPartidos();
+
 void cargarEquipos();
 void cargarGrupos();
-void cargarPartidos();
+ListaPartido cargarPartidos();
 void cargarJugadores(Equipo &equipo);
 void imprimirListaJugadores(ListaJugador  &lista);
 int main()
 {
     int menu=0;
-    int submenu1=0,submenu2=0,submenu3=0;
+    int submenu1=0,submenu2=0,submenu3=0,submenu4=0;
     cargarEquipos();
     cargarGrupos();
-    cargarPartidos();
+    ListaPartido ptrListaPartido = cargarPartidos();
 
     while(menu!=5){
 
@@ -69,10 +70,28 @@ int main()
 
                  switch(submenu2){
 
-             case 1://Registrar inicio de partidos
-             case 2://Registrar goles ocurridos en cada partido
-             case 3://Registrar fin de un partido
-             case 4:break;
+             case 1:
+                    int auxId=0;
+                    cout<<"Ingrese id del partido a iniciar"<<endl;
+                    cin>>auxId;
+                    Partido partidoAux ;
+                    partidoAux.id= auxId;
+
+                    PtrNodoPartido ptrCursorAux=localizarDato(ptrListaPartido,partidoAux);
+
+                    cout<<"el id del partido es"<<ptrCursorAux->partido.id<<endl;
+                    ptrCursorAux->partido.golesL =  0;
+                    ptrCursorAux->partido.golesV = 0;
+                    ptrCursorAux->partido.idEquipoL = 0;
+                    ptrCursorAux->partido.idEquipoV = 0;
+
+                    cout<<"a ver"<<ptrCursorAux->partido.golesL<<endl;
+                    break;
+
+
+             //case 2://Registrar goles ocurridos en cada partido
+            // case 3://Registrar fin de un partido
+          //   case 4:break;
 
 
 
@@ -206,7 +225,7 @@ if(archivo.is_open()){
 archivo.close();
 }
 
-void bateriaJugadores(){
+void bateriaJugadores(){//bateria  de jugadores carga  todo en 0
     int id =0;
     ofstream ficheroSalida;
 
@@ -225,8 +244,9 @@ void bateriaJugadores(){
     ficheroSalida.close();
 
 }
-void cargarPartidos(){
+ListaPartido cargarPartidos(){//Levanta los partidos de los  txt y los pone en una lista
 ListaPartido listaPartido;
+
 crearListaPartido(listaPartido);
 Partido partido;
 crearPartido(partido);
@@ -239,6 +259,7 @@ if(archivo.is_open()){
         stringstream id(linea);
         id>>aux;
         setId(partido,aux);
+
         getline(archivo,linea,';');
         stringstream el(linea);
         el>>aux;
@@ -260,9 +281,12 @@ if(archivo.is_open()){
 
     }
     archivo.seekg(0);
+
 }
 archivo.close();
+return listaPartido;
 }
+
 void cargarJugadores(Equipo &equipo){
 ListaJugador listaJugador;
 crearListaJugador(listaJugador);

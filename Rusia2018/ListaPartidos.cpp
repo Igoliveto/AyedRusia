@@ -1,8 +1,15 @@
+#include <iostream>
+#include <stdlib.h>
+#include <string>
+#include <sstream>
+#include <fstream>
 #include "ListaPartidos.h"
-
 #ifndef NULL
 #define NULL      0
 #endif
+
+using namespace std;
+
 /*----------------------------------------------------------------------------*/
 //                        IMPLEMENTACION DE PRIMITIVAS
 /*----------------------------------------------------------------------------*/
@@ -165,6 +172,7 @@ void eliminarLista(ListaPartido &lista) {
 }
 /*----------------------------------------------------------------------------*/
 ResultadoComparacionPartido compararDatoPartido(Partido partido1, Partido partido2) {
+
     if (partido1.id > partido2.id) {
         return MAYOR_PARTIDO;
     }
@@ -184,7 +192,7 @@ PtrNodoPartido localizarDato(ListaPartido &lista, Partido partido) {
 
   /* recorre los nodos hasta llegar al último o hasta
      encontrar el nodo buscado */
-  while ((ptrCursor != finListaPartido()) && (! encontrado)) {
+  while ((ptrCursor != finListaPartido()) && (false== encontrado)) {
 
     /* obtiene el dato del nodo y lo compara */
     obtenerDato(lista,partidoCursor,ptrCursor);

@@ -1,7 +1,12 @@
 #include "partido.h"
+#include <stdlib.h>
+#include <string>
+#include <sstream>
+#include <fstream>
 #ifndef NULL
 #define NULL      0
 #endif
+using namespace std;
 /*----------------------------------------------------------------------------*/
 //                           IMPLEMENTACION DE PRIMITIVAS
 /*----------------------------------------------------------------------------*/
