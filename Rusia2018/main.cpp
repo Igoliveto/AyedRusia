@@ -23,10 +23,12 @@ PtrNodoListaJugador traerJugador(ListaJugador listaJugador,int idJugador);
 PtrNodoListaEquipo traerEquipo(ListaEquipo listaEquipo,int idEquipo);
 PtrNodoPartido traerNodoPartido(ListaPartido listaPartido,int idPartido);
 PtrNodoGrupo traerGrupo(ListaGrupo listaGrupo,char idGrupo);
-void GuardarDatos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido listaPartido);
+void guardarDatos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido listaPartido);
 void calcularOctavos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido &listaPartido);
 PtrNodoListaEquipo primero(Grupo grupo,ListaEquipo listaEquipo);
 PtrNodoListaEquipo segundo(Grupo grupo,ListaEquipo listaEquipo);
+void calcularCuartos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido listaPartido);
+int traerIdGanador(PtrNodoPartido ptrNodoPartido);
 int main()
 {
     int menu=0;
@@ -66,10 +68,16 @@ int main()
                     PtrNodoPartido ptrCursorAux=localizarDato(listaPartido,partidoAux);
 
                     cout<<"Comenzo el partido con id: "<<ptrCursorAux->partido.id<<endl;
+                    if(auxId<49){
                     ptrCursorAux->partido.golesL =  0;
                     ptrCursorAux->partido.golesV = 0;
                     ptrCursorAux->partido.idEquipoL = 0;
-                    ptrCursorAux->partido.idEquipoV = 0;
+                    ptrCursorAux->partido.idEquipoV = 0;}
+                    else{
+                        ptrCursorAux->partido.golesL =  0;
+                        ptrCursorAux->partido.golesV = 0;
+                    }
+
 
                     break;
              }
@@ -149,6 +157,9 @@ int main()
                         setPuntos(ptrNodoEquipoV->equipo,ptrNodoEquipoV->equipo.puntos+1);
                      }
                      cout<<"Datos guardados"<<endl;
+                     calcularOctavos(listaEquipo,listaGrupo,listaPartido);
+
+
 
 
 
@@ -180,7 +191,7 @@ int main()
                     obtenerDato(listaGrupo, grupoAux, cursor);
                     cout << grupoAux.nombre<<endl;
                     cout <<traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.nombre<<traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.golesAFavor<<traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.puntos<<endl;
-                    cout<<traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.nombre<<traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.golesAFavor<<traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.puntos<<endl;
+                    cout <<traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.nombre<<traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.golesAFavor<<traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.puntos<<endl;
                     cout <<traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.nombre<<traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.golesAFavor<<traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.puntos<<endl;
                     cout <<traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.nombre<<traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.golesAFavor<<traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.puntos<<endl;
                     cout << endl;
@@ -258,7 +269,7 @@ int main()
 
 
      case 3:
-            GuardarDatos(listaEquipo,listaGrupo,listaPartido);
+            guardarDatos(listaEquipo,listaGrupo,listaPartido);
         break;
 
      case 4:
@@ -558,7 +569,7 @@ return ptrNodo;
 }
 
 
-void GuardarDatos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido listaPartido){
+void guardarDatos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido listaPartido){
 ofstream archivoP("partidos.txt");
 PtrNodoPartido ptrNodo= primeroPartido(listaPartido);
 Partido partido;
@@ -701,6 +712,41 @@ PtrNodoListaEquipo ptrSegundoGG=segundo(ptrNodoGrupoG->grupo,listaEquipo);
 
 PtrNodoListaEquipo ptrPrimeroGH=primero(ptrNodoGrupoH->grupo,listaEquipo);
 PtrNodoListaEquipo ptrSegundoGH=segundo(ptrNodoGrupoH->grupo,listaEquipo);
+
+PtrNodoPartido ptrPartido= traerNodoPartido(listaPartido,49);
+ptrPartido->partido.idEquipoL=ptrPrimeroGA->equipo.id;
+ptrPartido->partido.idEquipoV=ptrSegundoGB->equipo.id;
+
+ptrPartido=traerNodoPartido(listaPartido,50);
+ptrPartido->partido.idEquipoL=ptrPrimeroGC->equipo.id;
+ptrPartido->partido.idEquipoV=ptrSegundoGD->equipo.id;
+
+ptrPartido=traerNodoPartido(listaPartido,51);
+ptrPartido->partido.idEquipoL=ptrPrimeroGB->equipo.id;
+ptrPartido->partido.idEquipoV=ptrSegundoGA->equipo.id;
+
+ptrPartido=traerNodoPartido(listaPartido,52);
+ptrPartido->partido.idEquipoL=ptrPrimeroGD->equipo.id;
+ptrPartido->partido.idEquipoV=ptrSegundoGC->equipo.id;
+
+ptrPartido=traerNodoPartido(listaPartido,53);
+ptrPartido->partido.idEquipoL=ptrPrimeroGE->equipo.id;
+ptrPartido->partido.idEquipoV=ptrSegundoGF->equipo.id;
+
+ptrPartido=traerNodoPartido(listaPartido,54);
+ptrPartido->partido.idEquipoL=ptrPrimeroGG->equipo.id;
+ptrPartido->partido.idEquipoV=ptrSegundoGH->equipo.id;
+
+ptrPartido=traerNodoPartido(listaPartido,55);
+ptrPartido->partido.idEquipoL=ptrPrimeroGF->equipo.id;
+ptrPartido->partido.idEquipoV=ptrSegundoGE->equipo.id;
+
+ptrPartido=traerNodoPartido(listaPartido,56);
+ptrPartido->partido.idEquipoL=ptrPrimeroGH->equipo.id;
+ptrPartido->partido.idEquipoV=ptrSegundoGG->equipo.id;
+
+
+
 }
 
 PtrNodoListaEquipo primero(Grupo grupo,ListaEquipo listaEquipo){
@@ -737,4 +783,26 @@ adicionarAlPrincipio(nuevaLista,nodo4->equipo);
 reordenar(nuevaLista);
 segundo=primeroEquipo(nuevaLista)->siguiente;
 return segundo;
+}
+
+void calcularCuartos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido listaPartido){
+int idL=0;idV=0;
+PtrNodoPartido ptrNodoPartido=traerNodoPartido(listaPartido,49);
+idL=traerIdGanador(ptrNodoPartido);
+PtrNodoPartido ptrNodoPart=traerNodoPartido(listaPartido,50);
+idV=traerIdGanador(ptrNodoPart);
+
+}
+int traerIdGanador(PtrNodoPartido ptrNodoPartido){
+    int idGanador=0;
+    if(ptrNodoPartido->partido.golesL > ptrNodoPartido->partido.golesV){
+       idGanador=ptrNodoPartido->partido.idEquipoL;
+    }
+    else{
+        idGanador=ptrNodoPartido->partido.idEquipoV;
+    }
+    return idGanador;
+
+
+
 }
