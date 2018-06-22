@@ -196,6 +196,18 @@ ResultadoComparacionEquipo compararDatoEquipo(Equipo equipo1, Equipo equipo2) {
         return IGUAL_EQUIPO;
     }
 }
+/*---------------------------------------------------------------------------*/
+ResultadoComparacionEquipo compararGolesEquipo(Equipo equipo1, Equipo equipo2) {
+    if (equipo1.puntos > equipo2.puntos) {
+        return MAYOR_EQUIPO;
+    }
+    else if (equipo1.puntos < equipo2.puntos) {
+        return MENOR_EQUIPO;
+    }
+    else {
+        return IGUAL_EQUIPO;
+    }
+}
 /*----------------------------------------------------------------------------*/
 void eliminarDato(ListaEquipo &lista, Equipo equipo) {
 
@@ -205,4 +217,47 @@ void eliminarDato(ListaEquipo &lista, Equipo equipo) {
     eliminarNodo(lista,ptrNodo);
 }
 /*----------------------------------------------------------------------------*/
+PtrNodoListaEquipo insertarDato(ListaEquipo &lista, Equipo equipo) {
+
+  PtrNodoListaEquipo ptrPrevio = primeroEquipo(lista);
+  PtrNodoListaEquipo ptrCursor = primeroEquipo(lista);
+  PtrNodoListaEquipo ptrNuevoNodo;
+  Equipo equipoCursor;
+  bool ubicado = false;
+
+  /* recorre la lista buscando el lugar de la inserción */
+  while ((ptrCursor != finEquipo()) && (! ubicado)) {
+
+    obtenerDato(lista,equipoCursor,ptrCursor);
+    if (compararGolesEquipo(equipoCursor,equipo) == MAYOR_EQUIPO)
+      ubicado = true;
+
+    else {
+      ptrPrevio = ptrCursor;
+      ptrCursor = siguienteEquipo(lista,ptrCursor);
+    }
+  }
+
+  if (ptrCursor == primeroEquipo(lista))
+    ptrNuevoNodo = adicionarAlPrincipio(lista,equipo);
+  else
+    ptrNuevoNodo = adicionarDespues(lista,equipo,ptrPrevio);
+
+  return ptrNuevoNodo;
+}
+/*------------------------------------------------------------------------------*/
+void reordenar(ListaEquipo &lista) {
+
+  ListaEquipo temp = lista;
+  PtrNodoListaEquipo ptrCursor = primeroEquipo(temp);
+  crearListaEquipo(lista);
+  while ( ptrCursor != finEquipo() ) {
+        Equipo equipo;
+        obtenerDato( temp, equipo, ptrCursor);
+        insertarDato( lista, equipo );
+        eliminarNodo( temp, ptrCursor );
+        ptrCursor = primeroEquipo(temp);
+  }
+  eliminarLista( temp );
+}
 /******************************************************************************/

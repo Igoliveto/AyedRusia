@@ -13,7 +13,7 @@
 1529631385 c:\users\tomas\documents\codeblocks\rusia2018\jugador.h
 	<string>
 
-1529688423 source:c:\users\tomas\documents\codeblocks\rusia2018\main.cpp
+1529701461 source:c:\users\tomas\documents\codeblocks\rusia2018\main.cpp
 	<iostream>
 	"Equipo.h"
 	"ListaEquipo.h"
@@ -41,10 +41,10 @@
 	<sstream>
 	<fstream>
 
-1529631385 source:c:\users\tomas\documents\codeblocks\rusia2018\listaequipo.cpp
+1529702189 source:c:\users\tomas\documents\codeblocks\rusia2018\listaequipo.cpp
 	"ListaEquipo.h"
 
-1529631385 c:\users\tomas\documents\codeblocks\rusia2018\listaequipo.h
+1529701678 c:\users\tomas\documents\codeblocks\rusia2018\listaequipo.h
 	"Equipo.h"
 
 1529631385 source:c:\users\tomas\documents\codeblocks\rusia2018\listajugadores.cpp

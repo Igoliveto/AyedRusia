@@ -252,5 +252,7 @@ PtrNodoListaEquipo localizarDato(ListaEquipo &lista, Equipo equipo);
 */
 void eliminarDato(ListaEquipo &lista, Equipo equipo);
 /*----------------------------------------------------------------------------*/
+PtrNodoListaEquipo insertarDato(ListaEquipo &lista, Equipo equipo);
+void reordenar(ListaEquipo &lista);
 /******************************************************************************/
 #endif // _LISTAEQUIPO_H

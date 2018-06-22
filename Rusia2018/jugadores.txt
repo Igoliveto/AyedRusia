@@ -1,8 +1,8 @@
 1;Equipo1JugadorNumero1;0;1
 2;Equipo1JugadorNumero2;0;1
-3;Equipo1JugadorNumero3;0;1
+2;Equipo1JugadorNumero3;0;1
 4;Equipo1JugadorNumero4;0;1
-5;Equipo1JugadorNumero5;0;1
+6;Equipo1JugadorNumero5;0;1
 6;Equipo1JugadorNumero6;0;1
 7;Equipo1JugadorNumero7;0;1
 8;Equipo1JugadorNumero8;0;1

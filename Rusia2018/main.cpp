@@ -19,10 +19,14 @@ void cargarJugadores(Equipo &equipo);
 void imprimirListaJugadores(ListaJugador  &lista);
 void imprimirListaPartidos(ListaPartido  &lista);
 PtrNodoListaJugador traerJugador(ListaEquipo lista,int idEquipo,int idJugador);
+PtrNodoListaJugador traerJugador(ListaJugador listaJugador,int idJugador);
 PtrNodoListaEquipo traerEquipo(ListaEquipo listaEquipo,int idEquipo);
 PtrNodoPartido traerNodoPartido(ListaPartido listaPartido,int idPartido);
 PtrNodoGrupo traerGrupo(ListaGrupo listaGrupo,char idGrupo);
 void GuardarDatos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido listaPartido);
+void calcularOctavos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido &listaPartido);
+PtrNodoListaEquipo primero(Grupo grupo,ListaEquipo listaEquipo);
+PtrNodoListaEquipo segundo(Grupo grupo,ListaEquipo listaEquipo);
 int main()
 {
     int menu=0;
@@ -444,7 +448,7 @@ crearJugador(jugador);
 ifstream archivoJugadores("jugadores.txt");
 int aux=0;
 string linea;
-//bool fallos=false;
+bool fallos=false;
 int idEquipo=0;
 idEquipo=getId(equipo);
 if(archivoJugadores.is_open()){
@@ -453,11 +457,11 @@ if(archivoJugadores.is_open()){
         getline(archivoJugadores,linea,';');
         stringstream id(linea);
         id>>aux;
-        /* if(traerJugador( ,aux)!=finJugador()){
+        if(traerJugador(listaJugador,aux)!=finJugador()){
            cout<<"Informe de errores: Jugadores"<<endl;
-           cout<<"El id"<< aux<< "ya esta cargado"<<endl;
+           cout<<"El id "<< aux<< " ya esta cargado"<<endl;
               fallos=true;
-        }*/
+        }
         setId(jugador,aux);
 
         getline(archivoJugadores,linea,';');
@@ -473,7 +477,8 @@ if(archivoJugadores.is_open()){
         idE>>aux;
         setIdEquipo(jugador,aux);
         if(aux==idEquipo){
-        adicionarFinal(equipo.listaJugadores,jugador);}
+        adicionarFinal(equipo.listaJugadores,jugador);
+        adicionarFinal(listaJugador,jugador);}
 
         }
 
@@ -483,8 +488,8 @@ archivoJugadores.seekg(0);
 
 }
 archivoJugadores.close();
-//if(fallos)
-   // exit(1);
+if(fallos)
+    exit(1);
 
 }
 void imprimirListaJugadores(ListaJugador  &lista){
@@ -652,4 +657,83 @@ archivoJ.close();
 archivoE.close();
 
 cout<<"datos guardados"<<endl;
+}
+PtrNodoListaJugador traerJugador(ListaJugador listaJugador,int idJugador){
+PtrNodoListaJugador ptrNodoJugador= primeroJugador(listaJugador);
+Jugador jugador;
+crearJugador(jugador);
+setId(jugador,idJugador);
+ptrNodoJugador=localizarDato(listaJugador,jugador);
+
+return ptrNodoJugador;
+
+}
+void calcularOctavos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido &listaPartido){
+PtrNodoGrupo ptrNodoGrupoA=traerGrupo(listaGrupo,'A');
+PtrNodoGrupo ptrNodoGrupoB=traerGrupo(listaGrupo,'B');
+PtrNodoGrupo ptrNodoGrupoC=traerGrupo(listaGrupo,'C');
+PtrNodoGrupo ptrNodoGrupoD=traerGrupo(listaGrupo,'D');
+PtrNodoGrupo ptrNodoGrupoE=traerGrupo(listaGrupo,'E');
+PtrNodoGrupo ptrNodoGrupoF=traerGrupo(listaGrupo,'F');
+PtrNodoGrupo ptrNodoGrupoG=traerGrupo(listaGrupo,'G');
+PtrNodoGrupo ptrNodoGrupoH=traerGrupo(listaGrupo,'H');
+
+PtrNodoListaEquipo ptrPrimeroGA=primero(ptrNodoGrupoA->grupo,listaEquipo);
+PtrNodoListaEquipo ptrSegundoGA=segundo(ptrNodoGrupoA->grupo,listaEquipo);
+
+PtrNodoListaEquipo ptrPrimeroGB=primero(ptrNodoGrupoB->grupo,listaEquipo);
+PtrNodoListaEquipo ptrSegundoGB=segundo(ptrNodoGrupoB->grupo,listaEquipo);
+
+PtrNodoListaEquipo ptrPrimeroGC=primero(ptrNodoGrupoC->grupo,listaEquipo);
+PtrNodoListaEquipo ptrSegundoGC=segundo(ptrNodoGrupoC->grupo,listaEquipo);
+
+PtrNodoListaEquipo ptrPrimeroGD=primero(ptrNodoGrupoD->grupo,listaEquipo);
+PtrNodoListaEquipo ptrSegundoGD=segundo(ptrNodoGrupoD->grupo,listaEquipo);
+
+PtrNodoListaEquipo ptrPrimeroGE=primero(ptrNodoGrupoE->grupo,listaEquipo);
+PtrNodoListaEquipo ptrSegundoGE=segundo(ptrNodoGrupoE->grupo,listaEquipo);
+
+PtrNodoListaEquipo ptrPrimeroGF=primero(ptrNodoGrupoF->grupo,listaEquipo);
+PtrNodoListaEquipo ptrSegundoGF=segundo(ptrNodoGrupoF->grupo,listaEquipo);
+
+PtrNodoListaEquipo ptrPrimeroGG=primero(ptrNodoGrupoG->grupo,listaEquipo);
+PtrNodoListaEquipo ptrSegundoGG=segundo(ptrNodoGrupoG->grupo,listaEquipo);
+
+PtrNodoListaEquipo ptrPrimeroGH=primero(ptrNodoGrupoH->grupo,listaEquipo);
+PtrNodoListaEquipo ptrSegundoGH=segundo(ptrNodoGrupoH->grupo,listaEquipo);
+}
+PtrNodoListaEquipo primero(Grupo grupo,ListaEquipo listaEquipo){
+PtrNodoListaEquipo nodo1= traerEquipo(listaEquipo,grupo.idEquipo1);
+PtrNodoListaEquipo nodo2= traerEquipo(listaEquipo,grupo.idEquipo2);
+PtrNodoListaEquipo nodo3= traerEquipo(listaEquipo,grupo.idEquipo3);
+PtrNodoListaEquipo nodo4= traerEquipo(listaEquipo,grupo.idEquipo4);
+PtrNodoListaEquipo primero=finEquipo();
+ListaEquipo nuevaLista;
+crearListaEquipo(nuevaLista);
+adicionarAlPrincipio(nuevaLista,nodo1->equipo);
+adicionarAlPrincipio(nuevaLista,nodo2->equipo);
+adicionarAlPrincipio(nuevaLista,nodo3->equipo);
+adicionarAlPrincipio(nuevaLista,nodo4->equipo);
+reordenar(nuevaLista);
+primero=primeroEquipo(nuevaLista);
+
+return primero;
+
+}
+
+PtrNodoListaEquipo segundo(Grupo grupo,ListaEquipo listaEquipo){
+PtrNodoListaEquipo nodo1= traerEquipo(listaEquipo,grupo.idEquipo1);
+PtrNodoListaEquipo nodo2= traerEquipo(listaEquipo,grupo.idEquipo2);
+PtrNodoListaEquipo nodo3= traerEquipo(listaEquipo,grupo.idEquipo3);
+PtrNodoListaEquipo nodo4= traerEquipo(listaEquipo,grupo.idEquipo4);
+PtrNodoListaEquipo segundo=finEquipo();
+ListaEquipo nuevaLista;
+crearListaEquipo(nuevaLista);
+adicionarAlPrincipio(nuevaLista,nodo1->equipo);
+adicionarAlPrincipio(nuevaLista,nodo2->equipo);
+adicionarAlPrincipio(nuevaLista,nodo3->equipo);
+adicionarAlPrincipio(nuevaLista,nodo4->equipo);
+reordenar(nuevaLista);
+segundo=primeroEquipo(nuevaLista)->siguiente;
+return segundo;
 }
