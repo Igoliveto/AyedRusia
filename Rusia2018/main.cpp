@@ -32,7 +32,6 @@ int main()
     crearListaPartido(listaPartido);
     listaPartido=cargarPartidos();
     while(menu!=6){
-
      cout<<"1_Administrar equipos, jugadores, grupos y partidos(Altas, bajas y modificaciones)"<<endl;
      cout<<"2_Administrar partidos"<<endl;
      cout<<"3_Procesar reportes"<<endl;
@@ -396,15 +395,15 @@ void bateriaJugadores(){//bateria  de jugadores carga  todo en 0
     int id =0;
     ofstream ficheroSalida;
 
-    ficheroSalida.open ("Jugadores.txt",ios::trunc);
+    ficheroSalida.open ("jugadores.txt",ios::trunc);
     ficheroSalida.close();
 
-    ficheroSalida.open ("Jugadores.txt",ios::app);
+    ficheroSalida.open ("jugadores.txt",ios::app);
     for (int i=0; i<32; i++){
         for (int u=0;u<23;u++){
           id++;
           ficheroSalida <<id<<";"<<"Equipo"<<i+1<< "JugadorNumero"<<u+1<<";"<<0<< ";"<<i+1 <<"\n";
-
+          //cout <<id<<";"<<"Equipo"<<i+1<< "JugadorNumero"<<u+1<<";"<<0<< ";"<<i+1 <<"\n";
      }
    }
 
@@ -447,6 +446,7 @@ if(archivo.is_open()){
 
 
     }
+
     archivo.seekg(0);
 
 }
@@ -558,8 +558,10 @@ void GuardarDatos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido lis
 ofstream archivoP("partidos.txt");
 PtrNodoPartido ptrNodo= primeroPartido(listaPartido);
 Partido partido;
+int indice=0;
 if(archivoP.is_open()){
-    while(ptrNodo!=finListaPartido()){
+    while(ptrNodo!=finListaPartido() && indice!=64){
+        indice++;
         obtenerDato(listaPartido,partido,ptrNodo);
         archivoP<<partido.id;
         archivoP<<";";
@@ -570,16 +572,23 @@ if(archivoP.is_open()){
         archivoP<<partido.golesL;
         archivoP<<";";
         archivoP<<partido.golesV;
+        if(ptrNodo->siguiente!=finListaPartido())
         archivoP<<endl;
+
         ptrNodo=siguientePartido(listaPartido,ptrNodo);
+
+
     }
     }
+indice=0;
 archivoP.close();
 ofstream archivoG("grupos.txt");
 PtrNodoGrupo ptrNodoGrupo=primeroListaGrupo(listaGrupo);
 Grupo grupo;
+
 if(archivoG.is_open()){
-    while(ptrNodoGrupo!=finGrupo()){
+    while(ptrNodoGrupo!=finGrupo() && indice!=8){
+        indice++;
         obtenerDato(listaGrupo,grupo,ptrNodoGrupo);
         archivoG<<ptrNodoGrupo->grupo.id;
         archivoG<<";";
@@ -592,12 +601,15 @@ if(archivoG.is_open()){
         archivoG<<ptrNodoGrupo->grupo.idEquipo3;
         archivoG<<";";
         archivoG<<ptrNodoGrupo->grupo.idEquipo4;
+        if(ptrNodoGrupo->siguiente != finGrupo())
         archivoG<<endl;
+
         ptrNodoGrupo=siguienteListaGrupo(listaGrupo,ptrNodoGrupo);
 
     }
 
 }
+indice=0;
 archivoG.close();
 ofstream archivoE("equipos.txt");
 PtrNodoListaEquipo ptrNodoEquipo = primeroEquipo(listaEquipo);
@@ -616,7 +628,8 @@ if(archivoE.is_open() && archivoJ.is_open()){
         archivoE<<";";
         archivoE<<ptrNodoEquipo->equipo.puntos;
         PtrNodoListaJugador ptrNodoJugador=primeroJugador(ptrNodoEquipo->equipo.listaJugadores);
-        while(ptrNodoJugador!=finJugador()){
+        while(ptrNodoJugador!=finJugador() && indice!=736){
+            indice++;
             archivoJ<<ptrNodoJugador->jugador.id;
             archivoJ<<";";
             archivoJ<<ptrNodoJugador->jugador.nombre;
@@ -624,8 +637,9 @@ if(archivoE.is_open() && archivoJ.is_open()){
             archivoJ<<ptrNodoJugador->jugador.goles;
             archivoJ<<";";
             archivoJ<<ptrNodoJugador->jugador.idEquipo;
-          //  if(ptrNodoEquipo->siguiente!=finEquipo() && ptrNodoJugador->sgte!=finJugador()){
-            archivoJ<<endl;//}
+            if(indice!=736)
+            archivoJ<<endl;
+
             ptrNodoJugador=siguienteJugador(ptrNodoEquipo->equipo.listaJugadores,ptrNodoJugador);
 
         }
@@ -634,6 +648,7 @@ if(archivoE.is_open() && archivoJ.is_open()){
         ptrNodoEquipo=siguienteEquipo(listaEquipo,ptrNodoEquipo);
     }
 }
+indice=0;
 archivoJ.close();
 archivoE.close();
 
