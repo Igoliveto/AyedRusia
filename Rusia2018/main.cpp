@@ -12,19 +12,23 @@ using namespace std;
 void bateriaJugadores();
 void administrarPartidos();
 
-void cargarEquipos();
-void cargarGrupos();
+ListaEquipo cargarEquipos();
+ListaGrupo cargarGrupos();
 ListaPartido cargarPartidos();
 void cargarJugadores(Equipo &equipo);
 void imprimirListaJugadores(ListaJugador  &lista);
+void imprimirListaPartidos(ListaPartido  &lista);
+PtrNodoListaJugador traerJugador(ListaEquipo lista,int idEquipo,int idJugador);
+PtrNodoListaEquipo traerEquipo(ListaEquipo listaEquipo,int idEquipo);
 int main()
 {
     int menu=0;
     int submenu1=0,submenu2=0,submenu3=0,submenu4=0;
-    cargarEquipos();
-    cargarGrupos();
-    ListaPartido ptrListaPartido = cargarPartidos();
-
+    ListaEquipo listaEquipo=cargarEquipos();
+    ListaGrupo listaGrupo=cargarGrupos();
+    ListaPartido listaPartido;
+    crearListaPartido(listaPartido);
+    listaPartido=cargarPartidos();
     while(menu!=5){
 
      cout<<"1_Administrar equipos, jugadores, grupos y partidos(Altas, bajas y modificaciones)"<<endl;
@@ -36,6 +40,7 @@ int main()
      cin>>menu;
 
      switch(menu){
+
      case 1://Administrar equipos, jugadores, rupos y partidos(Altas, bajas y modificaciones)
 
                  while(submenu1!=4){
@@ -70,26 +75,68 @@ int main()
 
                  switch(submenu2){
 
-             case 1:
+             case 1:{
                     int auxId=0;
                     cout<<"Ingrese id del partido a iniciar"<<endl;
                     cin>>auxId;
                     Partido partidoAux ;
                     partidoAux.id= auxId;
 
-                    PtrNodoPartido ptrCursorAux=localizarDato(ptrListaPartido,partidoAux);
+                    PtrNodoPartido ptrCursorAux=localizarDato(listaPartido,partidoAux);
 
                     cout<<"el id del partido es"<<ptrCursorAux->partido.id<<endl;
                     ptrCursorAux->partido.golesL =  0;
                     ptrCursorAux->partido.golesV = 0;
                     ptrCursorAux->partido.idEquipoL = 0;
                     ptrCursorAux->partido.idEquipoV = 0;
+                    imprimirListaPartidos(listaPartido);
+                    //cout<<"a ver"<<ptrCursorAux->partido.golesL<<endl;
 
-                    cout<<"a ver"<<ptrCursorAux->partido.golesL<<endl;
                     break;
+             }
 
-
-             //case 2://Registrar goles ocurridos en cada partido
+             case 2:{
+                 int auxId=0;
+                 int idE=0,idV=0,gol=0,golV=0,idJugador=0;
+                 char aux;
+                 cout<<"ingrese id del partido a cargar los goles"<<endl;
+                 cin>>auxId;
+                 Partido partidoAux;
+                 partidoAux.id=auxId;
+                 PtrNodoPartido ptrCursor=localizarDato(listaPartido,partidoAux);
+                 cout<<"Id partido"<<ptrCursor->partido.id<<endl;
+                 cout<< "Ingrese Id del equipo local:"<<endl;
+                 cin>>idE;
+                 setIdEquipoL(ptrCursor->partido,idE);
+                 cout<< "Ingrese Id del equipo visitante:"<<endl;
+                 cin>>idV;
+                 setIdEquipoV(ptrCursor->partido,idV);
+                 cout<<"Ingrese goles del equipo local:"<<endl;
+                 cin>>gol;
+                 setGolesL(ptrCursor->partido,gol);
+                 while(gol>0){
+                    cout<<"Ingrese id del jugador del gol nro:"<<gol<<endl;
+                    cin>>idJugador;
+                    PtrNodoListaJugador ptrNodo = traerJugador(listaEquipo,idE,idJugador);
+                    ptrNodo->jugador.goles=ptrNodo->jugador.goles+1;
+                    gol=gol-1;
+                    }
+                idJugador=0;
+                cout<<"Ingrese goles del equipo visitante:"<<endl;
+                cin>>golV;
+                setGolesV(ptrCursor->partido,golV);
+                while(golV>0){
+                    cout<<"Ingrese id del jugador del gol nro:"<<gol<<endl;
+                    cin>>idJugador;
+                    PtrNodoListaJugador ptrNodo =traerJugador(listaEquipo,idV,idJugador);
+                    ptrNodo->jugador.goles=ptrNodo->jugador.goles+1;
+                    golV=golV-1;
+                }
+                imprimirListaJugadores(traerEquipo(listaEquipo,idE)->equipo.listaJugadores);
+                cout<<"----"<<endl;
+                imprimirListaJugadores(traerEquipo(listaEquipo,idV)->equipo.listaJugadores);
+                 break;
+             }
             // case 3://Registrar fin de un partido
           //   case 4:break;
 
@@ -145,7 +192,7 @@ int main()
     }
     return 0;
 }
-void cargarEquipos(){
+ListaEquipo cargarEquipos(){
 ListaEquipo listaEquipo;
 crearListaEquipo(listaEquipo);
 Equipo equipo;
@@ -181,9 +228,10 @@ if(archivo.is_open()){
         archivo.seekg(0); //Me posiciono al principio del archivo
 }
 archivo.close();
+return listaEquipo;
 }
 
-void cargarGrupos(){
+ListaGrupo cargarGrupos(){
 ListaGrupo listaGrupo;
 crearListaGrupo(listaGrupo);
 Grupo grupo;
@@ -223,6 +271,7 @@ if(archivo.is_open()){
       archivo.seekg(0); //Me posiciono al principio del archivo
 }
 archivo.close();
+return listaGrupo;
 }
 
 void bateriaJugadores(){//bateria  de jugadores carga  todo en 0
@@ -337,10 +386,44 @@ void imprimirListaJugadores(ListaJugador  &lista){
 
     while (cursor != finJugador()) {
         obtenerDato(lista, jugador, cursor);
+        if(jugador.goles>0){
         cout << jugador.nombre << endl;
+        cout<<jugador.goles<<endl;}
         cursor = siguienteJugador(lista, cursor);
     }
 
     cout << endl;
 }
+void imprimirListaPartidos(ListaPartido  &lista){
+    PtrNodoPartido cursor = primeroPartido(lista);
+    Partido partido;
+    cout<<"probando"<<endl;
+    while (cursor != finListaPartido()) {
+        obtenerDato(lista, partido, cursor);
+        cout << partido.id << endl;
+        cout << partido.idEquipoL << endl;
+        cout <<"-----"<<endl;
+        cursor = siguientePartido(lista, cursor);
+    }
 
+    cout << endl;
+}
+PtrNodoListaJugador traerJugador(ListaEquipo lista,int idEquipo,int idJugador){
+
+PtrNodoListaEquipo ptrNodo=traerEquipo(lista,idEquipo);
+Jugador jugador;
+crearJugador(jugador);
+setId(jugador,idJugador);
+PtrNodoListaJugador ptrNodoJugador = localizarDato(ptrNodo->equipo.listaJugadores,jugador);
+
+return ptrNodoJugador;
+}
+
+PtrNodoListaEquipo traerEquipo(ListaEquipo listaEquipo,int idEquipo){
+Equipo equipo;
+crearEquipo(equipo);
+setId(equipo,idEquipo);
+PtrNodoListaEquipo ptrNodo= localizarDato(listaEquipo,equipo);
+
+return ptrNodo;
+}
