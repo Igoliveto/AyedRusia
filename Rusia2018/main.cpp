@@ -419,11 +419,18 @@ crearPartido(partido);
 ifstream archivo("partidos.txt");
 int aux;
 string linea;
+PtrNodoPartido ptrNodoPartido;
+bool fallos=true;
 if(archivo.is_open()){
     while(!archivo.eof()){
         getline(archivo,linea,';');
         stringstream id(linea);
         id>>aux;
+        if(traerNodoPartido(listaPartido,aux)!=finListaPartido()){
+           cout<<"Informe de errores: Partidos"<<endl;
+           cout<<"El id"<< aux<< "ya esta cargado"<<endl;
+              fallos=true;
+        }
         setId(partido,aux);
 
         getline(archivo,linea,';');
@@ -447,10 +454,14 @@ if(archivo.is_open()){
 
     }
 
+
     archivo.seekg(0);
 
 }
 archivo.close();
+if(fallos)
+    exit(1);
+
 return listaPartido;
 }
 
