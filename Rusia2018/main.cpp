@@ -702,6 +702,7 @@ PtrNodoListaEquipo ptrSegundoGG=segundo(ptrNodoGrupoG->grupo,listaEquipo);
 PtrNodoListaEquipo ptrPrimeroGH=primero(ptrNodoGrupoH->grupo,listaEquipo);
 PtrNodoListaEquipo ptrSegundoGH=segundo(ptrNodoGrupoH->grupo,listaEquipo);
 }
+
 PtrNodoListaEquipo primero(Grupo grupo,ListaEquipo listaEquipo){
 PtrNodoListaEquipo nodo1= traerEquipo(listaEquipo,grupo.idEquipo1);
 PtrNodoListaEquipo nodo2= traerEquipo(listaEquipo,grupo.idEquipo2);

@@ -254,5 +254,6 @@ void eliminarDato(ListaEquipo &lista, Equipo equipo);
 /*----------------------------------------------------------------------------*/
 PtrNodoListaEquipo insertarDato(ListaEquipo &lista, Equipo equipo);
 void reordenar(ListaEquipo &lista);
+ResultadoComparacionEquipo compararGolesEquipo(Equipo equipo1, Equipo equipo2) ;
 /******************************************************************************/
 #endif // _LISTAEQUIPO_H
