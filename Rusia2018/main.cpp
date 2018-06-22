@@ -193,11 +193,90 @@ int main()
 
                  switch(submenu3){
 
-             case 1://Registrar inicio de partidos
-             case 2://Registrar goles ocurridos en cada partido
-             case 3://Registrar fin de un partido
-             case 4:
-             case 5:
+             case 1:
+                 //orden equipos por grupo
+             case 2:{
+                    int cantidadGrupos=0;
+                    int golesParciales=0;
+                    int golesTotales=0;
+
+                    PtrNodoGrupo cursor = primeroListaGrupo(listaGrupo);
+                    Grupo grupoAux;
+
+                    while (cursor != finGrupo()) {
+                    obtenerDato(listaGrupo, grupoAux, cursor);
+                    cout << grupoAux.nombre<<endl;
+                    cout <<traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.nombre<<traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.golesAFavor<<traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.puntos<<endl;
+                    cout<<traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.nombre<<traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.golesAFavor<<traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.puntos<<endl;
+                    cout <<traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.nombre<<traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.golesAFavor<<traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.puntos<<endl;
+                    cout <<traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.nombre<<traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.golesAFavor<<traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.puntos<<endl;
+                    cout << endl;
+                    cantidadGrupos=cantidadGrupos+1;
+                    golesParciales=traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.golesAFavor+traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.golesAFavor+traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.golesAFavor+traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.golesAFavor;
+                    cout<< "Cantidad Goles Parciales:"<<golesParciales<<endl;
+                    golesTotales=golesTotales+golesParciales;
+                    cursor = siguienteListaGrupo(listaGrupo, cursor);
+                     if(cantidadGrupos==8){
+                        cursor=finGrupo();
+                    }
+                    }
+                    cout<< "Cantidad GRUPOS:"<<cantidadGrupos<<endl;
+                    cout<< "Cantidad GOLES TOTALES:"<<golesTotales<<endl;
+                    cout << endl;
+
+             }break;
+
+
+
+            // case 3:
+                    //grupo de la muerte
+             case 4:{
+
+                 int cantidadGrupos=0;
+                    int golesParciales=0;
+                    int golesParcialesMuerte=9999;
+                    string grupoMuerteNombre;
+
+                    PtrNodoGrupo cursor = primeroListaGrupo(listaGrupo);
+                    Grupo grupoAux;
+                    while (cursor != finGrupo()) {
+                    obtenerDato(listaGrupo, grupoAux, cursor);
+
+                    cantidadGrupos=cantidadGrupos+1;
+                    golesParciales=traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.golesAFavor+traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.golesAFavor+traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.golesAFavor+traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.golesAFavor;
+
+                    if(golesParcialesMuerte==9999){
+                        golesParcialesMuerte=golesParciales;
+                        grupoMuerteNombre=grupoAux.nombre;
+                    }
+                    if(golesParcialesMuerte>=golesParciales){
+                        golesParcialesMuerte=golesParcialesMuerte;
+                        grupoMuerteNombre=grupoMuerteNombre;
+                    }
+                    if(golesParcialesMuerte<golesParciales){
+                        golesParcialesMuerte=golesParciales;
+                        grupoMuerteNombre=grupoAux.nombre;
+                    }
+
+                    cursor = siguienteListaGrupo(listaGrupo, cursor);
+                     if(cantidadGrupos==8){
+                        cursor=finGrupo();
+                    }
+                    }
+                    cout<< "GRUPO MUERTE:"<<grupoMuerteNombre<<endl;
+                    cout<< "GOLES PARCIALES MUERTE:"<<golesParcialesMuerte<<endl;
+                    cout << endl;
+
+
+
+
+
+
+             }break;
+
+
+
+            // case 5:
              case 6:break;
 
 
