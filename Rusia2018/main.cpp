@@ -20,6 +20,8 @@ void imprimirListaJugadores(ListaJugador  &lista);
 void imprimirListaPartidos(ListaPartido  &lista);
 PtrNodoListaJugador traerJugador(ListaEquipo lista,int idEquipo,int idJugador);
 PtrNodoListaEquipo traerEquipo(ListaEquipo listaEquipo,int idEquipo);
+PtrNodoPartido traerNodoPartido(ListaPartido listaPartido,int idPartido);
+void GuardarDatos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido listaPartido);
 int main()
 {
     int menu=0;
@@ -29,13 +31,13 @@ int main()
     ListaPartido listaPartido;
     crearListaPartido(listaPartido);
     listaPartido=cargarPartidos();
-    while(menu!=5){
+    while(menu!=6){
 
      cout<<"1_Administrar equipos, jugadores, grupos y partidos(Altas, bajas y modificaciones)"<<endl;
      cout<<"2_Administrar partidos"<<endl;
      cout<<"3_Procesar reportes"<<endl;
      cout<<"4_Crear Datos de prueba"<<endl;
-     cout<<"5_Salir"<<endl;
+     cout<<"5_Guardar y salir"<<endl;
 
      cin>>menu;
 
@@ -84,19 +86,17 @@ int main()
 
                     PtrNodoPartido ptrCursorAux=localizarDato(listaPartido,partidoAux);
 
-                    cout<<"el id del partido es"<<ptrCursorAux->partido.id<<endl;
+                    cout<<"Comenzo el partido con id: "<<ptrCursorAux->partido.id<<endl;
                     ptrCursorAux->partido.golesL =  0;
                     ptrCursorAux->partido.golesV = 0;
                     ptrCursorAux->partido.idEquipoL = 0;
                     ptrCursorAux->partido.idEquipoV = 0;
-                    imprimirListaPartidos(listaPartido);
-                    //cout<<"a ver"<<ptrCursorAux->partido.golesL<<endl;
 
                     break;
              }
 
              case 2:{
-                 int auxId=0;
+                 int auxId=0,goles=0;
                  int idE=0,idV=0,gol=0,golV=0,idJugador=0;
                  char aux;
                  cout<<"ingrese id del partido a cargar los goles"<<endl;
@@ -113,6 +113,7 @@ int main()
                  setIdEquipoV(ptrCursor->partido,idV);
                  cout<<"Ingrese goles del equipo local:"<<endl;
                  cin>>gol;
+                 goles=goles+gol;
                  setGolesL(ptrCursor->partido,gol);
                  while(gol>0){
                     cout<<"Ingrese id del jugador del gol nro:"<<gol<<endl;
@@ -124,6 +125,7 @@ int main()
                 idJugador=0;
                 cout<<"Ingrese goles del equipo visitante:"<<endl;
                 cin>>golV;
+                goles=goles+golV;
                 setGolesV(ptrCursor->partido,golV);
                 while(golV>0){
                     cout<<"Ingrese id del jugador del gol nro:"<<gol<<endl;
@@ -132,16 +134,49 @@ int main()
                     ptrNodo->jugador.goles=ptrNodo->jugador.goles+1;
                     golV=golV-1;
                 }
-                imprimirListaJugadores(traerEquipo(listaEquipo,idE)->equipo.listaJugadores);
-                cout<<"----"<<endl;
-                imprimirListaJugadores(traerEquipo(listaEquipo,idV)->equipo.listaJugadores);
+                if(goles>10){
+                    cout<<"*****Convirtieron mas de 10 goles******"<<endl;
+
+                }
+                if((goles*100)%100){
+                    cout<<"MAS DE 100 GOLES"<<endl;
+                }
+
                  break;
              }
-            // case 3://Registrar fin de un partido
+             case 3:{
+                     //Registrar fin de un partido
+                     int id;
+                     cout<<"Ingrese id del partido a finalizar"<<endl;
+                     cin>>id;
+                     PtrNodoPartido ptrNodo=traerNodoPartido(listaPartido,id);
+                     cout<<"Id del partido:"<<id;
+                     PtrNodoPartido ptrNodoPartido = traerNodoPartido(listaPartido,id);
+                     PtrNodoListaEquipo ptrNodoEquipoL = traerEquipo(listaEquipo,ptrNodoPartido->partido.idEquipoL);
+                     PtrNodoListaEquipo ptrNodoEquipoV = traerEquipo(listaEquipo,ptrNodoPartido->partido.idEquipoV);
+
+                     setGolesAFavor(ptrNodoEquipoL->equipo,ptrNodoEquipoL->equipo.golesAFavor+ptrNodoPartido->partido.golesL);
+                     setGolesEnContra(ptrNodoEquipoL->equipo,ptrNodoEquipoL->equipo.golesEnContra+ptrNodoPartido->partido.golesV);
+
+                     setGolesAFavor(ptrNodoEquipoV->equipo,ptrNodoEquipoV->equipo.golesAFavor+ptrNodoPartido->partido.golesV);
+                     setGolesEnContra(ptrNodoEquipoV->equipo,ptrNodoEquipoV->equipo.golesEnContra+ptrNodoPartido->partido.golesL);
+
+                     if(ptrNodoPartido->partido.golesL > ptrNodoPartido->partido.golesV ){
+                        setPuntos(ptrNodoEquipoL->equipo,ptrNodoEquipoL->equipo.puntos+3);
+                     }
+                     else if(ptrNodoPartido->partido.golesL < ptrNodoPartido->partido.golesV){
+                        setPuntos(ptrNodoEquipoV->equipo,ptrNodoEquipoV->equipo.puntos+3);
+                     }
+                     else{
+                        setPuntos(ptrNodoEquipoL->equipo,ptrNodoEquipoL->equipo.puntos+1);
+                        setPuntos(ptrNodoEquipoV->equipo,ptrNodoEquipoV->equipo.puntos+1);
+                     }
+                     cout<<"Datos guardados"<<endl;
           //   case 4:break;
 
 
 
+                 }
                  }
                  }
                   break;
@@ -175,6 +210,7 @@ int main()
         break;
 
      case 5:
+            GuardarDatos(listaEquipo,listaGrupo,listaPartido);
         break;
     case 6://Test Interno(osea no le den  bola)
             Equipo* equipo = new Equipo;
@@ -188,10 +224,13 @@ int main()
 
 
         break;
+
      }
+
     }
     return 0;
 }
+
 ListaEquipo cargarEquipos(){
 ListaEquipo listaEquipo;
 crearListaEquipo(listaEquipo);
@@ -426,4 +465,80 @@ setId(equipo,idEquipo);
 PtrNodoListaEquipo ptrNodo= localizarDato(listaEquipo,equipo);
 
 return ptrNodo;
+}
+PtrNodoPartido traerNodoPartido(ListaPartido listaPartido,int idPartido){
+Partido partido;
+crearPartido(partido);
+setId(partido,idPartido);
+PtrNodoPartido ptrNodo = localizarDato(listaPartido,partido);
+
+return ptrNodo;
+}
+
+void GuardarDatos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido listaPartido){
+ofstream archivoP("partidos.txt");
+PtrNodoPartido ptrNodo= primeroPartido(listaPartido);
+Partido partido;
+if(archivoP.is_open()){
+    while(ptrNodo!=finListaPartido()){
+        obtenerDato(listaPartido,partido,ptrNodo);
+        archivoP<<partido.id;
+        archivoP<<";";
+        archivoP<<partido.idEquipoL;
+        archivoP<<";";
+        archivoP<<partido.idEquipoV;
+        archivoP<<";";
+        archivoP<<partido.golesL;
+        archivoP<<";";
+        archivoP<<partido.golesV;
+        archivoP<<endl;
+        ptrNodo=siguientePartido(listaPartido,ptrNodo);
+    }
+    }
+archivoP.close();
+ofstream archivoG("grupos.txt");
+PtrNodoGrupo ptrNodoGrupo=primeroListaGrupo(listaGrupo);
+Grupo grupo;
+if(archivoG.is_open()){
+    while(ptrNodoGrupo!=finGrupo()){
+        obtenerDato(listaGrupo,grupo,ptrNodoGrupo);
+        archivoG<<ptrNodoGrupo->grupo.id;
+        archivoG<<";";
+        archivoG<<ptrNodoGrupo->grupo.nombre;
+        archivoG<<";";
+        archivoG<<ptrNodoGrupo->grupo.idEquipo1;
+        archivoG<<";";
+        archivoG<<ptrNodoGrupo->grupo.idEquipo2;
+        archivoG<<";";
+        archivoG<<ptrNodoGrupo->grupo.idEquipo3;
+        archivoG<<";";
+        archivoG<<ptrNodoGrupo->grupo.idEquipo4;
+        archivoG<<endl;
+        ptrNodoGrupo=siguienteListaGrupo(listaGrupo,ptrNodoGrupo);
+
+    }
+
+}
+archivoG.close();
+ofstream archivoE("equipos.txt");
+PtrNodoListaEquipo ptrNodoEquipo = primeroEquipo(listaEquipo);
+Equipo equipo;
+if(archivoE.is_open()){
+    while(ptrNodoEquipo!=finEquipo()){
+        archivoE<<ptrNodoEquipo->equipo.id;
+        archivoE<<";";
+        archivoE<<ptrNodoEquipo->equipo.nombre;
+        archivoE<<";";
+        archivoE<<ptrNodoEquipo->equipo.golesAFavor;
+        archivoE<<";";
+        archivoE<<ptrNodoEquipo->equipo.golesEnContra;
+        archivoE<<";";
+        archivoE<<ptrNodoEquipo->equipo.puntos;
+        if(ptrNodoEquipo->siguiente!=finEquipo()){
+        archivoE<<endl;}
+        ptrNodoEquipo=siguienteEquipo(listaEquipo,ptrNodoEquipo);
+    }
+}
+archivoE.close();
+cout<<"datos guardados"<<endl;
 }
