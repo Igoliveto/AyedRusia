@@ -21,51 +21,27 @@ void imprimirListaPartidos(ListaPartido  &lista);
 PtrNodoListaJugador traerJugador(ListaEquipo lista,int idEquipo,int idJugador);
 PtrNodoListaEquipo traerEquipo(ListaEquipo listaEquipo,int idEquipo);
 PtrNodoPartido traerNodoPartido(ListaPartido listaPartido,int idPartido);
+PtrNodoGrupo traerGrupo(ListaGrupo listaGrupo,char idGrupo);
 void GuardarDatos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido listaPartido);
 int main()
 {
     int menu=0;
-    int submenu1=0,submenu2=0,submenu3=0,submenu4=0;
+    int submenu2=0,submenu3=0;
     ListaEquipo listaEquipo=cargarEquipos();
     ListaGrupo listaGrupo=cargarGrupos();
     ListaPartido listaPartido;
     crearListaPartido(listaPartido);
     listaPartido=cargarPartidos();
-    while(menu!=6){
-     cout<<"1_Administrar equipos, jugadores, grupos y partidos(Altas, bajas y modificaciones)"<<endl;
-     cout<<"2_Administrar partidos"<<endl;
-     cout<<"3_Procesar reportes"<<endl;
-     cout<<"4_Crear Datos de prueba"<<endl;
-     cout<<"5_Guardar y salir"<<endl;
+    while(menu!=3){
+     cout<<"1_Administrar partidos"<<endl;
+     cout<<"2_Procesar reportes"<<endl;
+     cout<<"3_Guardar y salir"<<endl;
 
      cin>>menu;
 
      switch(menu){
 
-     case 1://Administrar equipos, jugadores, rupos y partidos(Altas, bajas y modificaciones)
-
-                 while(submenu1!=4){
-                 cout<<"1_Altas"<<endl;
-                 cout<<"2_Bajas"<<endl;
-                 cout<<"3_Modificaciones"<<endl;
-                 cout<<"4_Atras"<<endl;
-                 cin>>submenu1;
-
-                 switch(submenu1){
-
-             case 1://altas
-             case 2://bajas
-             case 3://modificaciones
-             case 4:break;
-
-
-
-                 }
-                 }
-            break;
-
-
-     case 2: //administrar partidos
+     case 1: //administrar partidos
 
             while(submenu2!=4){
                  cout<<"1-Registrar inicio de partidos"<<endl;
@@ -97,7 +73,6 @@ int main()
              case 2:{
                  int auxId=0,goles=0;
                  int idE=0,idV=0,gol=0,golV=0,idJugador=0;
-                 char aux;
                  cout<<"ingrese id del partido a cargar los goles"<<endl;
                  cin>>auxId;
                  Partido partidoAux;
@@ -148,7 +123,6 @@ int main()
                      int id;
                      cout<<"Ingrese id del partido a finalizar"<<endl;
                      cin>>id;
-                     PtrNodoPartido ptrNodo=traerNodoPartido(listaPartido,id);
                      cout<<"Id del partido:"<<id;
                      PtrNodoPartido ptrNodoPartido = traerNodoPartido(listaPartido,id);
                      PtrNodoListaEquipo ptrNodoEquipoL = traerEquipo(listaEquipo,ptrNodoPartido->partido.idEquipoL);
@@ -171,30 +145,26 @@ int main()
                         setPuntos(ptrNodoEquipoV->equipo,ptrNodoEquipoV->equipo.puntos+1);
                      }
                      cout<<"Datos guardados"<<endl;
-          //   case 4:break;
+
 
 
 
                  }
+                case 4:break;
                  }
                  }
                   break;
-    case 3: //reportes
+    case 2: //reportes
 
-            while(submenu3!=6){
-                 cout<<"1-Listado de goleadores"<<endl;
-                 cout<<"2_Orden de equipos por Grupo"<<endl;
-                 cout<<"3_Fixture"<<endl;
-                 cout<<"4_Grupo de la muerte"<<endl;
-                 cout<<"5_Porcentajes goles local o visitante"<<endl;
-                 cout<<"6_Atras"<<endl;
+            while(submenu3!=3){
+                 cout<<"1_Orden de equipos por Grupo"<<endl;
+                 cout<<"2_Grupo de la muerte"<<endl;
+                 cout<<"3_Atras"<<endl;
                  cin>>submenu3;
 
                  switch(submenu3){
 
-             case 1:
-                 //orden equipos por grupo
-             case 2:{
+             case 1:{
                     int cantidadGrupos=0;
                     int golesParciales=0;
                     int golesTotales=0;
@@ -226,10 +196,8 @@ int main()
              }break;
 
 
-
-            // case 3:
                     //grupo de la muerte
-             case 4:{
+             case 2:{
 
                  int cantidadGrupos=0;
                     int golesParciales=0;
@@ -275,36 +243,24 @@ int main()
 
 
 
-            // case 5:
-             case 6:break;
+
+             case 3:break;
 
 
 
                  }
                  }
                   break;
-    case 4:
-        bateriaJugadores();
-        break;
 
-     case 5:
+
+     case 3:
             GuardarDatos(listaEquipo,listaGrupo,listaPartido);
         break;
-    case 6://Test Interno(osea no le den  bola)
-            Equipo* equipo = new Equipo;
-            ListaJugador* listaJugador = new ListaJugador;
-            Jugador* jugador = new Jugador;
 
-            crearEquipo(*equipo);
-            crearJugador(*jugador);
-
-            adicionarDespues((*equipo).listaJugadores,*jugador,crearNodoListaJugador(*jugador));
-
-
+     case 4:
+        bateriaJugadores();
         break;
-
      }
-
     }
     return 0;
 }
@@ -317,11 +273,17 @@ crearEquipo(equipo);
 ifstream archivo("equipos.txt"); // abrir el archivo en modo lectura//
 int aux=0;
 string linea;
+bool fallos=false;
 if(archivo.is_open()){
     while(!archivo.eof()){        //mientras no sea el fin de archivo//
             getline(archivo,linea,';'); // leo desde el comienzo has ";" y lo guardo en linea//
             stringstream id(linea);  //Cargo en el stream "id", lo que esta en linea;
             id>>aux;                  // lo paso a aux;
+              if(traerEquipo(listaEquipo,aux)!=finEquipo()){
+           cout<<"Informe de errores: Equipos"<<endl;
+           cout<<"El id"<< aux<< "ya esta cargado"<<endl;
+              fallos=true;
+        }
             setId(equipo,aux);
             getline(archivo,linea,';');
             setNombre(equipo,linea);
@@ -345,6 +307,8 @@ if(archivo.is_open()){
         archivo.seekg(0); //Me posiciono al principio del archivo
 }
 archivo.close();
+if(fallos)
+   exit(1);
 return listaEquipo;
 }
 
@@ -357,11 +321,17 @@ ifstream archivo("grupos.txt");
 int aux=0;
 char aux1;
 string linea;
+bool fallos=false;
 if(archivo.is_open()){
 
     while(!archivo.eof()){
          getline(archivo,linea,';');
          aux1=linea[0];
+          if(traerGrupo(listaGrupo,aux1)!=finGrupo()){
+           cout<<"Informe de errores: Grupos"<<endl;
+           cout<<"El id"<< aux1<< "ya esta cargado"<<endl;
+              fallos=true;
+        }
          setId(grupo,aux1);
          getline(archivo,linea,';');
          setNombre(grupo,linea);
@@ -388,6 +358,8 @@ if(archivo.is_open()){
       archivo.seekg(0); //Me posiciono al principio del archivo
 }
 archivo.close();
+if(fallos)
+    exit(1);
 return listaGrupo;
 }
 
@@ -419,8 +391,7 @@ crearPartido(partido);
 ifstream archivo("partidos.txt");
 int aux;
 string linea;
-PtrNodoPartido ptrNodoPartido;
-bool fallos=true;
+bool fallos=false;
 if(archivo.is_open()){
     while(!archivo.eof()){
         getline(archivo,linea,';');
@@ -473,6 +444,7 @@ crearJugador(jugador);
 ifstream archivoJugadores("jugadores.txt");
 int aux=0;
 string linea;
+//bool fallos=false;
 int idEquipo=0;
 idEquipo=getId(equipo);
 if(archivoJugadores.is_open()){
@@ -481,6 +453,11 @@ if(archivoJugadores.is_open()){
         getline(archivoJugadores,linea,';');
         stringstream id(linea);
         id>>aux;
+        /* if(traerJugador( ,aux)!=finJugador()){
+           cout<<"Informe de errores: Jugadores"<<endl;
+           cout<<"El id"<< aux<< "ya esta cargado"<<endl;
+              fallos=true;
+        }*/
         setId(jugador,aux);
 
         getline(archivoJugadores,linea,';');
@@ -506,7 +483,8 @@ archivoJugadores.seekg(0);
 
 }
 archivoJugadores.close();
-
+//if(fallos)
+   // exit(1);
 
 }
 void imprimirListaJugadores(ListaJugador  &lista){
@@ -564,6 +542,16 @@ PtrNodoPartido ptrNodo = localizarDato(listaPartido,partido);
 
 return ptrNodo;
 }
+
+
+PtrNodoGrupo traerGrupo(ListaGrupo listaGrupo,char idGrupo){
+Grupo grupo;
+crearGrupo(grupo);
+setId(grupo,idGrupo);
+PtrNodoGrupo ptrNodo = localizarDato(listaGrupo,grupo);
+return ptrNodo;
+}
+
 
 void GuardarDatos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido listaPartido){
 ofstream archivoP("partidos.txt");
