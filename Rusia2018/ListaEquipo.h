@@ -252,8 +252,37 @@ PtrNodoListaEquipo localizarDato(ListaEquipo &lista, Equipo equipo);
 */
 void eliminarDato(ListaEquipo &lista, Equipo equipo);
 /*----------------------------------------------------------------------------*/
+/*
+  pre : lista fue creada con crearLista() y cargada con datos ordenados de
+        menor a mayor respecto del sentido progresivo.
+  post: agrega a la lista el dato manteniendo el orden pero con multiples
+        valores iguales y devuelve un puntero al nodo insertado.
+
+  lista : lista sobre la cual se invoca la primitiva.
+  dato : elemento a insertar.
+  return puntero al nodo insertado.
+*/
 PtrNodoListaEquipo insertarDato(ListaEquipo &lista, Equipo equipo);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : la lista fue creada con crearLista().
+  post : reordena la lista.
+
+  lista : lista sobre la cual se invoca la primitiva.
+*/
 void reordenar(ListaEquipo &lista);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : ninguna.
+  post: compara ambos dato1 y dato2, devuelve
+          mayor si dato1 es mayor que dato2,
+          igual si dato1 es igual a dato2,
+          menor si dato1 es menor que dato2.
+
+  dato1 : dato a comparar.
+  dato2 : dato a comparar.
+  return resultado de comparar dato1 respecto de dato2.
+*/
 ResultadoComparacionEquipo compararGolesEquipo(Equipo equipo1, Equipo equipo2) ;
 /******************************************************************************/
 #endif // _LISTAEQUIPO_H
