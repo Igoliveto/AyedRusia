@@ -602,7 +602,9 @@ archivoG.close();
 ofstream archivoE("equipos.txt");
 PtrNodoListaEquipo ptrNodoEquipo = primeroEquipo(listaEquipo);
 Equipo equipo;
-if(archivoE.is_open()){
+ofstream archivoJ("jugadores.txt");
+Jugador jugador;
+if(archivoE.is_open() && archivoJ.is_open()){
     while(ptrNodoEquipo!=finEquipo()){
         archivoE<<ptrNodoEquipo->equipo.id;
         archivoE<<";";
@@ -613,11 +615,27 @@ if(archivoE.is_open()){
         archivoE<<ptrNodoEquipo->equipo.golesEnContra;
         archivoE<<";";
         archivoE<<ptrNodoEquipo->equipo.puntos;
+        PtrNodoListaJugador ptrNodoJugador=primeroJugador(ptrNodoEquipo->equipo.listaJugadores);
+        while(ptrNodoJugador!=finJugador()){
+            archivoJ<<ptrNodoJugador->jugador.id;
+            archivoJ<<";";
+            archivoJ<<ptrNodoJugador->jugador.nombre;
+            archivoJ<<";";
+            archivoJ<<ptrNodoJugador->jugador.goles;
+            archivoJ<<";";
+            archivoJ<<ptrNodoJugador->jugador.idEquipo;
+          //  if(ptrNodoEquipo->siguiente!=finEquipo() && ptrNodoJugador->sgte!=finJugador()){
+            archivoJ<<endl;//}
+            ptrNodoJugador=siguienteJugador(ptrNodoEquipo->equipo.listaJugadores,ptrNodoJugador);
+
+        }
         if(ptrNodoEquipo->siguiente!=finEquipo()){
         archivoE<<endl;}
         ptrNodoEquipo=siguienteEquipo(listaEquipo,ptrNodoEquipo);
     }
 }
+archivoJ.close();
 archivoE.close();
+
 cout<<"datos guardados"<<endl;
 }
