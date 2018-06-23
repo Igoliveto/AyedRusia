@@ -11,7 +11,8 @@
 using namespace std;
 void bateriaJugadores();
 void administrarPartidos();
-
+Equipo validarEquipoEncontrado(ListaEquipo listaEquipo, Equipo equipo);
+Partido validarPartidoEncontrado (ListaPartido listaPartido, Partido partido);
 ListaEquipo cargarEquipos();
 ListaGrupo cargarGrupos();
 ListaPartido cargarPartidos();
@@ -67,8 +68,11 @@ int main()
                     Partido partidoAux ;
                     partidoAux.id= auxId;
 
-                    PtrNodoPartido ptrCursorAux=localizarDato(listaPartido,partidoAux);
 
+                    if( localizarDato(listaPartido,partidoAux)==finListaPartido())
+                      partidoAux=validarPartidoEncontrado(listaPartido,partidoAux);
+
+                    PtrNodoPartido ptrCursorAux=localizarDato(listaPartido,partidoAux);
                     cout<<"Comenzo el partido con id: "<<ptrCursorAux->partido.id<<endl;
                     if(auxId<49){
                     ptrCursorAux->partido.golesL =  0;
@@ -85,24 +89,48 @@ int main()
              }
 
              case 2:{
-                 int auxId=0,goles=0;
-                 int idE=0,idV=0,gol=0,golV=0,idJugador=0;
-                 cout<<"ingrese id del partido a cargar los goles"<<endl;
-                 cin>>auxId;
-                 Partido partidoAux;
-                 partidoAux.id=auxId;
-                 PtrNodoPartido ptrCursor=localizarDato(listaPartido,partidoAux);
-                 cout<<"Id partido"<<ptrCursor->partido.id<<endl;
-                 cout<< "Ingrese Id del equipo local:"<<endl;
-                 cin>>idE;
-                 setIdEquipoL(ptrCursor->partido,idE);
+                int auxId=0,goles=0;
+                int idE=0,idV=0,gol=0,golV=0,idJugador=0;
+                Equipo equipoAuxiliar;
+                Partido partidoAux;
+
+
+                cout<<"ingrese id del partido a cargar los goles"<<endl;
+                cin>>auxId;
+                partidoAux.id=auxId;
+
+                if( localizarDato(listaPartido,partidoAux)==finListaPartido())
+                    partidoAux=validarPartidoEncontrado(listaPartido,partidoAux);
+
+                PtrNodoPartido ptrCursor=localizarDato(listaPartido,partidoAux);
+
+                cout<<"Id partido"<<ptrCursor->partido.id<<endl;
+                cout<< "Ingrese Id del equipo local:"<<endl;
+                cin>>idE;
+                equipoAuxiliar.id = idE;
+
+                if(localizarDato(listaEquipo,equipoAuxiliar)== finEquipo()){
+                    equipoAuxiliar=validarEquipoEncontrado(listaEquipo,equipoAuxiliar);
+                }
+
+
+                setIdEquipoL(ptrCursor->partido,equipoAuxiliar.id);
+
                  cout<< "Ingrese Id del equipo visitante:"<<endl;
                  cin>>idV;
-                 setIdEquipoV(ptrCursor->partido,idV);
+                 equipoAuxiliar.id = idV;
+
+                   if(localizarDato(listaEquipo,equipoAuxiliar)== finEquipo()){
+                    equipoAuxiliar=validarEquipoEncontrado(listaEquipo,equipoAuxiliar);
+                }
+
+                 setIdEquipoV(ptrCursor->partido,equipoAuxiliar.id);
+
                  cout<<"Ingrese goles del equipo local:"<<endl;
                  cin>>gol;
                  goles=goles+gol;
                  setGolesL(ptrCursor->partido,gol);
+
                  while(gol>0){
                     cout<<"Ingrese id del jugador del gol nro:"<<gol<<endl;
                     cin>>idJugador;
@@ -882,4 +910,44 @@ ptrProximo->partido.idEquipoL=idL;
 ptrProximo->partido.idEquipoV=idV;
 
 
+}
+
+Partido validarPartidoEncontrado (ListaPartido listaPartido, Partido partido){
+    bool encontrado = false;
+    int auxId;
+    auxId = partido.id;
+    while(encontrado==false){
+
+        if( localizarDato(listaPartido,partido)==finListaPartido()){
+            cout<<"Informe de errores: Adminitrar Partido"<<endl;
+            cout<<"El id: |"<< auxId<< "|no existe en la lista de partidos enlistados"<<endl;
+            cout<<"Reintente por favor"<<endl;
+            cout<<"Ingrese id del partido a iniciar"<<endl;
+            cin>>auxId;
+            partido.id= auxId;
+            if( localizarDato(listaPartido,partido)!=finListaPartido())
+                encontrado = true;
+
+            }else {encontrado = true;}
+    }
+    return partido;
+}
+
+Equipo validarEquipoEncontrado(ListaEquipo listaEquipo, Equipo equipo){
+    bool encontrado = false;
+    int auxId;
+    while (encontrado == false){
+         if( localizarDato(listaEquipo,equipo)==finEquipo()){
+            cout<<"Informe de errores: Adminitrar Partido"<<endl;
+            cout<<"El id: |"<< auxId<< "|no existe en la lista de equipos enlistados"<<endl;
+            cout<<"Reintente por favor ingresar el id"<<endl;
+
+            cin>>auxId;
+            equipo.id= auxId;
+            if( localizarDato(listaEquipo,equipo)!= finEquipo())
+                encontrado = true;
+
+            }else {encontrado = true;}
+    }
+    return equipo;
 }
