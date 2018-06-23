@@ -197,15 +197,19 @@ ResultadoComparacionEquipo compararDatoEquipo(Equipo equipo1, Equipo equipo2) {
     }
 }
 /*---------------------------------------------------------------------------*/
-ResultadoComparacionEquipo compararGolesEquipo(Equipo equipo1, Equipo equipo2) {
+bool estaPrimero(Equipo equipo1, Equipo equipo2) {
     if (equipo1.puntos > equipo2.puntos) {
-        return MAYOR_EQUIPO;
+        return true;
     }
     else if (equipo1.puntos < equipo2.puntos) {
-        return MENOR_EQUIPO;
+        return false;
     }
     else {
-        return IGUAL_EQUIPO;
+        if(equipo1.golesAFavor> equipo2.golesAFavor){
+            return true;
+        }
+        else return false;
+
     }
 }
 /*----------------------------------------------------------------------------*/
@@ -229,7 +233,7 @@ PtrNodoListaEquipo insertarDato(ListaEquipo &lista, Equipo equipo) {
   while ((ptrCursor != finEquipo()) && (! ubicado)) {
 
     obtenerDato(lista,equipoCursor,ptrCursor);
-    if (compararGolesEquipo(equipoCursor,equipo) == MAYOR_EQUIPO)
+    if (estaPrimero(equipoCursor,equipo) == true)
       ubicado = true;
 
     else {
@@ -239,9 +243,9 @@ PtrNodoListaEquipo insertarDato(ListaEquipo &lista, Equipo equipo) {
   }
 
   if (ptrCursor == primeroEquipo(lista))
-    ptrNuevoNodo = adicionarAlPrincipio(lista,equipo);
-  else
     ptrNuevoNodo = adicionarDespues(lista,equipo,ptrPrevio);
+  else
+    ptrNuevoNodo = adicionarAlPrincipio(lista,equipo);
 
   return ptrNuevoNodo;
 }

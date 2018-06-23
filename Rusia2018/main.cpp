@@ -51,7 +51,7 @@ int main()
      switch(menu){
 
      case 1: //administrar partidos
-
+            submenu2=0;
             while(submenu2!=4){
                  cout<<"1-Registrar inicio de partidos"<<endl;
                  cout<<"2_Registrar goles ocurridos en cada partido"<<endl;
@@ -203,7 +203,7 @@ int main()
                  }
                   break;
     case 2: //reportes
-
+             submenu3=0;
             while(submenu3!=3){
                  cout<<"1_Orden de equipos por Grupo"<<endl;
                  cout<<"2_Grupo de la muerte"<<endl;
@@ -302,6 +302,10 @@ int main()
 
 
      case 3:
+                     calcularOctavos(listaEquipo,listaGrupo,listaPartido);
+                     calcularCuartos(listaPartido);
+                     calcularSemi(listaPartido);
+                     calcularFinal(listaPartido);
             guardarDatos(listaEquipo,listaGrupo,listaPartido);
         break;
 
@@ -908,6 +912,21 @@ idV=traerIdGanador(ptrNodoPart);
 PtrNodoPartido ptrProximo=traerNodoPartido(listaPartido,64);
 ptrProximo->partido.idEquipoL=idL;
 ptrProximo->partido.idEquipoV=idV;
+PtrNodoPartido ptrTercerPuesto=traerNodoPartido(listaPartido,63);
+
+if(ptrNodoPartido->partido.idEquipoL==idL){
+    ptrTercerPuesto->partido.idEquipoL=ptrNodoPartido->partido.idEquipoV;
+}
+else {
+        ptrTercerPuesto->partido.idEquipoL=ptrNodoPartido->partido.idEquipoL;
+   }
+if(ptrNodoPart->partido.idEquipoV==idV){
+    ptrTercerPuesto->partido.idEquipoV=ptrNodoPart->partido.idEquipoL;
+}
+else{
+    ptrTercerPuesto->partido.idEquipoV=ptrNodoPart->partido.idEquipoV;
+
+}
 
 
 }
