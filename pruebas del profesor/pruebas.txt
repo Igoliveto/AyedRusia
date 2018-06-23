@@ -1,0 +1,49 @@
+puntos
+
+1 obligatorio
+
+2 obligatorio
+
+3.a opcional
+
+3.b obligatorio
+
+3.c elegir dos reportes
+
+
+3.d obligatorio
+
+
+Se pide desarrollar una aplicación que permita:
+1)	Cargar la información de los equipos, jugadores, grupos y partidos desde los archivos equipos.txt, jugadores.txt, grupos.txt y partidos.txt (durante el inicio de la aplicación).
+2)	Guardar la información de los equipos, jugadores, grupos y partidos en los archivos equipos.txt, jugadores.txt, grupos.txt y partidos.txt (durante el cierre de la aplicación).
+3)	Presentar un menú con las siguientes opciones:
+a.	Administrar equipos, jugadores, grupos y partidos (Alta, Baja y Modificación) debido a que pueden existir errores en los datos.
+b.	Administrar Partidos
+i.	Registrar el inicio de un partido (identificado por id).
+ii.	Registrar los goles ocurridos en cada partido (identificando equipo y jugador).
+iii.	Registrar el fin de un partido.
+c.	Procesar reportes:
+i.	Listado de goleadores. Ordenado en forma descendente por cantidad de goles. El reporte se deberá segmentar por cantidad de goles (por ejemplo, si el máximo de goles es 10, deberá figurar “10 goles” y todos los jugadores con 10 goles, después 9, y todos los que convirtieron 9 goles, etc).
+Se deberá poner un subtotal indicando la cantidad de jugadores en cada segmento y un total final con cantidad de jugadores y cantidad de goles. 
+ii.	Orden de equipos por grupo (con puntos y diferencia de gol). Es decir, Grupo A, equipos del Grupo A, Grupo B, equipos del Grupo B, etc. Además, se deben informar los goles parciales por grupos y el total de todos los grupos.
+iii.	Listar el fixture con todos los resultados y los partidos pendientes ordenados por partido.
+iv.	Deberá informar “el grupo de la muerte” que será el grupo en que se hayan efectuado mayor cantidad de goles totales.
+v.	Porcentaje goles local o visitante.
+d.	Salir de la aplicación (se deberán grabar los datos en los archivos).
+
+
+
+1) ids duplicados --> jugardor 13 duplicado
+ equipo inexistente --> grupo G
+ 
+2) jugar partido 1, 6 y 16
+
+3) goles jugadores 2, 3, 300 (no está jugando), 400 (no existe)
+12, 12, 12, 18, 21, 31, 91
+
+4) reportes
+
+5 cerrar partidos 1, 6, 10 (no se está jugando).
+
+6) cerrar app (tiene que cerrar el 16.

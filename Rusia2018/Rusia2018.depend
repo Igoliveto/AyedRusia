@@ -367,3 +367,79 @@
 	<sstream>
 	<fstream>
 
+1529731388 source:c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\equipo.cpp
+	"Equipo.h"
+	<cstring>
+	<string>
+	<iostream>
+	"ListaJugadores.h"
+
+1529731388 c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\equipo.h
+	"ListaJugadores.h"
+	<string>
+
+1529731388 c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\listajugadores.h
+	"Jugador.h"
+
+1529731388 c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\jugador.h
+	<string>
+
+1529731388 source:c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\grupo.cpp
+	"Grupo.h"
+	<string>
+	<iostream>
+
+1529731388 c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\grupo.h
+	<string>
+
+1529731388 source:c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\jugador.cpp
+	"Jugador.h"
+	"string"
+
+1529731388 source:c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\listaequipo.cpp
+	"ListaEquipo.h"
+
+1529731388 c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\listaequipo.h
+	"Equipo.h"
+
+1529731388 source:c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\listagrupo.cpp
+	"ListaGrupo.h"
+
+1529731388 c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\listagrupo.h
+	"Grupo.h"
+
+1529731388 source:c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\listajugadores.cpp
+	"ListaJugadores.h"
+
+1529731388 source:c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\listapartidos.cpp
+	<iostream>
+	<stdlib.h>
+	<string>
+	<sstream>
+	<fstream>
+	"ListaPartidos.h"
+
+1529731388 c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\listapartidos.h
+	"Partido.h"
+
+1529731388 c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\partido.h
+
+1529758941 source:c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\main.cpp
+	<iostream>
+	"Equipo.h"
+	"ListaEquipo.h"
+	"ListaGrupo.h"
+	"ListaJugadores.h"
+	"ListaPartidos.h"
+	<stdlib.h>
+	<string>
+	<sstream>
+	<fstream>
+
+1529731388 source:c:\users\betina\desktop\tp rusia 2018 ayed\rusia2018\partido.cpp
+	"partido.h"
+	<stdlib.h>
+	<string>
+	<sstream>
+	<fstream>
+

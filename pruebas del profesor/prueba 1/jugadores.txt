@@ -11,7 +11,7 @@
 11;Jugardor 11;0;2
 12;Jugardor 12;0;2
 13;Jugardor 13;0;2
-14;Jugardor 14;0;2
+13;Jugardor 14;0;2
 15;Jugardor 15;0;2
 16;Jugardor 16;0;2
 17;Jugardor 17;0;2

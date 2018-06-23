@@ -163,11 +163,21 @@ int main()
              }
              case 3:{
                      //Registrar fin de un partido
+                     PtrNodoPartido auxPartido;
                      int id;
                      cout<<"Ingrese id del partido a finalizar"<<endl;
                      cin>>id;
                      cout<<"Id del partido:"<<id;
+                        auxPartido->partido.id=id;
+                        auxPartido= localizarDato (listaPartido,auxPartido->partido);
+                      if( auxPartido->partido.golesL == -1){
+                        cout<<"El partido no se ha iniciado"<<endl;
+                        exit(1);
+                      }
+
                      PtrNodoPartido ptrNodoPartido = traerNodoPartido(listaPartido,id);
+
+
                      PtrNodoListaEquipo ptrNodoEquipoL = traerEquipo(listaEquipo,ptrNodoPartido->partido.idEquipoL);
                      PtrNodoListaEquipo ptrNodoEquipoV = traerEquipo(listaEquipo,ptrNodoPartido->partido.idEquipoV);
 
@@ -391,19 +401,33 @@ if(archivo.is_open()){
          getline(archivo,linea,';');
          stringstream id1(linea);
          id1>>aux;
+         if (aux <0 || aux> 32 ){
+             cout<< "Equipo inexistente"<<aux<<endl;
+         }
          setIdEquipo1(grupo,aux);
          getline(archivo,linea,';');
          stringstream id2(linea);
          id2>>aux;
+         if (aux <0 || aux> 32 ){
+             cout<< "Equipo inexistente"<<aux<<endl;
+         }
          setIdEquipo2(grupo,aux);
          getline(archivo,linea,';');
          stringstream id3(linea);
          id3>>aux;
+         if (aux <0 || aux> 32 ){
+             cout<< "Equipo inexistente"<<aux<<endl;
+         }
          setIdEquipo3(grupo,aux);
          getline(archivo,linea);
          stringstream id4(linea);
          id4>>aux;
+         if (aux <0 || aux> 32 ){
+            cout<< "Equipo inexistente"<<aux<<endl;
+         }
+
          setIdEquipo4(grupo,aux);
+
          adicionarFinal(listaGrupo,grupo);
 
 
@@ -542,8 +566,8 @@ archivoJugadores.seekg(0);
 
 }
 archivoJugadores.close();
-if(fallos)
-    exit(1);
+//if(fallos)
+    //exit(1);
 
 }
 void imprimirListaJugadores(ListaJugador  &lista){
