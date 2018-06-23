@@ -138,6 +138,7 @@ int main()
                     ptrNodo->jugador.goles=ptrNodo->jugador.goles+1;
                     gol=gol-1;
                     }
+                //
                 idJugador=0;
                 cout<<"Ingrese goles del equipo visitante:"<<endl;
                 cin>>golV;
