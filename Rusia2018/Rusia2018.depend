@@ -91,10 +91,10 @@
 	"Jugador.h"
 	"string"
 
-1529556129 source:c:\users\havok\documents\github\ayedrusia\rusia2018\listaequipo.cpp
+1529712874 source:c:\users\havok\documents\github\ayedrusia\rusia2018\listaequipo.cpp
 	"ListaEquipo.h"
 
-1529556129 c:\users\havok\documents\github\ayedrusia\rusia2018\listaequipo.h
+1529712874 c:\users\havok\documents\github\ayedrusia\rusia2018\listaequipo.h
 	"Equipo.h"
 
 1529556129 source:c:\users\havok\documents\github\ayedrusia\rusia2018\listagrupo.cpp
@@ -106,7 +106,7 @@
 1529556129 source:c:\users\havok\documents\github\ayedrusia\rusia2018\listajugadores.cpp
 	"ListaJugadores.h"
 
-1529617397 source:c:\users\havok\documents\github\ayedrusia\rusia2018\main.cpp
+1529717034 source:c:\users\havok\documents\github\ayedrusia\rusia2018\main.cpp
 	<iostream>
 	"Equipo.h"
 	"ListaEquipo.h"

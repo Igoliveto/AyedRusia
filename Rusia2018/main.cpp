@@ -491,10 +491,15 @@ if(archivoJugadores.is_open()){
         getline(archivoJugadores,linea);
         stringstream idE(linea);
         idE>>aux;
+        if (aux >32 || aux <1){
+            cout<<"Informe de errores: Jugadores"<<endl;
+            cout<<"El id "<< aux<< " no corresponde a ningun equipo enlistado"<<endl;
+            fallos=true;
+        }
         setIdEquipo(jugador,aux);
         if(aux==idEquipo){
-        adicionarFinal(equipo.listaJugadores,jugador);
-        adicionarFinal(listaJugador,jugador);}
+            adicionarFinal(equipo.listaJugadores,jugador);
+            adicionarFinal(listaJugador,jugador);}
 
         }
 
