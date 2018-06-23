@@ -27,8 +27,10 @@ void guardarDatos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido lis
 void calcularOctavos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido &listaPartido);
 PtrNodoListaEquipo primero(Grupo grupo,ListaEquipo listaEquipo);
 PtrNodoListaEquipo segundo(Grupo grupo,ListaEquipo listaEquipo);
-void calcularCuartos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido listaPartido);
+void calcularCuartos(ListaPartido listaPartido);
 int traerIdGanador(PtrNodoPartido ptrNodoPartido);
+void calcularSemi(ListaPartido listaPartido);
+void calcularFinal(ListaPartido listaPartido);
 int main()
 {
     int menu=0;
@@ -158,6 +160,9 @@ int main()
                      }
                      cout<<"Datos guardados"<<endl;
                      calcularOctavos(listaEquipo,listaGrupo,listaPartido);
+                     calcularCuartos(listaPartido);
+                     calcularSemi(listaPartido);
+                     calcularFinal(listaPartido);
 
 
 
@@ -785,24 +790,91 @@ segundo=primeroEquipo(nuevaLista)->siguiente;
 return segundo;
 }
 
-void calcularCuartos(ListaEquipo listaEquipo,ListaGrupo listaGrupo,ListaPartido listaPartido){
-int idL=0;idV=0;
+void calcularCuartos(ListaPartido listaPartido){
+int idL=0,idV=0;
 PtrNodoPartido ptrNodoPartido=traerNodoPartido(listaPartido,49);
 idL=traerIdGanador(ptrNodoPartido);
 PtrNodoPartido ptrNodoPart=traerNodoPartido(listaPartido,50);
 idV=traerIdGanador(ptrNodoPart);
+PtrNodoPartido ptrProximo = traerNodoPartido(listaPartido,57);
+ptrProximo->partido.idEquipoL=idL;
+ptrProximo->partido.idEquipoV=idV;
+
+ptrNodoPartido=traerNodoPartido(listaPartido,53);
+idL=traerIdGanador(ptrNodoPartido);
+ptrNodoPart=traerNodoPartido(listaPartido,54);
+idV=traerIdGanador(ptrNodoPart);
+ptrProximo=traerNodoPartido(listaPartido,58);
+ptrProximo->partido.idEquipoL=idL;
+ptrProximo->partido.idEquipoV=idV;
+
+ptrNodoPartido=traerNodoPartido(listaPartido,51);
+idL=traerIdGanador(ptrNodoPartido);
+ptrNodoPart=traerNodoPartido(listaPartido,52);
+idV=traerIdGanador(ptrNodoPart);
+ptrProximo=traerNodoPartido(listaPartido,59);
+ptrProximo->partido.idEquipoL=idL;
+ptrProximo->partido.idEquipoV=idV;
+
+ptrNodoPartido=traerNodoPartido(listaPartido,55);
+idL=traerIdGanador(ptrNodoPartido);
+ptrNodoPart=traerNodoPartido(listaPartido,56);
+idV=traerIdGanador(ptrNodoPart);
+ptrProximo=traerNodoPartido(listaPartido,60);
+ptrProximo->partido.idEquipoL=idL;
+ptrProximo->partido.idEquipoV=idV;
+
+
 
 }
 int traerIdGanador(PtrNodoPartido ptrNodoPartido){
-    int idGanador=0;
+    int idGanador=-1;
+    if(ptrNodoPartido->partido.golesL>-1 && ptrNodoPartido->partido.golesV>-1 ){
+
     if(ptrNodoPartido->partido.golesL > ptrNodoPartido->partido.golesV){
        idGanador=ptrNodoPartido->partido.idEquipoL;
     }
     else{
         idGanador=ptrNodoPartido->partido.idEquipoV;
     }
+    }
+
     return idGanador;
 
+}
+void calcularSemi(ListaPartido listaPartido){
+int idL=0,idV=0;
+PtrNodoPartido ptrNodoPartido=traerNodoPartido(listaPartido,57);
+idL=traerIdGanador(ptrNodoPartido);
+PtrNodoPartido ptrNodoPart=traerNodoPartido(listaPartido,58);
+idV=traerIdGanador(ptrNodoPart);
+PtrNodoPartido ptrProximo=traerNodoPartido(listaPartido,61);
+ptrProximo->partido.idEquipoL=idL;
+ptrProximo->partido.idEquipoV=idV;
+
+ptrNodoPartido=traerNodoPartido(listaPartido,59);
+idL=traerIdGanador(ptrNodoPartido);
+ptrNodoPart=traerNodoPartido(listaPartido,60);
+idV=traerIdGanador(ptrNodoPart);
+ptrProximo=traerNodoPartido(listaPartido,61);
+ptrProximo->partido.idEquipoL=idL;
+ptrProximo->partido.idEquipoV=idV;
+
+
+
+}
+
+void calcularFinal(ListaPartido listaPartido){
+int idL=0,idV=0;
+PtrNodoPartido ptrNodoPartido=traerNodoPartido(listaPartido,61);
+idL=traerIdGanador(ptrNodoPartido);
+
+PtrNodoPartido ptrNodoPart = traerNodoPartido(listaPartido,62);
+idV=traerIdGanador(ptrNodoPart);
+
+PtrNodoPartido ptrProximo=traerNodoPartido(listaPartido,64);
+ptrProximo->partido.idEquipoL=idL;
+ptrProximo->partido.idEquipoV=idV;
 
 
 }
