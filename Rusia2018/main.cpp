@@ -70,51 +70,79 @@ int main()
                  switch(submenu2){
 
              case 1:{
-                    int auxId=0;
+                    bool partidoIniciado=false;
+                    int auxId=999;
                     cout<<"Ingrese id del partido a iniciar"<<endl;
                     cin>>auxId;
                     Partido partidoAux ;
                     partidoAux.id= auxId;
                     PtrNodoPartido ptrCursorAux;
 
+
+                    // comprobar q exista partido
                     if( localizarDato(listaPartido,partidoAux)==finListaPartido())
                       ptrCursorAux=validarPartidoEncontrado(listaPartido,partidoAux);// comprobar q exista partido
 
-                        ptrCursorAux=localizarDato(listaPartido,partidoAux);
-                    cout<<"Comenzo el partido con id: "<<ptrCursorAux->partido.id<<endl;
-                    if(auxId<49){
-                    //----------TEST---
-                    //cout<< "id del equipo  traigo"<<ptrCursorAux->partido.idEquipoL<<endl;
-                   // PtrNodoListaEquipo ptrNodoEquipoAux;
-                    //ptrNodoEquipoAux=traerEquipo(listaEquipo, 1);
-                    //cout<<"Nombre equipo"<<ptrNodoEquipoAux->equipo.nombre<<endl;
-                    //----------TEST---
+                    ptrCursorAux=localizarDato(listaPartido,partidoAux);
 
-                    ptrCursorAux->partido.golesL =  0;
-                    ptrCursorAux->partido.golesV = 0;
+                    if (ptrCursorAux->partido.golesV!=-1 && ptrCursorAux->partido.golesL!=-1){
+                        while (partidoIniciado==false){
+                            cout<<"El partido esta iniciado"<<endl;
+                            cout<<"Ingrese id del partido a iniciar (Ingreesar 0 para salir)"<<endl;
+                            cin>>auxId;
+                            if (auxId==0){
+                                break;
+                            }
+                            partidoAux.id=auxId;
+                            cout<<auxId<<endl;
+                            if( localizarDato(listaPartido,partidoAux)==finListaPartido()){
+                                ptrCursorAux=validarPartidoEncontrado(listaPartido,partidoAux);
+                            }else{ptrCursorAux=localizarDato(listaPartido,partidoAux);}
+
+
+                            if (ptrCursorAux->partido.golesV==-1 && ptrCursorAux->partido.golesL==-1){
+                                partidoIniciado=true;
+                            }
+                        }
                     }
-                    else{
-                        ptrCursorAux->partido.golesL =  0;// Para q esta esto???
+                    if(auxId!=0){
+                        cout<<"Comenzo el partido con id: "<<ptrCursorAux->partido.id<<endl;
+                        if(auxId<49){
+                        //----------TEST---
+                        //cout<< "id del equipo  traigo"<<ptrCursorAux->partido.idEquipoL<<endl;
+                       // PtrNodoListaEquipo ptrNodoEquipoAux;
+                        //ptrNodoEquipoAux=traerEquipo(listaEquipo, 1);
+                        //cout<<"Nombre equipo"<<ptrNodoEquipoAux->equipo.nombre<<endl;
+                        //----------TEST---
+
+                        ptrCursorAux->partido.golesL =  0;
                         ptrCursorAux->partido.golesV = 0;
-                    }
-
+                        }
+                        else{
+                            ptrCursorAux->partido.golesL =  0;// Para q esta esto???
+                            ptrCursorAux->partido.golesV = 0;
+                        }
+                        }
 
                     break;
              }
 
              case 2:{
-                int auxId=0,goles=0;
+                int auxId=9999,goles=0;
                 int idE=0,idV=0,gol=0,golV=0,idJugador=0;
-
+                bool partidoIniciado=false;
 
                 PtrNodoPartido ptrCursor;
-                // Tengo q lograr ingresar solo el nombre del jugador y que el sistema haga todo
-                //comprobar que el partido exista , que este iniciado tambien;
 
-                cout<<"ingrese id del partido a cargar los goles"<<endl;
+
+
+               while (auxId != 0){
+                cout<<"ingrese id del partido a cargar los goles(Ingresar 0 para salir)"<<endl;
                 cin>>auxId;
                 partidoAux.id=auxId;
-
+                if(auxId==0){
+                    break;
+                }
 
                 if( localizarDato(listaPartido,partidoAux)==finListaPartido()){
                     ptrCursor=validarPartidoEncontrado(listaPartido,partidoAux);
@@ -123,10 +151,31 @@ int main()
                 cout<<"Id partido"<<ptrCursor->partido.id<<endl;
 
 
+                // esto valida q el partido este iniciado
+                if (ptrCursor->partido.golesV==-1 && ptrCursor->partido.golesL==-1){
+                    while (partidoIniciado==false){
+                        cout<<"El partido no esta iniciado"<<endl;
+                        cout<<"Ingrese id del partido a cargar los goles (Ingreesar 0 para salir)"<<endl;
+                        cin>>auxId;
+                        if (auxId==0){
+                            break;
+                        }
+                        partidoAux.id=auxId;
+                        cout<<auxId<<endl;
+                        if( localizarDato(listaPartido,partidoAux)==finListaPartido()){
+                            ptrCursor=validarPartidoEncontrado(listaPartido,partidoAux);
+                        }else{ptrCursor=localizarDato(listaPartido,partidoAux);}
+
+
+                        if (ptrCursor->partido.golesV!=-1 && ptrCursor->partido.golesL!=-1){
+                            partidoIniciado=true;
+                        }
+                    }
+                }
 
 
 
-
+                if(auxId!=0){
 
                     cout<<"Ingrese id del jugador que hizo el gol:"<<endl;
                     cin>>idJugador;
@@ -138,7 +187,7 @@ int main()
                     }
 
                    if(ptrANodoJugador == NULL){
-                        cout<< "El jugador no pertnece a los equipos q estan jugando"<<endl;//Hay q  hacer  un validador de jugadores
+                        cout<< "El jugador no pertenece a los equipos q estan jugando"<<endl;//Hay q  hacer  un validador de jugadores
                     }
 
 
@@ -151,14 +200,16 @@ int main()
                             ptrANodoJugador->jugador.goles=ptrANodoJugador->jugador.goles+1;
                         }
 
-
-                cout<< "Vamo a ver si todo esta bien"<<endl;
-                cout<<"Goles local: |"<<ptrCursor->partido.golesL<<"|"<<endl;
-                cout<<"Goles Vistinate: |"<<ptrCursor->partido.golesV<<"|"<<endl;
-                cout<<"Goles echos por el jugador: |"<<ptrANodoJugador->jugador.goles<<"|"<<endl;
+                    cout<<"Goles local: |"<<ptrCursor->partido.golesL<<"|"<<endl;
+                    cout<<"Goles Vistinate: |"<<ptrCursor->partido.golesV<<"|"<<endl;
+                    cout<<"Goles echos por el jugador: |"<<ptrANodoJugador->jugador.goles<<"|"<<endl;
 
 
 
+                }
+
+
+               }
                  break;
              }
 
@@ -167,18 +218,23 @@ int main()
                      //Registrar fin de un partido
                      PtrNodoPartido auxPartido;
                      int id;
+
+
                      cout<<"Ingrese id del partido a finalizar"<<endl;
                      cin>>id;
                      cout<<"Id del partido:"<<id;
                         auxPartido->partido.id=id;
                         auxPartido= localizarDato (listaPartido,auxPartido->partido);
+
+
                       if( auxPartido->partido.golesL == -1){
                         cout<<"El partido no se ha iniciado"<<endl;
                         exit(1);
                       }
 
                      PtrNodoPartido ptrNodoPartido = traerNodoPartido(listaPartido,id);
-
+                        cout<< "Datos del partido a cerrar"<< auxPartido->partido.id<<";"<<auxPartido->partido.idEquipoL<<endl;
+                        //Todo Hasta aca parece estar  bien el problema parece ser a  partir de  aca
 
                      PtrNodoListaEquipo ptrNodoEquipoL = traerEquipo(listaEquipo,ptrNodoPartido->partido.idEquipoL);
                      PtrNodoListaEquipo ptrNodoEquipoV = traerEquipo(listaEquipo,ptrNodoPartido->partido.idEquipoV);
