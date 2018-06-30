@@ -1,7 +1,7 @@
-1;Equipo 1;0;0;0
-2;Equipo 2;0;0;0
-3;Equipo 3;0;0;0
-4;Equipo 4;0;0;0
+1;Rusia;0;0;0
+2;Arabia Saudita;0;0;0
+3;Egipto;0;0;0
+4;Uruguay;0;0;0
 5;Equipo 5;0;0;0
 6;Equipo 6;0;0;0
 7;Equipo 7;0;0;0
