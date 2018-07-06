@@ -12,6 +12,7 @@ typedef struct{
     int idEquipoV;
     int golesL;
     int golesV;
+    bool finalizado;
 }Partido;
 /*----------------------------------------------------------------------------*/
 //                                PRIMITIVAS
@@ -121,6 +122,7 @@ void setGolesV(Partido &partido, int golesV);
   partido : estructura de datos a ser destruido.
 */
 void destructor(Partido &partido);
+void finalizarPartido(Partido &partido);
 /*----------------------------------------------------------------------------*/
 /******************************************************************************/
 #endif // _PARTIDO_H

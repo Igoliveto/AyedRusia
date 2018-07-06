@@ -192,7 +192,7 @@ PtrNodoPartido localizarDato(ListaPartido &lista, Partido partido) {
 
   /* recorre los nodos hasta llegar al último o hasta
      encontrar el nodo buscado */
-  while ((ptrCursor != finListaPartido()) && (false== encontrado)) {
+  while ((ptrCursor != finListaPartido()) && (!encontrado)) {
 
     /* obtiene el dato del nodo y lo compara */
     obtenerDato(lista,partidoCursor,ptrCursor);
@@ -205,6 +205,7 @@ PtrNodoPartido localizarDato(ListaPartido &lista, Partido partido) {
   /* si no lo encontró devuelve fin */
   if (! encontrado)
     ptrCursor = finListaPartido();
+
 
   return ptrCursor;
 }

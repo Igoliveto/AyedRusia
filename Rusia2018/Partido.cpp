@@ -14,8 +14,9 @@ void crearPartido(Partido &partido){
 partido.id=0;
 partido.idEquipoL=0;
 partido.idEquipoV=0;
-partido.golesL=0;
-partido.golesV=0;
+partido.golesL=-1;
+partido.golesV=-1;
+partido.finalizado=false;
 }
 /*----------------------------------------------------------------------------*/
 int getId(Partido &partido){
@@ -65,5 +66,9 @@ partido.idEquipoV=0;
 partido.golesL=0;
 partido.golesV=0;
 }
+void finalizarPartido(Partido &partido){
+partido.finalizado=true;
+}
+
 /*----------------------------------------------------------------------------*/
 /******************************************************************************/

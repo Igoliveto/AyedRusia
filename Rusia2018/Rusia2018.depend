@@ -13,7 +13,7 @@
 1529631385 c:\users\tomas\documents\codeblocks\rusia2018\jugador.h
 	<string>
 
-1529728422 source:c:\users\tomas\documents\codeblocks\rusia2018\main.cpp
+1530846836 source:c:\users\tomas\documents\codeblocks\rusia2018\main.cpp
 	<iostream>
 	"Equipo.h"
 	"ListaEquipo.h"
@@ -34,7 +34,7 @@
 	"Jugador.h"
 	"string"
 
-1529632196 source:c:\users\tomas\documents\codeblocks\rusia2018\partido.cpp
+1530835187 source:c:\users\tomas\documents\codeblocks\rusia2018\partido.cpp
 	"partido.h"
 	<stdlib.h>
 	<string>
@@ -125,7 +125,7 @@
 	<sstream>
 	<fstream>
 
-1529632196 source:c:\users\tomas\documents\codeblocks\rusia2018\listapartidos.cpp
+1530829013 source:c:\users\tomas\documents\codeblocks\rusia2018\listapartidos.cpp
 	<iostream>
 	<stdlib.h>
 	<string>
@@ -136,7 +136,7 @@
 1529631385 c:\users\tomas\documents\codeblocks\rusia2018\listapartidos.h
 	"Partido.h"
 
-1529631385 c:\users\tomas\documents\codeblocks\rusia2018\partido.h
+1530833023 c:\users\tomas\documents\codeblocks\rusia2018\partido.h
 
 1529539387 source:c:\users\bettina\desktop\rusia2018\equipo.cpp
 	"Equipo.h"
