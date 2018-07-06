@@ -37,6 +37,8 @@ void registrarInicio(ListaPartido &listaPartido, ListaPartido &listaAux);
 void registrarGoles(ListaPartido &listaPartido, ListaEquipo &listaEquipo);
 void registrarFindePartido(ListaPartido &listaPartido,ListaEquipo &listaEquipo,ListaGrupo &listaGrupo,ListaPartido &listaAux);
 void ordenDeEquipos(ListaGrupo &listaGrupo,ListaEquipo &listaEquipo);
+bool equipoJugando(PtrNodoPartido ptrNodoPartido,ListaPartido listaAux);
+void grupoDeLaMuerte(ListaEquipo &listaEquipo,ListaGrupo &listaGrupo);
 int main()
 {
 
@@ -101,7 +103,7 @@ int main()
                  }
                   break;
     case 2: //reportes
-             submenu3=0;
+            submenu3=0;
             while(submenu3!=3){
                  cout<<"1_Orden de equipos por Grupo"<<endl;
                  cout<<"2_Grupo de la muerte"<<endl;
@@ -114,70 +116,16 @@ int main()
                     }
                     break;
 
-
-                    //grupo de la muerte
-             case 2:{
-
-                 int cantidadGrupos=0;
-                    int golesParciales=0;
-                    int golesParcialesMuerte=9999;
-                    string grupoMuerteNombre;
-
-                    PtrNodoGrupo cursor = primeroListaGrupo(listaGrupo);
-                    Grupo grupoAux;
-                    while (cursor != finGrupo()) {
-                    obtenerDato(listaGrupo, grupoAux, cursor);
-
-                    cantidadGrupos=cantidadGrupos+1;
-                    golesParciales=traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.golesAFavor+traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.golesAFavor+traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.golesAFavor+traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.golesAFavor;
-
-                    if(golesParcialesMuerte==9999){
-                        golesParcialesMuerte=golesParciales;
-                        grupoMuerteNombre=grupoAux.nombre;
-                    }
-                    if(golesParcialesMuerte>=golesParciales){
-                        golesParcialesMuerte=golesParcialesMuerte;
-                        grupoMuerteNombre=grupoMuerteNombre;
-                    }
-                    if(golesParcialesMuerte<golesParciales){
-                        golesParcialesMuerte=golesParciales;
-                        grupoMuerteNombre=grupoAux.nombre;
-                    }
-
-                    cursor = siguienteListaGrupo(listaGrupo, cursor);
-                     if(cantidadGrupos==8){
-                        cursor=finGrupo();
-                    }
-                    }
-                    cout<< "GRUPO MUERTE:"<<grupoMuerteNombre<<endl;
-                    cout<< "GOLES PARCIALES MUERTE:"<<golesParcialesMuerte<<endl;
-                    cout << endl;
-
-
-
-
-
-
+             case 2:{grupoDeLaMuerte(listaEquipo,listaGrupo);
              }break;
 
-
-
-
              case 3:break;
-
-
-
                  }
                  }
                   break;
 
 
      case 3:
-                     /*calcularOctavos(listaEquipo,listaGrupo,listaPartido);
-                     calcularCuartos(listaPartido);
-                     calcularSemi(listaPartido);
-                     calcularFinal(listaPartido);*/
-
             guardarDatos(listaEquipo,listaGrupo,listaPartido);
             exit(1);
         break;
@@ -1031,24 +979,39 @@ while(ptrCursor!=finListaPartido() && !encontrado){
 return encontrado;
 }
 void registrarInicio(ListaPartido &listaPartido, ListaPartido &listaAux){
-bool partidoIniciado=false;
+                    bool partidoIniciado=false;
                     int auxId=999;
                     cout<<"Ingrese id del partido a iniciar"<<endl;
                     cin>>auxId;
                     Partido partidoAux ;
                     partidoAux.id= auxId;
                     PtrNodoPartido ptrCursorAux;
-
-
+                    PtrNodoPartido ptrAuxiliar;
                     // comprobar q exista partido
                     if( localizarDato(listaPartido,partidoAux)==finListaPartido())
-                      ptrCursorAux=validarPartidoEncontrado(listaPartido,partidoAux);// comprobar q exista partido
+                        ptrCursorAux=validarPartidoEncontrado(listaPartido,partidoAux);// comprobar q exista partido
 
                     ptrCursorAux=localizarDato(listaPartido,partidoAux);
 
+                     if(equipoJugando(ptrCursorAux,listaAux)){      // pregunto si los equipos estan jugando otro partido
+                        cout<<"No se puede iniciar este partido porque uno de los equipos esta jugando en este momento"<<endl;
+                      while(partidoIniciado==false && auxId!=0){
+                              cout<<"ingrese id del partido a iniciar: (0 para salir)"<<endl;
+                              cin>>auxId;
+                              if(auxId!=0){
+                              partidoAux.id= auxId;
+                              if( localizarDato(listaPartido,partidoAux)==finListaPartido())
+                                 ptrCursorAux=validarPartidoEncontrado(listaPartido,partidoAux);// comprobar q exista partido
 
+                               ptrCursorAux=localizarDato(listaPartido,partidoAux);
+                               partidoIniciado=equipoJugando(ptrCursorAux,listaAux);      //comprobar que los equipos no esten jugando
+                             }
+                        }
+                     }
+                        partidoIniciado=false;
+                    if(auxId!=0){
 
-                    if (ptrCursorAux->partido.golesV!=-1 && ptrCursorAux->partido.golesL!=-1){
+                       if (ptrCursorAux->partido.golesV!=-1 && ptrCursorAux->partido.golesL!=-1){
                         while (partidoIniciado==false){
                             cout<<"El partido esta iniciado"<<endl;
                             cout<<"Ingrese id del partido a iniciar (Ingreesar 0 para salir)"<<endl;
@@ -1077,7 +1040,6 @@ bool partidoIniciado=false;
                         //ptrNodoEquipoAux=traerEquipo(listaEquipo, 1);
                         //cout<<"Nombre equipo"<<ptrNodoEquipoAux->equipo.nombre<<endl;
                         //----------TEST---
-
                         ptrCursorAux->partido.golesL =  0;
                         ptrCursorAux->partido.golesV = 0;
                         adicionarFinal(listaAux,ptrCursorAux->partido);        // agrego los partidos inicados a la lista//
@@ -1086,6 +1048,7 @@ bool partidoIniciado=false;
                             ptrCursorAux->partido.golesL =  0;// Para q esta esto???
                             ptrCursorAux->partido.golesV = 0;
                             adicionarFinal(listaAux,ptrCursorAux->partido);         // agrego los partidos inicados a la lista//
+                        }
                         }
                         }
 
@@ -1097,10 +1060,7 @@ void registrarGoles(ListaPartido &listaPartido, ListaEquipo &listaEquipo){
 
                 PtrNodoPartido ptrCursor;
                 Partido partidoAux;
-
-
-
-               while (auxId != 0){
+                while (auxId != 0){
                 cout<<"ingrese id del partido a cargar los goles(Ingresar 0 para salir)"<<endl;
                 cin>>auxId;
                 partidoAux.id=auxId;
@@ -1177,21 +1137,30 @@ void registrarGoles(ListaPartido &listaPartido, ListaEquipo &listaEquipo){
 }
 void registrarFindePartido(ListaPartido &listaPartido,ListaEquipo &listaEquipo,ListaGrupo &listaGrupo,ListaPartido &listaAux){
                      PtrNodoPartido auxPartido;
+                     Partido partido;
                      int id=0;
-
-
+                     bool partidoIniciado=false;
                      cout<<"Ingrese id del partido a finalizar"<<endl;
                      cin>>id;
                      cout<<"Id del partido:"<<id;
-                        auxPartido->partido.id=id;
-                        auxPartido= localizarDato (listaPartido,auxPartido->partido);
+                        crearPartido(partido);
+                        partido.id=id;
+                        auxPartido= localizarDato (listaPartido,partido);
+
 
 
                       if( auxPartido->partido.golesL == -1){
-                        cout<<"El partido no se ha iniciado"<<endl;
-                        exit(1);
-                      }
 
+                         while(!partidoIniciado){
+                            cout<<"El partido no se ha iniciado"<<endl;
+                            cout<<"Ingrese id del partido a finalizar"<<endl;
+                            cin>>id;
+                            if(localizarDato(listaAux,auxPartido->partido)!=finListaPartido()){
+                                partidoIniciado==true;
+                            }
+                        }
+                     }
+                     if(partidoIniciado==true){
                      PtrNodoPartido ptrNodoPartido = traerNodoPartido(listaPartido,id);
                         cout<< "Datos del partido a cerrar"<< auxPartido->partido.id<<";"<<auxPartido->partido.idEquipoL<<endl;
                         //Todo Hasta aca parece estar  bien el problema parece ser a  partir de  aca
@@ -1215,8 +1184,11 @@ void registrarFindePartido(ListaPartido &listaPartido,ListaEquipo &listaEquipo,L
                         setPuntos(ptrNodoEquipoL->equipo,ptrNodoEquipoL->equipo.puntos+1);
                         setPuntos(ptrNodoEquipoV->equipo,ptrNodoEquipoV->equipo.puntos+1);
                      }
-                     PtrNodoPartido ptrAux=traerNodoPartido(listaAux,id);          //Busco por ID, en la lista de partidos iniciados//
-                     finalizarPartido(ptrAux->partido);
+                     PtrNodoPartido ptrAux=traerNodoPartido(listaAux,id);          //Busco por ID, en la lista de partidos iniciados al momento de ejecucion//
+                     if(ptrAux!=finListaPartido()){                                //Si lo encontro, lo finaliza//
+                        finalizarPartido(ptrAux->partido);
+                     }
+
                      cout<<"Datos guardados"<<endl;
 
                      calcularOctavos(listaEquipo,listaGrupo,listaPartido);
@@ -1226,6 +1198,7 @@ void registrarFindePartido(ListaPartido &listaPartido,ListaEquipo &listaEquipo,L
                      calcularSemi(listaPartido);
 
                      calcularFinal(listaPartido);
+}
 }
 void ordenDeEquipos(ListaGrupo &listaGrupo,ListaEquipo &listaEquipo){
                     int cantidadGrupos=0;
@@ -1254,5 +1227,59 @@ void ordenDeEquipos(ListaGrupo &listaGrupo,ListaEquipo &listaEquipo){
                     }
                     cout<< "Cantidad GRUPOS:"<<cantidadGrupos<<endl;
                     cout<< "Cantidad GOLES TOTALES:"<<golesTotales<<endl;
+                    cout << endl;
+}
+bool equipoJugando(PtrNodoPartido ptrNodoPartido,ListaPartido listaAux){
+    bool encontrado=false;
+    int idEL=0,idEV=0;
+    idEL=ptrNodoPartido->partido.idEquipoL;
+    idEV=ptrNodoPartido->partido.idEquipoL;
+    PtrNodoPartido ptrCursor=primeroPartido(listaAux);
+
+    while(ptrCursor!=finListaPartido() && !encontrado){
+        if(ptrCursor->partido.idEquipoL==idEL || ptrCursor->partido.idEquipoV==idEV){
+                encontrado=true;
+
+        }
+        ptrCursor=siguientePartido(listaAux,ptrCursor);
+
+    }
+    return encontrado;
+}
+void grupoDeLaMuerte(ListaEquipo &listaEquipo,ListaGrupo &listaGrupo){
+
+                    int cantidadGrupos=0;
+                    int golesParciales=0;
+                    int golesParcialesMuerte=9999;
+                    string grupoMuerteNombre;
+
+                    PtrNodoGrupo cursor = primeroListaGrupo(listaGrupo);
+                    Grupo grupoAux;
+                    while (cursor != finGrupo()) {
+                    obtenerDato(listaGrupo, grupoAux, cursor);
+
+                    cantidadGrupos=cantidadGrupos+1;
+                    golesParciales=traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.golesAFavor+traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.golesAFavor+traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.golesAFavor+traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.golesAFavor;
+
+                    if(golesParcialesMuerte==9999){
+                        golesParcialesMuerte=golesParciales;
+                        grupoMuerteNombre=grupoAux.nombre;
+                    }
+                    if(golesParcialesMuerte>=golesParciales){
+                        golesParcialesMuerte=golesParcialesMuerte;
+                        grupoMuerteNombre=grupoMuerteNombre;
+                    }
+                    if(golesParcialesMuerte<golesParciales){
+                        golesParcialesMuerte=golesParciales;
+                        grupoMuerteNombre=grupoAux.nombre;
+                    }
+
+                    cursor = siguienteListaGrupo(listaGrupo, cursor);
+                     if(cantidadGrupos==8){
+                        cursor=finGrupo();
+                    }
+                    }
+                    cout<< "GRUPO MUERTE:"<<grupoMuerteNombre<<endl;
+                    cout<< "GOLES PARCIALES MUERTE:"<<golesParcialesMuerte<<endl;
                     cout << endl;
 }
