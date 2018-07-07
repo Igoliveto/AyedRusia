@@ -185,58 +185,75 @@ if(fallos)
 return listaEquipo;
 }
 
-ListaGrupo cargarGrupos(){
+ListaGrupo cargarGrupos(){//Si algo no anda maniana  es aca !!!!!!!!!!!!!!!!!!  probar  version anterior.
 ListaGrupo listaGrupo;
 crearListaGrupo(listaGrupo);
 Grupo grupo;
 crearGrupo(grupo);
 ifstream archivo("grupos.txt");
-int aux=0;
-char aux1;
+int aux=0,aux1=0,aux2=0,aux3=0,aux4=0;
+char auxA;
 string linea;
 bool fallos=false;
 if(archivo.is_open()){
 
     while(!archivo.eof()){
          getline(archivo,linea,';');
-         aux1=linea[0];
-          if(traerGrupo(listaGrupo,aux1)!=finGrupo()){
+         auxA=linea[0];
+          if(traerGrupo(listaGrupo,auxA)!=finGrupo()){
            cout<<"Informe de errores: Grupos"<<endl;
-           cout<<"El id"<< aux1<< "ya esta cargado"<<endl;
+           cout<<"El id"<< auxA<< "ya esta cargado"<<endl;
               fallos=true;
         }
-         setId(grupo,aux1);
+         setId(grupo,auxA);
          getline(archivo,linea,';');
          setNombre(grupo,linea);
+
          getline(archivo,linea,';');
          stringstream id1(linea);
-         id1>>aux;
-         if (aux <0 || aux> 32 ){
-             cout<< "Equipo inexistente"<<aux<<endl;
+         id1>>aux1;
+         if (aux1 <0 || aux1> 32 ){
+             cout<< "Equipo inexistente"<<aux1<<endl;
          }
-         setIdEquipo1(grupo,aux);
+         setIdEquipo1(grupo,aux1);
+         //------
          getline(archivo,linea,';');
          stringstream id2(linea);
-         id2>>aux;
-         if (aux <0 || aux> 32 ){
-             cout<< "Equipo inexistente"<<aux<<endl;
-         }
-         setIdEquipo2(grupo,aux);
-         getline(archivo,linea,';');
-         stringstream id3(linea);
-         id3>>aux;
-         if (aux <0 || aux> 32 ){
-             cout<< "Equipo inexistente"<<aux<<endl;
-         }
-         setIdEquipo3(grupo,aux);
-         getline(archivo,linea);
-         stringstream id4(linea);
-         id4>>aux;
-         if (aux <0 || aux> 32 ){
-            cout<< "Equipo inexistente"<<aux<<endl;
+         id2>>aux2;
+         if (aux2 <0 || aux2> 32 ){
+             cout<< "Equipo inexistente"<<aux2<<endl;
          }
 
-         setIdEquipo4(grupo,aux);
+         if (aux2== aux1){
+
+            cout<<"Este equipo ya fue cargado en este grupo:"<<aux2<<endl;
+         }
+         setIdEquipo2(grupo,aux2);
+         //----
+
+         getline(archivo,linea,';');
+         stringstream id3(linea);
+         id3>>aux3;
+         if (aux3 <0 || aux3> 32 ){
+             cout<< "Equipo inexistente"<<aux3<<endl;
+         }
+         if (aux3==aux2 || aux3==aux1){
+            cout<<"Este equipo ya fue cargado en este grupo"<<aux3<<endl;
+         }
+
+         setIdEquipo3(grupo,aux3);
+         //---
+
+         getline(archivo,linea);
+         stringstream id4(linea);
+         id4>>aux4;
+         if (aux4 <0 || aux4> 32 ){
+            cout<< "Equipo inexistente"<<aux4<<endl;
+         }
+          if(aux4==aux1||aux4==aux2 || aux4 ==aux3){
+            cout<<"Este equipo ya fue cargado en este grupo"<<endl;
+          }
+         setIdEquipo4(grupo,aux4);
 
          adicionarFinal(listaGrupo,grupo);
 
