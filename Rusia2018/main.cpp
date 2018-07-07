@@ -979,7 +979,7 @@ while(ptrCursor!=finListaPartido() && !encontrado){
 return encontrado;
 }
 void registrarInicio(ListaPartido &listaPartido, ListaPartido &listaAux){
-                    bool partidoIniciado=false;
+                    bool partidoFinalizado=false;
                     int auxId=999;
                     cout<<"Ingrese id del partido a iniciar"<<endl;
                     cin>>auxId;
@@ -987,6 +987,7 @@ void registrarInicio(ListaPartido &listaPartido, ListaPartido &listaAux){
                     partidoAux.id= auxId;
                     PtrNodoPartido ptrCursorAux;
                     PtrNodoPartido ptrAuxiliar;
+
                     // comprobar q exista partido
                     if( localizarDato(listaPartido,partidoAux)==finListaPartido())
                         ptrCursorAux=validarPartidoEncontrado(listaPartido,partidoAux);// comprobar q exista partido
@@ -994,8 +995,8 @@ void registrarInicio(ListaPartido &listaPartido, ListaPartido &listaAux){
                     ptrCursorAux=localizarDato(listaPartido,partidoAux);
 
                      if(equipoJugando(ptrCursorAux,listaAux)){      // pregunto si los equipos estan jugando otro partido
-                        cout<<"No se puede iniciar este partido porque uno de los equipos esta jugando en este momento"<<endl;
-                      while(partidoIniciado==false && auxId!=0){
+                        cout<<"No se puede iniciar este partido porque uno de los equipos esta jugando en este momento o el partido ya fue finalizado"<<endl;
+                      while(partidoFinalizado==false && auxId!=0){
                               cout<<"ingrese id del partido a iniciar: (0 para salir)"<<endl;
                               cin>>auxId;
                               if(auxId!=0){
@@ -1004,15 +1005,15 @@ void registrarInicio(ListaPartido &listaPartido, ListaPartido &listaAux){
                                  ptrCursorAux=validarPartidoEncontrado(listaPartido,partidoAux);// comprobar q exista partido
 
                                ptrCursorAux=localizarDato(listaPartido,partidoAux);
-                               partidoIniciado=equipoJugando(ptrCursorAux,listaAux);      //comprobar que los equipos no esten jugando
+                               partidoFinalizado=equipoJugando(ptrCursorAux,listaAux);      //comprobar que los equipos no esten jugando
                              }
                         }
                      }
-                        partidoIniciado=false;
+
                     if(auxId!=0){
 
                        if (ptrCursorAux->partido.golesV!=-1 && ptrCursorAux->partido.golesL!=-1){
-                        while (partidoIniciado==false){
+                        while (partidoFinalizado==false){
                             cout<<"El partido esta iniciado"<<endl;
                             cout<<"Ingrese id del partido a iniciar (Ingreesar 0 para salir)"<<endl;
                             cin>>auxId;
@@ -1027,7 +1028,7 @@ void registrarInicio(ListaPartido &listaPartido, ListaPartido &listaAux){
 
 
                             if (ptrCursorAux->partido.golesV==-1 && ptrCursorAux->partido.golesL==-1){
-                                partidoIniciado=true;
+                                partidoFinalizado=false;
                             }
                         }
                     }
@@ -1056,7 +1057,7 @@ void registrarInicio(ListaPartido &listaPartido, ListaPartido &listaAux){
 void registrarGoles(ListaPartido &listaPartido, ListaEquipo &listaEquipo){
                 int auxId=9999;
                 int idJugador=0;
-                bool partidoIniciado=false;
+                bool partidoFinalizado=false;
 
                 PtrNodoPartido ptrCursor;
                 Partido partidoAux;
@@ -1077,7 +1078,7 @@ void registrarGoles(ListaPartido &listaPartido, ListaEquipo &listaEquipo){
 
                 // esto valida q el partido este iniciado
                 if (ptrCursor->partido.golesV==-1 && ptrCursor->partido.golesL==-1){
-                    while (partidoIniciado==false){
+                    while (partidoFinalizado==false){
                         cout<<"El partido no esta iniciado"<<endl;
                         cout<<"Ingrese id del partido a cargar los goles (Ingreesar 0 para salir)"<<endl;
                         cin>>auxId;
@@ -1092,14 +1093,20 @@ void registrarGoles(ListaPartido &listaPartido, ListaEquipo &listaEquipo){
 
 
                         if (ptrCursor->partido.golesV!=-1 && ptrCursor->partido.golesL!=-1){
-                            partidoIniciado=true;
+                            partidoFinalizado=true;
                         }
                     }
+                }
+
+                if(ptrCursor->partido.finalizado=false){
+
                 }
 
 
 
                 if(auxId!=0){
+                partidoFinalizado=false;
+                ptrCursor->partido.finalizado=partidoFinalizado;
 
                     cout<<"Ingrese id del jugador que hizo el gol:"<<endl;
                     cin>>idJugador;
@@ -1139,32 +1146,33 @@ void registrarFindePartido(ListaPartido &listaPartido,ListaEquipo &listaEquipo,L
                      PtrNodoPartido auxPartido;
                      Partido partido;
                      int id=0;
-                     bool partidoIniciado=false;
+                     bool partidoFinalizado=false;
                      cout<<"Ingrese id del partido a finalizar"<<endl;
                      cin>>id;
                      cout<<"Id del partido:"<<id;
                         crearPartido(partido);
                         partido.id=id;
                         auxPartido= localizarDato (listaPartido,partido);
+                        partidoFinalizado = auxPartido->partido.finalizado;
 
 
 
                       if( auxPartido->partido.golesL == -1){
 
-                         while(!partidoIniciado){
+                         while(!partidoFinalizado){
                             cout<<"El partido no se ha iniciado"<<endl;
                             cout<<"Ingrese id del partido a finalizar"<<endl;
                             cin>>id;
                             if(localizarDato(listaAux,auxPartido->partido)!=finListaPartido()){
-                                partidoIniciado==true;
+                                partidoFinalizado==true;
                             }
                         }
                      }
-                     if(partidoIniciado==true){
+                     if(partidoFinalizado==false){
                      PtrNodoPartido ptrNodoPartido = traerNodoPartido(listaPartido,id);
                         cout<< "Datos del partido a cerrar"<< auxPartido->partido.id<<";"<<auxPartido->partido.idEquipoL<<endl;
                         //Todo Hasta aca parece estar  bien el problema parece ser a  partir de  aca
-
+                     ptrNodoPartido->partido.finalizado ==  true;
                      PtrNodoListaEquipo ptrNodoEquipoL = traerEquipo(listaEquipo,ptrNodoPartido->partido.idEquipoL);
                      PtrNodoListaEquipo ptrNodoEquipoV = traerEquipo(listaEquipo,ptrNodoPartido->partido.idEquipoV);
 
@@ -1211,10 +1219,10 @@ void ordenDeEquipos(ListaGrupo &listaGrupo,ListaEquipo &listaEquipo){
                     while (cursor != finGrupo()) {
                     obtenerDato(listaGrupo, grupoAux, cursor);
                     cout << grupoAux.nombre<<endl;
-                    cout <<traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.nombre<<traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.golesAFavor<<traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.puntos<<endl;
-                    cout <<traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.nombre<<traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.golesAFavor<<traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.puntos<<endl;
-                    cout <<traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.nombre<<traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.golesAFavor<<traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.puntos<<endl;
-                    cout <<traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.nombre<<traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.golesAFavor<<traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.puntos<<endl;
+                    cout <<traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.nombre<<" Goles:"<<traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.golesAFavor<<" Puntos"<<traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.puntos<<endl;
+                    cout <<traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.nombre<< " Goles:"<<traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.golesAFavor<<" Puntos"<<traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.puntos<<endl;
+                    cout <<traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.nombre<<" Goles:"<<traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.golesAFavor<<" Puntos"<<traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.puntos<<endl;
+                    cout <<traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.nombre<<" Goles:"<<traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.golesAFavor<<" Puntos"<<traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.puntos<<endl;
                     cout << endl;
                     cantidadGrupos=cantidadGrupos+1;
                     golesParciales=traerEquipo(listaEquipo,grupoAux.idEquipo1)->equipo.golesAFavor+traerEquipo(listaEquipo,grupoAux.idEquipo2)->equipo.golesAFavor+traerEquipo(listaEquipo,grupoAux.idEquipo3)->equipo.golesAFavor+traerEquipo(listaEquipo,grupoAux.idEquipo4)->equipo.golesAFavor;
@@ -1231,20 +1239,22 @@ void ordenDeEquipos(ListaGrupo &listaGrupo,ListaEquipo &listaEquipo){
 }
 bool equipoJugando(PtrNodoPartido ptrNodoPartido,ListaPartido listaAux){
     bool encontrado=false;
+    bool yaExiste = false;
     int idEL=0,idEV=0;
     idEL=ptrNodoPartido->partido.idEquipoL;
-    idEV=ptrNodoPartido->partido.idEquipoL;
+    idEV=ptrNodoPartido->partido.idEquipoV;
     PtrNodoPartido ptrCursor=primeroPartido(listaAux);
 
     while(ptrCursor!=finListaPartido() && !encontrado){
         if(ptrCursor->partido.idEquipoL==idEL || ptrCursor->partido.idEquipoV==idEV){
                 encontrado=true;
+                yaExiste = true;
 
         }
         ptrCursor=siguientePartido(listaAux,ptrCursor);
 
     }
-    return encontrado;
+    return yaExiste;
 }
 void grupoDeLaMuerte(ListaEquipo &listaEquipo,ListaGrupo &listaGrupo){
 

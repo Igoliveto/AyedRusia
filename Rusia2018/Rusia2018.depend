@@ -106,7 +106,7 @@
 1529556129 source:c:\users\havok\documents\github\ayedrusia\rusia2018\listajugadores.cpp
 	"ListaJugadores.h"
 
-1530327727 source:c:\users\havok\documents\github\ayedrusia\rusia2018\main.cpp
+1530936387 source:c:\users\havok\documents\github\ayedrusia\rusia2018\main.cpp
 	<iostream>
 	"Equipo.h"
 	"ListaEquipo.h"
@@ -118,7 +118,7 @@
 	<sstream>
 	<fstream>
 
-1529610333 source:c:\users\havok\documents\github\ayedrusia\rusia2018\partido.cpp
+1530938015 source:c:\users\havok\documents\github\ayedrusia\rusia2018\partido.cpp
 	"partido.h"
 	<stdlib.h>
 	<string>
@@ -214,7 +214,7 @@
 	<sstream>
 	<fstream>
 
-1529616672 source:c:\users\havok\documents\github\ayedrusia\rusia2018\listapartidos.cpp
+1530927939 source:c:\users\havok\documents\github\ayedrusia\rusia2018\listapartidos.cpp
 	<iostream>
 	<stdlib.h>
 	<string>
@@ -225,7 +225,7 @@
 1529556129 c:\users\havok\documents\github\ayedrusia\rusia2018\listapartidos.h
 	"Partido.h"
 
-1529556129 c:\users\havok\documents\github\ayedrusia\rusia2018\partido.h
+1530927939 c:\users\havok\documents\github\ayedrusia\rusia2018\partido.h
 
 1529539387 source:c:\users\bettina\documents\ayed\rusia2018\equipo.cpp
 	"Equipo.h"

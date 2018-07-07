@@ -67,7 +67,7 @@ partido.golesL=0;
 partido.golesV=0;
 }
 void finalizarPartido(Partido &partido){
-partido.finalizado=true;
+partido.finalizado=false;
 }
 
 /*----------------------------------------------------------------------------*/
